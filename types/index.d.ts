@@ -313,6 +313,8 @@ declare namespace CookieConsent {
          * Custom HTML string where you can put links pointing to your privacy policy.
          */
         footer?: string
+
+        customThirdButton?: string
     }
 
     interface CookieTable {

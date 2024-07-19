@@ -68,7 +68,8 @@ export const createConsentModal = (api, createMainContainer) => {
         closeIconLabelData = consentModalData.closeIconLabel,
         footerData = consentModalData.footer,
         consentModalLabelValue = consentModalData.label,
-        consentModalTitleValue = consentModalData.title;
+        consentModalTitleValue = consentModalData.title,
+        consentModalCustomThirdButton = consentModalData.customThirdButton;
 
     /**
      * @param {string|string[]} [categories]
@@ -130,7 +131,7 @@ export const createConsentModal = (api, createMainContainer) => {
 
         appendChild(dom._cmBody, dom._cmTexts);
 
-        if (acceptAllBtnData || acceptNecessaryBtnData || showPreferencesBtnData)
+        if (acceptAllBtnData || acceptNecessaryBtnData || showPreferencesBtnData || consentModalCustomThirdButton)
             appendChild(dom._cmBody, dom._cmBtns);
 
         dom._cmDivTabindex = createNode(DIV_TAG);
@@ -220,6 +221,20 @@ export const createConsentModal = (api, createMainContainer) => {
         }
 
         dom._cmShowPreferencesBtn.firstElementChild.innerHTML = showPreferencesBtnData;
+    }
+
+    if (consentModalCustomThirdButton) {
+        if (!dom._cmCustomThirdBtn) {
+            dom._cmCustomThirdBtn = createNode(BUTTON_TAG);
+            appendChild(dom._cmCustomThirdBtn, createFocusSpan())
+            addClass(dom._cmCustomThirdBtn, 'btn');
+            setAttribute(dom._cmCustomThirdBtn, DATA_ROLE, 'optional')
+
+            addEvent(dom._cmCustomThirdBtn, CLICK_EVENT, () => {
+                alert("Custom Button was clicked");
+            });
+        }
+        dom._cmCustomThirdBtn.firstElementChild.innerHTML = consentModalCustomThirdButton;
     }
 
     if (!dom._cmBtnGroup) {
