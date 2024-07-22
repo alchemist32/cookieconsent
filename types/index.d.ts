@@ -374,6 +374,8 @@ declare namespace CookieConsent {
         serviceCounterLabel?: string
 
         sections: Section[]
+
+        customThirdButton: string
     }
 
     interface Translation {
