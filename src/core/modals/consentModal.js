@@ -234,7 +234,7 @@ export const createConsentModal = (api, createMainContainer) => {
                 alert('Custom Button was clicked');
             });
         }
-        dom._cmCustomThirdBtn.firstElementChild.innerHTML = consentModalCustomThirdButton;
+        dom._cmMangeByBTS.firstElementChild.innerHTML = consentModalCustomThirdButton;
     }
 
     if (!dom._cmBtnGroup) {
