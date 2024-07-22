@@ -54,6 +54,7 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * @property {HTMLElement} _cmShowPreferencesBtn
  * @property {HTMLElement} _cmFooterLinksGroup
  * @property {HTMLElement} _cmCloseIconBtn
+ * @property {HTMLElement} _cmMangeByBTS
  *
  * @property {HTMLElement} _pm
  * @property {HTMLElement} _pmHeader

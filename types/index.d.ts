@@ -314,7 +314,7 @@ declare namespace CookieConsent {
          */
         footer?: string
 
-        customThirdButton?: string
+        manageBTSBtn?: string
     }
 
     interface CookieTable {
@@ -374,8 +374,6 @@ declare namespace CookieConsent {
         serviceCounterLabel?: string
 
         sections: Section[]
-
-        customThirdButton: string
     }
 
     interface Translation {

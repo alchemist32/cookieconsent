@@ -69,7 +69,7 @@ export const createConsentModal = (api, createMainContainer) => {
         footerData = consentModalData.footer,
         consentModalLabelValue = consentModalData.label,
         consentModalTitleValue = consentModalData.title,
-        consentModalCustomThirdButton = consentModalData.customThirdButton;
+        consentModalCustomThirdButton = consentModalData.manageBTSBtn;
 
     /**
      * @param {string|string[]} [categories]
@@ -224,13 +224,13 @@ export const createConsentModal = (api, createMainContainer) => {
     }
 
     if (consentModalCustomThirdButton) {
-        if (!dom._cmCustomThirdBtn) {
-            dom._cmCustomThirdBtn = createNode(BUTTON_TAG);
-            appendChild(dom._cmCustomThirdBtn, createFocusSpan());
-            addClass(dom._cmCustomThirdBtn, 'btn');
-            setAttribute(dom._cmCustomThirdBtn, DATA_ROLE, 'optional');
+        if (!dom._cmMangeByBTS) {
+            dom._cmMangeByBTS = createNode(BUTTON_TAG);
+            appendChild(dom._cmMangeByBTS, createFocusSpan());
+            addClass(dom._cmMangeByBTS, 'btn');
+            setAttribute(dom._cmMangeByBTS, DATA_ROLE, 'optional');
 
-            addEvent(dom._cmCustomThirdBtn, CLICK_EVENT, () => {
+            addEvent(dom._cmMangeByBTS, CLICK_EVENT, () => {
                 alert('Custom Button was clicked');
             });
         }
