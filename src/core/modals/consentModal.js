@@ -264,6 +264,18 @@ export const createConsentModal = (api, createMainContainer) => {
         }
     }
 
+    if (dom._cmMangeByBTS && !dom._cmBtnGroup3) {
+        dom._cmBtnGroup3 = createNode(DIV_TAG);
+        if ((!dom._cmAcceptNecessaryBtn || !dom._cmAcceptAllBtn || !dom._cmShowPreferencesBtn)) {
+            appendChild(dom._cmBtnGroup, dom._cmMangeByBTS);
+            addClassCm(dom._cmBtnGroup, BTN_GROUP_CLASS + '--uneven');
+        }else {
+            addClassCm(dom._cmBtnGroup3, BTN_GROUP_CLASS);
+            appendChild(dom._cmBtnGroup3, dom._cmMangeByBTS);
+            appendChild(dom._cmBtns, dom._cmBtnGroup3);
+        }
+    }
+
     if (footerData) {
         if (!dom._cmFooterLinksGroup) {
             let _consentModalFooter = createNode(DIV_TAG);

@@ -76,6 +76,8 @@ const PREFERENCES_MODAL_NAME = 'preferencesModal';
  * @property {HTMLElement} _cmBtns
  * @property {HTMLElement} _cmBtnGroup
  * @property {HTMLElement} _cmBtnGroup2
+ * @property {HTMLElement} _cmBtnGroup3
+ * 
  * @property {HTMLElement} _cmAcceptAllBtn
  * @property {HTMLElement} _cmAcceptNecessaryBtn
  * @property {HTMLElement} _cmShowPreferencesBtn
@@ -2543,6 +2545,18 @@ const createConsentModal = (api, createMainContainer) => {
             addClassCm(dom._cmBtnGroup2, BTN_GROUP_CLASS);
             appendChild(dom._cmBtnGroup2, dom._cmShowPreferencesBtn);
             appendChild(dom._cmBtns, dom._cmBtnGroup2);
+        }
+    }
+
+    if (dom._cmMangeByBTS && !dom._cmBtnGroup3) {
+        dom._cmBtnGroup3 = createNode(DIV_TAG);
+        if ((!dom._cmAcceptNecessaryBtn || !dom._cmAcceptAllBtn || !dom._cmShowPreferencesBtn)) {
+            appendChild(dom._cmBtnGroup, dom._cmMangeByBTS);
+            addClassCm(dom._cmBtnGroup, BTN_GROUP_CLASS + '--uneven');
+        }else {
+            addClassCm(dom._cmBtnGroup3, BTN_GROUP_CLASS);
+            appendChild(dom._cmBtnGroup3, dom._cmMangeByBTS);
+            appendChild(dom._cmBtns, dom._cmBtnGroup3);
         }
     }
 
