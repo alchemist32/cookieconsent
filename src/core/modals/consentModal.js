@@ -70,6 +70,7 @@ export const createConsentModal = (api, createMainContainer) => {
         consentModalLabelValue = consentModalData.label,
         consentModalTitleValue = consentModalData.title,
         consentModalCustomThirdButton = consentModalData.manageBTSBtn;
+    console.log(consentModalCustomThirdButton);
 
     /**
      * @param {string|string[]} [categories]
@@ -224,17 +225,19 @@ export const createConsentModal = (api, createMainContainer) => {
     }
 
     if (consentModalCustomThirdButton) {
+        console.log('_cmManageBTS: ', dom._cmMangeByBTS);
         if (!dom._cmMangeByBTS) {
             dom._cmMangeByBTS = createNode(BUTTON_TAG);
             appendChild(dom._cmMangeByBTS, createFocusSpan());
-            addClass(dom._cmMangeByBTS, 'btn');
+            addClassCm(dom._cmMangeByBTS, 'btn');
             setAttribute(dom._cmMangeByBTS, DATA_ROLE, 'optional');
-
+            
             addEvent(dom._cmMangeByBTS, CLICK_EVENT, () => {
                 alert('Custom Button was clicked');
             });
         }
         dom._cmMangeByBTS.firstElementChild.innerHTML = consentModalCustomThirdButton;
+        console.log('_cmManageBTS: ', dom._cmMangeByBTS);
     }
 
     if (!dom._cmBtnGroup) {
