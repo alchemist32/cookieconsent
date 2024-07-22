@@ -70,7 +70,7 @@ export const createConsentModal = (api, createMainContainer) => {
         consentModalLabelValue = consentModalData.label,
         consentModalTitleValue = consentModalData.title,
         consentModalCustomThirdButton = consentModalData.manageBTSBtn;
-    console.log(consentModalCustomThirdButton);
+    console.log('button text: ', consentModalCustomThirdButton);
 
     /**
      * @param {string|string[]} [categories]
