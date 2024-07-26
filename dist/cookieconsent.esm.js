@@ -2603,6 +2603,7 @@ const createConsentModal = (api, createMainContainer) => {
             setAttribute(dom._cmMangeByBTS, DATA_ROLE, 'optional');
             
             addEvent(dom._cmMangeByBTS, 'mouseenter', () => {
+                debugger;
                 if (!state._manageByBTSModalExists) {
                     createManageByBTSModal(api, createMainContainer);
                 }
