@@ -4,4 +4,4142 @@
 * Author Orest Bida
 * Released under the MIT License
 */
-var e,t;e=this,t=function(e){'use strict';const t='opt-in',o='opt-out',n='show--consent',a='show--preferences',s='disable--interaction',c='data-category',r='div',i='button',l='aria-hidden',d='btn-group',f='click',_='data-role',u='consentModal',p='preferencesModal';class m{constructor(){this.t={mode:t,revision:0,autoShow:!0,lazyHtmlGeneration:!0,autoClearCookies:!0,manageScriptTags:!0,hideFromBots:!0,cookie:{name:'cc_cookie',expiresAfterDays:182,domain:'',path:'/',sameSite:'Lax'}},this.o={i:{},l:'',_:{},u:{},p:{},m:[],v:!1,h:null,C:null,S:null,M:'',T:!0,D:!1,k:!1,A:!1,B:!1,N:!1,H:!1,V:[],j:!1,I:!0,L:[],F:!1,P:'',O:!1,R:[],G:[],J:[],U:[],$:!1,q:!1,K:!1,W:[],X:[],Y:[],Z:{},ee:{},te:{},oe:{},ne:{},ae:[]},this.se={ce:{},re:{}},this.ie={},this.le={de:'cc:onFirstConsent',fe:'cc:onConsent',_e:'cc:onChange',ue:'cc:onModalShow',pe:'cc:onModalHide',me:'cc:onModalReady'}}}const g=new m,b=(e,t)=>e.indexOf(t),y=(e,t)=>-1!==b(e,t),v=e=>Array.isArray(e),h=e=>'string'==typeof e,C=e=>!!e&&'object'==typeof e&&!v(e),w=e=>'function'==typeof e,S=e=>Object.keys(e),M=e=>Array.from(new Set(e)),x=()=>document.activeElement,T=e=>e.preventDefault(),D=(e,t)=>e.querySelectorAll(t),k=e=>e.dispatchEvent(new Event('change')),E=e=>{const t=document.createElement(e);return e===i&&(t.type=e),t},A=(e,t,o)=>e.setAttribute(t,o),B=(e,t,o)=>{e.removeAttribute(o?'data-'+t:t)},N=(e,t,o)=>e.getAttribute(o?'data-'+t:t),H=(e,t)=>e.appendChild(t),V=(e,t)=>e.classList.add(t),j=(e,t)=>V(e,'cm__'+t),I=(e,t)=>V(e,'pm__'+t),L=(e,t)=>e.classList.remove(t),F=e=>{if('object'!=typeof e)return e;if(e instanceof Date)return new Date(e.getTime());let t=Array.isArray(e)?[]:{};for(let o in e){let n=e[o];t[o]=F(n)}return t},P=()=>{const e={},{R:t,Z:o,ee:n}=g.o;for(const a of t)e[a]=J(n[a],S(o[a]));return e},O=(e,t)=>dispatchEvent(new CustomEvent(e,{detail:t})),R=(e,t,o,n)=>{e.addEventListener(t,o),n&&g.o.m.push({ge:e,be:t,ye:o})},G=()=>{const e=g.t.cookie.expiresAfterDays;return w(e)?e(g.o.P):e},J=(e,t)=>{const o=e||[],n=t||[];return o.filter((e=>!y(n,e))).concat(n.filter((e=>!y(o,e))))},U=e=>{g.o.G=M(e),g.o.P=(()=>{let e='custom';const{G:t,R:o,J:n}=g.o,a=t.length;return a===o.length?e='all':a===n.length&&(e='necessary'),e})()},$=(e,t,o,n)=>{const a='accept-',{show:s,showPreferences:c,hide:r,hidePreferences:i,acceptCategory:l}=t,d=e||document,_=e=>D(d,`[data-cc="${e}"]`),u=(e,t)=>{T(e),l(t),i(),r()},p=_('show-preferencesModal'),m=_('show-consentModal'),b=_(a+'all'),y=_(a+'necessary'),v=_(a+'custom'),h=g.t.lazyHtmlGeneration;for(const e of p)A(e,'aria-haspopup','dialog'),R(e,f,(e=>{T(e),c()})),h&&(R(e,'mouseenter',(e=>{T(e),g.o.B||o(t,n)}),!0),R(e,'focus',(()=>{g.o.B||o(t,n)})));for(let e of m)A(e,'aria-haspopup','dialog'),R(e,f,(e=>{T(e),s(!0)}),!0);for(let e of b)R(e,f,(e=>{u(e,'all')}),!0);for(let e of v)R(e,f,(e=>{u(e)}),!0);for(let e of y)R(e,f,(e=>{u(e,[])}),!0)},z=(e,t)=>{e&&(t&&(e.tabIndex=-1),e.focus(),t&&e.removeAttribute('tabindex'))},q=(e,t)=>{const o=n=>{n.target.removeEventListener('transitionend',o),'opacity'===n.propertyName&&'1'===getComputedStyle(e).opacity&&z((e=>1===e?g.se.ve:g.se.he)(t))};R(e,'transitionend',o)};let K;const Q=e=>{clearTimeout(K),e?V(g.se.Ce,s):K=setTimeout((()=>{L(g.se.Ce,s)}),500)},W=['M 19.5 4.5 L 4.5 19.5 M 4.5 4.501 L 19.5 19.5','M 3.572 13.406 L 8.281 18.115 L 20.428 5.885','M 21.999 6.94 L 11.639 17.18 L 2.001 6.82 '],X=(e=0,t=1.5)=>`<svg viewBox="0 0 24 24" stroke-width="${t}"><path d="${W[e]}"/></svg>`,Y=e=>{const t=g.se,o=g.o;(e=>{const n=e===t.we,a=o.i.disablePageInteraction?t.Ce:n?t.Se:t.Ce;R(a,'keydown',(t=>{if('Tab'!==t.key||!(n?o.k&&!o.A:o.A))return;const a=x(),s=n?o.W:o.X;0!==s.length&&(t.shiftKey?a!==s[0]&&e.contains(a)||(T(t),z(s[1])):a!==s[1]&&e.contains(a)||(T(t),z(s[0])))}),!0)})(e)},Z=['[href]',i,'input','details','[tabindex]'].map((e=>e+':not([tabindex="-1"])')).join(','),ee=e=>{const{o:t,se:o}=g,n=(e,t)=>{const o=D(e,Z);t[0]=o[0],t[1]=o[o.length-1]};1===e&&t.D&&n(o.we,t.W),2===e&&t.B&&n(o.Me,t.X)},te=(e,t,o)=>{const{_e:n,fe:a,de:s,pe:c,me:r,ue:i}=g.ie,l=g.le;if(t){const n={modalName:t};return e===l.ue?w(i)&&i(n):e===l.pe?w(c)&&c(n):(n.modal=o,w(r)&&r(n)),O(e,n)}const d={cookie:g.o.p};e===l.de?w(s)&&s(F(d)):e===l.fe?w(a)&&a(F(d)):(d.changedCategories=g.o.L,d.changedServices=g.o.oe,w(n)&&n(F(d))),O(e,F(d))},oe=(e,t)=>{try{return e()}catch(e){return!t&&console.warn('CookieConsent:',e),!1}},ne=e=>{const{ee:t,oe:o,R:n,Z:a,ae:s,p:r,L:i}=g.o;for(const e of n){const n=o[e]||t[e]||[];for(const o of n){const n=a[e][o];if(!n)continue;const{onAccept:s,onReject:c}=n;!n.xe&&y(t[e],o)?(n.xe=!0,w(s)&&s()):n.xe&&!y(t[e],o)&&(n.xe=!1,w(c)&&c())}}if(!g.t.manageScriptTags)return;const l=s,d=e||r.categories||[],f=(e,n)=>{if(n>=e.length)return;const a=s[n];if(a.Te)return f(e,n+1);const r=a.De,l=a.ke,_=a.Ee,u=y(d,l),p=!!_&&y(t[l],_);if(!_&&!a.Ae&&u||!_&&a.Ae&&!u&&y(i,l)||_&&!a.Ae&&p||_&&a.Ae&&!p&&y(o[l]||[],_)){a.Te=!0;const t=N(r,'type',!0);B(r,'type',!!t),B(r,c);let o=N(r,'src',!0);o&&B(r,'src',!0);const s=E('script');s.textContent=r.innerHTML;for(const{nodeName:e}of r.attributes)A(s,e,r[e]||N(r,e));t&&(s.type=t),o?s.src=o:o=r.src;const i=!!o&&(!t||['text/javascript','module'].includes(t));if(i&&(s.onload=s.onerror=()=>{f(e,++n)}),r.replaceWith(s),i)return}f(e,++n)};f(l,0)},ae='bottom',se='left',ce='center',re='right',ie='inline',le='wide',de='pm--',fe='cm--',_e='box',ue=['middle','top',ae],pe=[se,ce,re],me={box:{Be:[le,ie],Ne:ue,He:pe,Ve:ae,je:re},cloud:{Be:[ie],Ne:ue,He:pe,Ve:ae,je:ce},bar:{Be:[ie],Ne:ue.slice(1),He:[],Ve:ae,je:''}},ge={box:{Be:[],Ne:[],He:[],Ve:'',je:''},bar:{Be:[le],Ne:[],He:[se,re],Ve:'',je:se}},be=e=>{const t=g.o.i.guiOptions,o=t&&t.consentModal,n=t&&t.preferencesModal,a=t&&t.manageByBTSModal;0===e&&ye(g.se.we,me,o,fe,_e,'cm'),1===e&&ye(g.se.Me,ge,n,de,_e,'pm'),2===e&&ye(g.se.Ie,ge,a,fe,_e,'pm')},ye=(e,t,o,n,a,s)=>{e.className=s;const c=o&&o.layout,r=o&&o.position,i=o&&o.flipButtons,l=!o||!1!==o.equalWeightButtons,d=c&&c.split(' ')||[],f=d[0],_=d[1],u=f in t?f:a,p=t[u],m=y(p.Be,_)&&_,b=r&&r.split(' ')||[],v=b[0],h=n===de?b[0]:b[1],C=y(p.Ne,v)?v:p.Ve,w=y(p.He,h)?h:p.je,S=t=>{t&&V(e,n+t)};S(u),S(m),S(C),S(w),i&&S('flip');const M=s+'__btn--secondary';if('cm'===s){const{Le:e,Fe:t}=g.se;e&&(l?L(e,M):V(e,M)),t&&(l?L(t,M):V(t,M))}else{const{Pe:e}=g.se;e&&(l?L(e,M):V(e,M))}},ve=(e,t)=>{const o=g.o,n=g.se,{hide:a,hidePreferences:s,acceptCategory:c}=e,u=e=>{c(e),s(),a()},m=o.u&&o.u.preferencesModal;if(!m)return;const b=m.title,y=m.closeIconLabel,v=m.acceptAllBtn,w=m.acceptNecessaryBtn,M=m.savePreferencesBtn,x=m.sections||[],T=v||w||M;if(n.Oe)n.Re=E(r),I(n.Re,'body');else{n.Oe=E(r),V(n.Oe,'pm-wrapper');const e=E('div');V(e,'pm-overlay'),H(n.Oe,e),R(e,f,s),n.Me=E(r),V(n.Me,'pm'),A(n.Me,'role','dialog'),A(n.Me,l,!0),A(n.Me,'aria-modal',!0),A(n.Me,'aria-labelledby','pm__title'),R(n.Ce,'keydown',(e=>{27===e.keyCode&&s()}),!0),n.Ge=E(r),I(n.Ge,'header'),n.Je=E('h2'),I(n.Je,'title'),n.Je.id='pm__title',n.Ue=E(i),I(n.Ue,'close-btn'),A(n.Ue,'aria-label',m.closeIconLabel||''),R(n.Ue,f,s),n.$e=E('span'),n.$e.innerHTML=X(),H(n.Ue,n.$e),n.ze=E(r),I(n.ze,'body'),n.qe=E(r),I(n.qe,'footer');var D=E(r);V(D,'btns');var k=E(r),B=E(r);I(k,d),I(B,d),H(n.qe,k),H(n.qe,B),H(n.Ge,n.Je),H(n.Ge,n.Ue),n.he=E(r),A(n.he,'tabIndex',-1),H(n.Me,n.he),H(n.Me,n.Ge),H(n.Me,n.ze),T&&H(n.Me,n.qe),H(n.Oe,n.Me)}let N;b&&(n.Je.innerHTML=b,y&&A(n.Ue,'aria-label',y)),x.forEach(((e,t)=>{const a=e.title,s=e.description,c=e.linkedCategory,d=c&&o.O[c],_=e.cookieTable,u=_&&_.body,p=_&&_.caption,g=u&&u.length>0,b=!!d,y=b&&o.Z[c],v=C(y)&&S(y)||[],w=b&&(!!s||!!g||S(y).length>0);var M=E(r);if(I(M,'section'),w||s){var x=E(r);I(x,'section-desc-wrapper')}let T=v.length;if(w&&T>0){const e=E(r);I(e,'section-services');for(const t of v){const o=y[t],n=o&&o.label||t,a=E(r),s=E(r),i=E(r),l=E(r);I(a,'service'),I(l,'service-title'),I(s,'service-header'),I(i,'service-icon');const f=he(n,t,d,!0,c);l.innerHTML=n,H(s,i),H(s,l),H(a,s),H(a,f),H(e,a)}H(x,e)}if(a){var D=E(r),k=E(b?i:r);if(I(D,'section-title-wrapper'),I(k,'section-title'),k.innerHTML=a,H(D,k),b){const e=E('span');e.innerHTML=X(2,3.5),I(e,'section-arrow'),H(D,e),M.className+='--toggle';const t=he(a,c,d);let o=m.serviceCounterLabel;if(T>0&&h(o)){let e=E('span');I(e,'badge'),I(e,'service-counter'),A(e,l,!0),A(e,'data-servicecounter',T),o&&(o=o.split('|'),o=o.length>1&&T>1?o[1]:o[0],A(e,'data-counterlabel',o)),e.innerHTML=T+(o?' '+o:''),H(k,e)}if(w){I(M,'section--expandable');var B=c+'-desc';A(k,'aria-expanded',!1),A(k,'aria-controls',B)}H(D,t)}else A(k,'role','heading'),A(k,'aria-level','3');H(M,D)}if(s){var j=E('p');I(j,'section-desc'),j.innerHTML=s,H(x,j)}if(w&&(A(x,l,'true'),x.id=B,((e,t,o)=>{R(k,f,(()=>{t.classList.contains('is-expanded')?(L(t,'is-expanded'),A(o,'aria-expanded','false'),A(e,l,'true')):(V(t,'is-expanded'),A(o,'aria-expanded','true'),A(e,l,'false'))}))})(x,M,k),g)){const e=E('table'),o=E('thead'),a=E('tbody');if(p){const t=E('caption');I(t,'table-caption'),t.innerHTML=p,e.appendChild(t)}I(e,'section-table'),I(o,'table-head'),I(a,'table-body');const s=_.headers,c=S(s),i=n.Ke.createDocumentFragment(),l=E('tr');for(const e of c){const o=s[e],n=E('th');n.id='cc__row-'+o+t,A(n,'scope','col'),I(n,'table-th'),n.innerHTML=o,H(i,n)}H(l,i),H(o,l);const d=n.Ke.createDocumentFragment();for(const e of u){const o=E('tr');I(o,'table-tr');for(const n of c){const a=s[n],c=e[n],i=E('td'),l=E(r);I(i,'table-td'),A(i,'data-column',a),A(i,'headers','cc__row-'+a+t),l.insertAdjacentHTML('beforeend',c),H(i,l),H(o,i)}H(d,o)}H(a,d),H(e,o),H(e,a),H(x,e)}(w||s)&&H(M,x);const F=n.Re||n.ze;b?(N||(N=E(r),I(N,'section-toggles')),N.appendChild(M)):N=null,H(F,N||M)})),v&&(n.Qe||(n.Qe=E(i),I(n.Qe,'btn'),A(n.Qe,_,'all'),H(k,n.Qe),R(n.Qe,f,(()=>u('all')))),n.Qe.innerHTML=v),w&&(n.Pe||(n.Pe=E(i),I(n.Pe,'btn'),A(n.Pe,_,'necessary'),H(k,n.Pe),R(n.Pe,f,(()=>u([])))),n.Pe.innerHTML=w),M&&(n.We||(n.We=E(i),I(n.We,'btn'),I(n.We,'btn--secondary'),A(n.We,_,'save'),H(B,n.We),R(n.We,f,(()=>u()))),n.We.innerHTML=M),n.Re&&(n.Me.replaceChild(n.Re,n.ze),n.ze=n.Re),be(1),o.B||(o.B=!0,te(g.le.me,p,n.Me),t(e),H(n.Se,n.Oe),Y(n.Me),setTimeout((()=>V(n.Oe,'cc--anim')),100)),ee(2)};function he(e,t,o,n,a){const s=g.o,r=g.se,i=E('label'),d=E('input'),_=E('span'),u=E('span'),p=E('span'),m=E('span'),b=E('span');if(m.innerHTML=X(1,3),b.innerHTML=X(0,3),d.type='checkbox',V(i,'section__toggle-wrapper'),V(d,'section__toggle'),V(m,'toggle__icon-on'),V(b,'toggle__icon-off'),V(_,'toggle__icon'),V(u,'toggle__icon-circle'),V(p,'toggle__label'),A(_,l,'true'),n?(V(i,'toggle-service'),A(d,c,a),r.re[a][t]=d):r.ce[t]=d,n?(e=>{R(d,'change',(()=>{const t=r.re[e],o=r.ce[e];s.te[e]=[];for(let o in t){const n=t[o];n.checked&&s.te[e].push(n.value)}o.checked=s.te[e].length>0}))})(a):(e=>{R(d,f,(()=>{const t=r.re[e],o=d.checked;s.te[e]=[];for(let n in t)t[n].checked=o,o&&s.te[e].push(n)}))})(t),d.value=t,p.textContent=e.replace(/<.*>.*<\/.*>/gm,''),H(u,b),H(u,m),H(_,u),s.T)(o.readOnly||o.enabled)&&(d.checked=!0);else if(n){const e=s.ee[a];d.checked=o.readOnly||y(e,t)}else y(s.G,t)&&(d.checked=!0);return o.readOnly&&(d.disabled=!0),H(i,d),H(i,_),H(i,p),i}const Ce=(e,t)=>{const o=g.o,n=g.se,{hide:a,hideManageByBTSModal:s}=e;if(o.u&&o.u.manageByBTSModal){if(!n.pm){n.Xe=E(r),V(n.Xe,'pm-wrapper');const e=E(r);V(e,'pm-overlay'),H(n.Xe,e),R(e,f,s),n.Ie=E(r),V(n.Ie,'pm'),A(n.Ie,'role','dialog'),A(n.Ie,l,!0),A(n.Ie,'aria-modal',!0),A(n.Ie,'aria-labelledby','btsm__title'),R(n.Ce,'keydown',(e=>{27===e.keyCode&&s()}),!0),n.Ye=E(r);const t=E('p');t.textContent='This is managed by BTS',H(n.Ye,t)}be(2),o.H&&(o.H=!0,te(g.le.me,'btsModal',n.Ie),t(e),H(n.Se,n.Xe),Y(n.Ie),setTimeout((()=>V(n.Oe,'cc--anim')),100)),ee(2)}},we=()=>{const e=E('span');return g.se.Ze||(g.se.Ze=e),e},Se=(e,t)=>{const o=g.o,n=g.se,{hide:a,showPreferences:s,acceptCategory:c,showManageByBTSModal:p}=e,m=o.u&&o.u.consentModal;if(!m)return;const b=m.acceptAllBtn,y=m.acceptNecessaryBtn,v=m.showPreferencesBtn,h=m.closeIconLabel,C=m.footer,w=m.label,S=m.title,M=m.manageBTSBtn,x=e=>{a(),c(e)};if(!n.et){n.et=E(r),n.we=E(r),n.tt=E(r),n.ot=E(r),n.nt=E(r),V(n.et,'cm-wrapper'),V(n.we,'cm'),j(n.tt,'body'),j(n.ot,'texts'),j(n.nt,'btns'),A(n.we,'role','dialog'),A(n.we,'aria-modal','true'),A(n.we,l,'false'),A(n.we,'aria-describedby','cm__desc'),w?A(n.we,'aria-label',w):S&&A(n.we,'aria-labelledby','cm__title');const e='box',t=o.i.guiOptions,a=t&&t.consentModal,s=(a&&a.layout||e).split(' ')[0]===e;S&&h&&s&&(n.Fe||(n.Fe=E(i),n.Fe.innerHTML=X(),j(n.Fe,'btn'),j(n.Fe,'btn--close'),R(n.Fe,f,(()=>{x([])})),H(n.tt,n.Fe)),A(n.Fe,'aria-label',h)),H(n.tt,n.ot),(b||y||v||M)&&H(n.tt,n.nt),n.ve=E(r),A(n.ve,'tabIndex',-1),H(n.we,n.ve),H(n.we,n.tt),H(n.et,n.we)}S&&(n.st||(n.st=E('h2'),n.st.className=n.st.id='cm__title',H(n.ot,n.st)),n.st.innerHTML=S);let T=m.description;if(T&&(o.j&&(T=T.replace('{{revisionMessage}}',o.I?'':m.revisionMessage||'')),n.ct||(n.ct=E('p'),n.ct.className=n.ct.id='cm__desc',H(n.ot,n.ct)),n.ct.innerHTML=T),b&&(n.rt||(n.rt=E(i),H(n.rt,we()),j(n.rt,'btn'),A(n.rt,_,'all'),R(n.rt,f,(()=>{x('all')}))),n.rt.firstElementChild.innerHTML=b),y&&(n.Le||(n.Le=E(i),H(n.Le,we()),j(n.Le,'btn'),A(n.Le,_,'necessary'),R(n.Le,f,(()=>{x([])}))),n.Le.firstElementChild.innerHTML=y),v&&(n.it||(n.it=E(i),H(n.it,we()),j(n.it,'btn'),j(n.it,'btn--secondary'),A(n.it,_,'show'),R(n.it,'mouseenter',(()=>{o.B||ve(e,t)})),R(n.it,f,s)),n.it.firstElementChild.innerHTML=v),M&&(n.lt||(n.lt=E(i),H(n.lt,we()),j(n.lt,'btn'),A(n.lt,_,'optional'),R(n.lt,'mouseenter',(()=>{o.H||Ce(e,t)})),R(n.lt,f,p)),n.lt.firstElementChild.innerHTML=M),n.dt||(n.dt=E(r),j(n.dt,d),b&&H(n.dt,n.rt),y&&H(n.dt,n.Le),(b||y)&&H(n.tt,n.dt),H(n.nt,n.dt)),n.it&&!n.ft&&(n.ft=E(r),n.Le&&n.rt?(j(n.ft,d),H(n.ft,n.it),H(n.nt,n.ft)):(H(n.dt,n.it),j(n.dt,d+'--uneven'))),n.lt&&!n._t&&(n._t=E(r),n.Le&&n.rt&&n.it?(j(n._t,d),H(n._t,n.lt),H(n.nt,n._t)):(H(n.dt,n.lt),j(n.dt,d+'--uneven'))),C){if(!n.ut){let e=E(r),t=E(r);n.ut=E(r),j(e,'footer'),j(t,'links'),j(n.ut,'link-group'),H(t,n.ut),H(e,t),H(n.we,e)}n.ut.innerHTML=C}be(0),o.D||(o.D=!0,te(g.le.me,u,n.we),t(e),H(n.Se,n.et),Y(n.we),setTimeout((()=>V(n.et,'cc--anim')),100)),ee(1),$(n.tt,e,ve,t)},Me=e=>{if(!h(e))return null;if(e in g.o._)return e;let t=e.slice(0,2);return t in g.o._?t:null},xe=()=>g.o.l||g.o.i.language.default,Te=e=>{e&&(g.o.l=e)},De=async e=>{const t=g.o;let o=Me(e)?e:xe(),n=t._[o];return h(n)?n=await(async e=>{try{const t=await fetch(e);return await t.json()}catch(e){return console.error(e),!1}})(n):w(n)&&(n=await n()),!!n&&(t.u=n,Te(o),!0)},ke=()=>{let e=g.o.i.language.rtl,t=g.se.Se;e&&t&&(v(e)||(e=[e]),y(e,g.o.l)?V(t,'cc--rtl'):L(t,'cc--rtl'))},Ee=()=>{const e=g.se;if(e.Se)return;e.Se=E(r),e.Se.id='cc-main',e.Se.setAttribute('data-nosnippet',''),ke();let t=g.o.i.root;t&&h(t)&&(t=document.querySelector(t)),(t||e.Ke.body).appendChild(e.Se)},Ae=e=>oe((()=>localStorage.removeItem(e))),Be=(e,t)=>{if(t instanceof RegExp)return e.filter((e=>t.test(e)));{const o=b(e,t);return o>-1?[e[o]]:[]}},Ne=e=>{const{hostname:t,protocol:o}=location,{name:n,path:a,domain:s,sameSite:c,useLocalStorage:r}=g.t.cookie,i=e?(()=>{const e=g.o.S,t=e?new Date-e:0;return 864e5*G()-t})():864e5*G(),l=new Date;l.setTime(l.getTime()+i),g.o.p.expirationTime=l.getTime();const d=JSON.stringify(g.o.p);let f=n+'='+encodeURIComponent(d)+(0!==i?'; expires='+l.toUTCString():'')+'; Path='+a+'; SameSite='+c;y(t,'.')&&(f+='; Domain='+s),'https:'===o&&(f+='; Secure'),r?((e,t)=>{oe((()=>localStorage.setItem(e,t)))})(n,d):document.cookie=f,g.o.p},He=(e,t,o)=>{if(0===e.length)return;const n=o||g.t.cookie.domain,a=t||g.t.cookie.path,s='www.'===n.slice(0,4),c=s&&n.substring(4),r=(e,t)=>{document.cookie=e+'=; path='+a+(t?'; domain=.'+t:'')+'; expires=Thu, 01 Jan 1970 00:00:01 GMT;'};for(const t of e)r(t),r(t,n),s&&r(t,c)},Ve=e=>{const t=e||g.t.cookie.name,o=g.t.cookie.useLocalStorage;return((e,t)=>{let o;return o=oe((()=>JSON.parse(t?e:decodeURIComponent(e))),!0)||{},o})(o?(n=t,oe((()=>localStorage.getItem(n)))||''):je(t,!0),o);var n},je=(e,t)=>{const o=document.cookie.match('(^|;)\\s*'+e+'\\s*=\\s*([^;]+)');return o?t?o.pop():e:''},Ie=e=>{const t=document.cookie.split(/;\s*/),o=[];for(const n of t){let t=n.split('=')[0];e?oe((()=>{e.test(t)&&o.push(t)})):o.push(t)}return o},Le=(e,n=[])=>{((e,t)=>{const{R:o,G:n,J:a,B:s,te:c,U:r,Z:i}=g.o;let l=[];if(e){v(e)?l.push(...e):h(e)&&(l='all'===e?o:[e]);for(const e of o)c[e]=y(l,e)?S(i[e]):[]}else l=[...n,...r],s&&(l=(()=>{const e=g.se.ce;if(!e)return[];let t=[];for(let o in e)e[o].checked&&t.push(o);return t})());l=l.filter((e=>!y(o,e)||!y(t,e))),l.push(...a),U(l)})(e,n),(e=>{const t=g.o,{te:o,J:n,ee:a,Z:s,R:c}=t,r=c;t.ne=F(a);for(const e of r){const c=s[e],r=S(c),i=o[e]&&o[e].length>0,l=y(n,e);if(0!==r.length){if(a[e]=[],l)a[e].push(...r);else if(i){const t=o[e];a[e].push(...t)}else a[e]=t.te[e];a[e]=M(a[e])}}})(),(()=>{const e=g.o;e.L=g.t.mode===o&&e.T?J(e.U,e.G):J(e.G,e.p.categories);let n=e.L.length>0,a=!1;for(const t of e.R)e.oe[t]=J(e.ee[t],e.ne[t]),e.oe[t].length>0&&(a=!0);const s=g.se.ce;for(const t in s)s[t].checked=y(e.G,t);for(const t of e.R){const o=g.se.re[t],n=e.ee[t];for(const e in o)o[e].checked=y(n,e)}e.C||(e.C=new Date),e.M||(e.M=([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,(e=>(e^crypto.getRandomValues(new Uint8Array(1))[0]&15>>e/4).toString(16)))),e.p={categories:F(e.G),revision:g.t.revision,data:e.h,consentTimestamp:e.C.toISOString(),consentId:e.M,services:F(e.ee)},e.S&&(e.p.lastConsentTimestamp=e.S.toISOString());let c=!1;const r=n||a;(e.T||r)&&(e.T&&(e.T=!1,c=!0),e.S=e.S?new Date:e.C,e.p.lastConsentTimestamp=e.S.toISOString(),Ne(),g.t.autoClearCookies&&(c||r)&&(e=>{const t=g.o,o=Ie(),n=(e=>{const t=g.o;return(e?t.R:t.L).filter((e=>{const o=t.O[e];return!!o&&!o.readOnly&&!!o.autoClear}))})(e);for(const e in t.oe)for(const n of t.oe[e]){const a=t.Z[e][n].cookies;if(!y(t.ee[e],n)&&a)for(const e of a){const t=Be(o,e.name);He(t,e.path,e.domain)}}for(const a of n){const n=t.O[a].autoClear,s=n&&n.cookies||[],c=y(t.L,a),r=!y(t.G,a),i=c&&r;if(e?r:i){n.reloadPage&&i&&(t.F=!0);for(const e of s){const t=Be(o,e.name);He(t,e.path,e.domain)}}}})(c),ne()),c&&(te(g.le.de),te(g.le.fe),g.t.mode===t)||(r&&te(g.le._e),e.F&&(e.F=!1,location.reload()))})()},Fe=e=>{const t=g.o.T?[]:g.o.G;return y(t,e)},Pe=(e,t)=>{const o=g.o.T?[]:g.o.ee[t]||[];return y(o,e)},Oe=(e,t,o)=>{let n=[];const a=e=>{if(h(e)){let t=je(e);''!==t&&n.push(t)}else n.push(...Ie(e))};if(v(e))for(let t of e)a(t);else a(e);He(n,t,o)},Re=e=>{const{se:t,o:o}=g;if(!o.k){if(!o.D){if(!e)return;Se($e,Ee)}o.k=!0,o.q=x(),o.v&&Q(!0),q(t.we,1),V(t.Ce,n),A(t.we,l,'false'),setTimeout((()=>{z(g.se.ve)}),100),te(g.le.ue,u)}},Ge=()=>{const{se:e,o:t,le:o}=g;t.k&&(t.k=!1,t.v&&Q(),z(e.Ze,!0),L(e.Ce,n),A(e.we,l,'true'),z(t.q),t.q=null,te(o.pe,u))},Je=()=>{const e=g.o;e.A||(e.B||ve($e,Ee),e.A=!0,e.k?e.K=x():e.q=x(),q(g.se.Me,2),V(g.se.Ce,a),A(g.se.Me,l,'false'),setTimeout((()=>{z(g.se.he)}),100),te(g.le.ue,p))},Ue=()=>{const e=g.o;e.A&&(e.A=!1,(()=>{const e=qe(),t=g.o.O,o=g.se.ce,n=g.se.re,a=e=>y(g.o.U,e);for(const s in o){const c=!!t[s].readOnly;o[s].checked=c||(e?Fe(s):a(s));for(const t in n[s])n[s][t].checked=c||(e?Pe(t,s):a(s))}})(),z(g.se.$e,!0),L(g.se.Ce,a),A(g.se.Me,l,'true'),e.k?(z(e.K),e.K=null):(z(e.q),e.q=null),te(g.le.pe,p))};var $e={show:Re,hide:Ge,showPreferences:Je,hidePreferences:Ue,acceptCategory:Le,hideManageByBTSModal:Ke};const ze=(e,t)=>{const o=Ve(t);return e?o[e]:o},qe=()=>!g.o.T,Ke=()=>{const e=g.o;e.N&&(e.N=!1,z(g.se.$e,!0),L(g.se.Ce,a),A(g.se.Me,l,'true'),e.k?(z(e.K),e.K=null):(z(e.q),e.q=null),te(g.le.pe,p))};e.acceptCategory=Le,e.acceptService=(e,t)=>{const{R:o,Z:n}=g.o;if(!(e&&t&&h(t)&&y(o,t)&&0!==S(n[t]).length))return!1;((e,t)=>{const o=g.o,{Z:n,te:a,B:s}=o,c=g.se.re[t]||{},r=g.se.ce[t]||{},i=S(n[t]);if(a[t]=[],h(e)){if('all'===e){if(a[t].push(...i),s)for(let e in c)c[e].checked=!0,k(c[e])}else if(y(i,e)&&a[t].push(e),s)for(let t in c)c[t].checked=e===t,k(c[t])}else if(v(e))for(let o of i){const n=y(e,o);n&&a[t].push(o),s&&(c[o].checked=n,k(c[o]))}const l=0===a[t].length;o.G=l?o.G.filter((e=>e!==t)):M([...o.G,t]),s&&(r.checked=!l,k(r))})(e,t),Le()},e.acceptedCategory=Fe,e.acceptedService=Pe,e.eraseCookies=Oe,e.getConfig=e=>{const t=g.t,o=g.o.i;return e?t[e]||o[e]:{...t,...o,cookie:{...t.cookie}}},e.getCookie=ze,e.getUserPreferences=()=>{const{P:e,ee:t}=g.o,{accepted:o,rejected:n}=(()=>{const{T:e,G:t,R:o}=g.o;return{accepted:t,rejected:e?[]:o.filter((e=>!y(t,e)))}})();return F({acceptType:e,acceptedCategories:o,rejectedCategories:n,acceptedServices:t,rejectedServices:P()})},e.hide=Ge,e.hideManageByBTSModal=Ke,e.hidePreferences=Ue,e.loadScript=(e,t)=>{let o=document.querySelector('script[src="'+e+'"]');return new Promise((n=>{if(o)return n(!0);if(o=E('script'),C(t))for(const e in t)A(o,e,t[e]);o.onload=()=>n(!0),o.onerror=()=>{o.remove(),n(!1)},o.src=e,H(document.head,o)}))},e.reset=e=>{const{Se:t,Ce:o}=g.se,{name:c,path:r,domain:i,useLocalStorage:l}=g.t.cookie;e&&(l?Ae(c):Oe(c,r,i));for(const{ge:e,be:t,ye:o}of g.o.m)e.removeEventListener(t,o);t&&t.remove(),o&&o.classList.remove(s,a,n);const d=new m;for(const e in g)g[e]=d[e];window._ccRun=!1},e.run=async e=>{const{o:t,t:n,le:a}=g,s=window;if(!s._ccRun){if(s._ccRun=!0,(e=>{const{se:t,t:n,o:a}=g,s=n,r=a,{cookie:i}=s,l=g.ie,d=e.cookie,f=e.categories,_=S(f)||[],u=navigator,p=document;t.Ke=p,t.Ce=p.documentElement,i.domain=location.hostname,r.i=e,r.O=f,r.R=_,r._=e.language.translations,r.v=!!e.disablePageInteraction,l.de=e.onFirstConsent,l.fe=e.onConsent,l._e=e.onChange,l.pe=e.onModalHide,l.ue=e.onModalShow,l.me=e.onModalReady;const{mode:m,autoShow:b,lazyHtmlGeneration:v,autoClearCookies:h,revision:w,manageScriptTags:M,hideFromBots:x}=e;m===o&&(s.mode=m),'boolean'==typeof h&&(s.autoClearCookies=h),'boolean'==typeof M&&(s.manageScriptTags=M),'number'==typeof w&&w>=0&&(s.revision=w,r.j=!0),'boolean'==typeof b&&(s.autoShow=b),'boolean'==typeof v&&(s.lazyHtmlGeneration=v),!1===x&&(s.hideFromBots=!1),!0===s.hideFromBots&&u&&(r.$=u.userAgent&&/bot|crawl|spider|slurp|teoma/i.test(u.userAgent)||u.webdriver),C(d)&&(s.cookie={...i,...d}),s.autoClearCookies,r.j,s.manageScriptTags,(e=>{const{O:t,Z:o,ee:n,te:a,J:s}=g.o;for(let c of e){const e=t[c],r=e.services||{},i=C(r)&&S(r)||[];o[c]={},n[c]=[],a[c]=[],e.readOnly&&(s.push(c),n[c]=i),g.se.re[c]={};for(let e of i){const t=r[e];t.xe=!1,o[c][e]=t}}})(_),(()=>{if(!g.t.manageScriptTags)return;const e=g.o,t=D(document,'script['+c+']');for(const o of t){let t=N(o,c),n=o.dataset.service||'',a=!1;if(t&&'!'===t.charAt(0)&&(t=t.slice(1),a=!0),'!'===n.charAt(0)&&(n=n.slice(1),a=!0),y(e.R,t)&&(e.ae.push({De:o,Te:!1,Ae:a,ke:t,Ee:n}),n)){const o=e.Z[t];o[n]||(o[n]={xe:!1})}}})(),Te((()=>{const e=g.o.i.language.autoDetect;if(e){const t={browser:navigator.language,document:document.documentElement.lang},o=Me(t[e]);if(o)return o}return xe()})())})(e),t.$)return;(()=>{const e=g.o,t=g.t,n=Ve(),{categories:a,services:s,consentId:c,consentTimestamp:r,lastConsentTimestamp:i,data:l,revision:d}=n,f=v(a);e.p=n,e.M=c;const _=!!c&&h(c);e.C=r,e.C&&(e.C=new Date(r)),e.S=i,e.S&&(e.S=new Date(i)),e.h=void 0!==l?l:null,e.j&&_&&d!==t.revision&&(e.I=!1),e.T=!(_&&e.I&&e.C&&e.S&&f),t.cookie.useLocalStorage&&!e.T&&(e.T=(new Date).getTime()>(n.expirationTime||0),e.T&&Ae(t.cookie.name)),e.T,(()=>{const e=g.o;for(const t of e.R){const n=e.O[t];if(n.readOnly||n.enabled){e.U.push(t);const n=e.Z[t]||{};for(let a in n)e.te[t].push(a),e.i.mode===o&&e.ee[t].push(a)}}})(),e.T?t.mode===o&&(e.G=[...e.U]):(e.ee={...e.ee,...s},e.te={...e.ee},U([...e.J,...a]))})();const i=qe();if(!await De())return!1;if($(null,r=$e,ve,Ee),$(null,r,Ce,Ee),g.o.T&&Se(r,Ee),g.t.lazyHtmlGeneration||ve(r,Ee),n.autoShow&&!i&&Re(!0),i)return ne(),te(a.fe);n.mode===o&&ne(t.U)}var r},e.setCookieData=e=>{let t,o=e.value,n=e.mode,a=!1;const s=g.o;if('update'===n){s.h=t=ze('data');const e=typeof t==typeof o;if(e&&'object'==typeof t){!t&&(t={});for(let e in o)t[e]!==o[e]&&(t[e]=o[e],a=!0)}else!e&&t||t===o||(t=o,a=!0)}else t=o,a=!0;return a&&(s.h=t,s.p.data=t,Ne(!0)),a},e.setLanguage=async(e,t)=>{if(!Me(e))return!1;const o=g.o;return!(e===xe()&&!0!==t||!await De(e)||(Te(e),o.D&&Se($e,Ee),o.B&&ve($e,Ee),ke(),0))},e.show=Re,e.showPreferences=Je,e.validConsent=qe,e.validCookie=e=>''!==je(e,!0)},'object'==typeof exports&&'undefined'!=typeof module?t(exports):'function'==typeof define&&define.amd?define(['exports'],t):t((e='undefined'!=typeof globalThis?globalThis:e||self).CookieConsent={});
+
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CookieConsent = {}));
+})(this, (function (exports) { 'use strict';
+
+    const COOKIE_NAME = 'cc_cookie';
+
+    const OPT_IN_MODE = 'opt-in';
+    const OPT_OUT_MODE = 'opt-out';
+
+    const TOGGLE_CONSENT_MODAL_CLASS = 'show--consent';
+    const TOGGLE_PREFERENCES_MODAL_CLASS = 'show--preferences';
+    const TOGGLE_DISABLE_INTERACTION_CLASS = 'disable--interaction';
+
+    const SCRIPT_TAG_SELECTOR = 'data-category';
+
+    const DIV_TAG = 'div';
+    const BUTTON_TAG = 'button';
+
+    const ARIA_HIDDEN = 'aria-hidden';
+    const BTN_GROUP_CLASS = 'btn-group';
+    const CLICK_EVENT = 'click';
+    const DATA_ROLE = 'data-role';
+
+    const CONSENT_MODAL_NAME = 'consentModal';
+    const PREFERENCES_MODAL_NAME = 'preferencesModal';
+    const MANAGE_BY_BTS_MODAL_NAME = 'btsModal';
+
+    /**
+     * @typedef {import('../../types')} CookieConsent
+     *
+     * @typedef {CookieConsent} Api
+     * @typedef {CookieConsent.CookieConsentConfig} UserConfig
+     * @typedef {CookieConsent.Category} Category
+     * @typedef {CookieConsent.Service} Service
+     * @typedef {Object.<string, Service>} Services
+     * @typedef {CookieConsent.AutoClear} AutoClear
+     * @typedef {CookieConsent.GuiOptions} GuiOptions
+     * @typedef {GuiOptions['consentModal']} GuiModalOption
+     * @typedef {CookieConsent.CookieConsentConfig['language']} Language
+     * @typedef {CookieConsent.Translation} Translation
+     * @typedef {CookieConsent.ConsentModalOptions} ConsentModalOptions
+     * @typedef {CookieConsent.PreferencesModalOptions} PreferencesModalOptions
+     * @typedef {CookieConsent.ManageByBTSModalModalOptions} ManageByBTSModalModalOptions
+     * @typedef {CookieConsent.CookieTable} CookieTable
+     * @typedef {CookieConsent.Section} Section
+     * @typedef {CookieConsent.CookieValue} CookieValue
+     * @typedef {CookieConsent.UserPreferences} UserPreferences
+     * @typedef {CookieConsent.UserPreferences} UserPreferences
+     */
+
+    /**
+     * Internal state for each script tag
+     * @typedef {Object} ScriptInfo
+     * @property {HTMLScriptElement} _script
+     * @property {string} _categoryName
+     * @property {string} [_serviceName]
+     * @property {boolean} _executed
+     * @property {boolean} _runOnDisable
+     */
+
+    /**
+     * Pointers to main dom elements
+     * @typedef {Object} DomElements
+     * @property {Document} _document
+     * @property {HTMLElement} _htmlDom
+     *
+     * @property {HTMLElement} _ccMain
+     * @property {HTMLElement} _cmContainer
+     * @property {HTMLElement} _pmContainer
+     *
+     * @property {HTMLElement} _cm
+     * @property {HTMLElement} _cmBody
+     * @property {HTMLElement} _cmTexts
+     * @property {HTMLElement} _cmTitle
+     * @property {HTMLElement} _cmDescription
+     * @property {HTMLElement} _cmBtns
+     * @property {HTMLElement} _cmBtnGroup
+     * @property {HTMLElement} _cmBtnGroup2
+     * @property {HTMLElement} _cmBtnGroup3
+     * 
+     * @property {HTMLElement} _cmAcceptAllBtn
+     * @property {HTMLElement} _cmAcceptNecessaryBtn
+     * @property {HTMLElement} _cmShowPreferencesBtn
+     * @property {HTMLElement} _cmFooterLinksGroup
+     * @property {HTMLElement} _cmCloseIconBtn
+     * @property {HTMLElement} _cmMangeByBTS
+     *
+     * @property {HTMLElement} _pm
+     * @property {HTMLElement} _pmHeader
+     * @property {HTMLElement} _pmTitle
+     * @property {HTMLElement} _pmCloseBtn
+     * @property {HTMLElement} _pmBody
+     * @property {HTMLElement} _pmNewBody
+     * @property {HTMLElement} _pmSections
+     * @property {HTMLElement} _pmFooter
+     * @property {HTMLElement} _pmAcceptAllBtn
+     * @property {HTMLElement} _pmAcceptNecessaryBtn
+     * @property {HTMLElement} _pmSavePreferencesBtn
+     * 
+     * @property {HTMLElement} _btsm
+     * @property {HTMLElement} _btsmTitle
+     * @property {HTMLElement} _btsmContent
+     * @property {HTMLElement} _btsmContainer
+     * @property {HTMLElement} _btsmOverlay
+     *
+     * @property {Object.<string, HTMLInputElement>} _categoryCheckboxInputs
+     * @property {Object.<string, ServiceToggle>} _serviceCheckboxInputs
+     *
+     * // Used to properly restore focus when modal is closed
+     * @property {HTMLSpanElement} _focusSpan
+     * @property {HTMLSpanElement} _pmFocusSpan
+     */
+
+    /**
+     * @typedef {Object} CustomCallbacks
+     * @property {Function} _onFirstConsent
+     * @property {Function} _onConsent
+     * @property {Function} _onChange
+     * @property {Function} _onModalShow
+     * @property {Function} _onModalHide
+     * @property {Function} _onModalReady
+     */
+
+    /**
+     * Pointers to all services toggles relative to a category
+     * @typedef {Object.<string, HTMLInputElement>} ServiceToggle
+     */
+
+    class GlobalState {
+        constructor() {
+
+            /**
+             * Default config. options
+             * @type {CookieConsent.CookieConsentConfig}
+             */
+            this._config = {
+                mode: OPT_IN_MODE,
+                revision: 0,
+
+                //{{START: GUI}}
+                autoShow: true,
+                lazyHtmlGeneration: true,
+                //{{END: GUI}}
+
+                autoClearCookies: true,
+                manageScriptTags: true,
+                hideFromBots: true,
+
+                cookie: {
+                    name: COOKIE_NAME,
+                    expiresAfterDays: 182,
+                    domain: '',
+                    path: '/',
+                    sameSite: 'Lax'
+                }
+            };
+
+            this._state = {
+                /**
+                * @type {UserConfig}
+                */
+                _userConfig: {},
+
+                _currentLanguageCode: '',
+
+                /**
+                * @type {Object.<string, Translation>}
+                */
+                _allTranslations: {},
+
+                /**
+                * @type {Translation}
+                */
+                _currentTranslation: {},
+
+                /**
+                * Internal state variables
+                * @type {CookieValue}
+                */
+                _savedCookieContent : {},
+
+                /**
+                 * Store all event data-cc event listeners
+                 * (so that they can be removed on .reset())
+                 *
+                 * @type {{
+                 *  _element: HTMLElement,
+                 *  _event: string,
+                 *  _listener: Function
+                 * }[]}
+                 */
+                _dataEventListeners: [],
+
+                _disablePageInteraction: false,
+
+                /**
+                * @type {any}
+                */
+                _cookieData : null,
+
+                /**
+                * @type {Date}
+                */
+                _consentTimestamp: null,
+
+                /**
+                * @type {Date}
+                */
+                _lastConsentTimestamp: null,
+
+                /**
+                * @type {string}
+                */
+                _consentId: '',
+
+                _invalidConsent : true,
+
+                //{{START: GUI}}
+                _consentModalExists : false,
+                _consentModalVisible : false,
+
+                _preferencesModalVisible : false,
+                _preferencesModalExists: false,
+
+                _manageByBTSModalVisible : false,
+                _manageByBTSModalExists : false,
+
+                /**
+                * @type {HTMLElement[]}
+                */
+                _currentModalFocusableElements: [],
+                //{{END: GUI}}
+
+                _revisionEnabled : false,
+                _validRevision : true,
+
+                /**
+                * Array containing the last changed categories (enabled/disabled)
+                * @type {string[]}
+                */
+                _lastChangedCategoryNames : [],
+
+                _reloadPage : false,
+
+                /**
+                * @type {CookieConsent.AcceptType}
+                */
+                _acceptType: '',
+
+                /**
+                * Object containing all user's defined categories
+                * @type {Object.<string, Category>}
+                */
+                _allDefinedCategories: false,
+
+                /**
+                * Stores all available categories
+                * @type {string[]}
+                */
+                _allCategoryNames: [],
+
+                /**
+                * Contains all accepted categories
+                * @type {string[]}
+                */
+                _acceptedCategories : [],
+
+                /**
+                * Keep track of readonly toggles
+                * @type {string[]}
+                */
+                _readOnlyCategories : [],
+
+                /**
+                * Contains all categories enabled by default
+                * @type {string[]}
+                */
+                _defaultEnabledCategories : [],
+
+                /**
+                * Don't run plugin if bot detected
+                * (to avoid indexing its text content)
+                */
+                _botAgentDetected : false,
+
+                /**
+                * Save reference to the last focused element on the page
+                * (used later to restore focus when both modals are closed)
+                */
+
+                //{{START: GUI}}
+
+                /** @type {HTMLElement} **/_lastFocusedElemBeforeModal: false,
+                /** @type {HTMLElement} **/_lastFocusedModalElement: false,
+
+                /**
+                * Both of the arrays below have the same structure:
+                * [0]: first focusable element inside modal
+                * [1]: last focusable element inside modal
+                */
+
+                /** @type {HTMLElement[]} **/ _cmFocusableElements : [],
+                /** @type {HTMLElement[]} **/ _pmFocusableElements : [],
+
+                /**
+                * Keep track of enabled/disabled categories
+                * @type {boolean[]}
+                */
+                _allToggleStates : [],
+
+                //{{END: GUI}}
+
+                /**
+                * @type {Object.<string, Services>}
+                */
+                _allDefinedServices: {},
+
+                /**
+                * @type {Object.<string, string[]>}
+                */
+                _acceptedServices: {},
+
+                /**
+                 * Keep track of the current state of the services
+                 * (may not be the same as enabledServices)
+                 *
+                 * @type {Object.<string, string[]>}
+                 */
+                _enabledServices: {},
+
+                /**
+                * @type {Object.<string, string[]>}
+                */
+                _lastChangedServices: {},
+
+                /**
+                * @type {Object.<string, string[]>}
+                */
+                _lastEnabledServices: {},
+
+                /**
+                * @type {ScriptInfo[]}
+                */
+                _allScriptTags: []
+            };
+
+            //{{START: GUI}}
+
+            /**
+             * Pointers to main dom elements
+             * @type {DomElements}
+             */
+            this._dom = {
+                _categoryCheckboxInputs: {},
+                _serviceCheckboxInputs: {}
+            };
+
+            //{{END: GUI}}
+
+            /**
+             * Callback functions
+             * @type {CustomCallbacks}
+             */
+            this._callbacks = {};
+
+            this._customEvents = {
+                _onFirstConsent: 'cc:onFirstConsent',
+                _onConsent: 'cc:onConsent',
+                _onChange: 'cc:onChange',
+                //{{START: GUI}}
+                _onModalShow: 'cc:onModalShow',
+                _onModalHide: 'cc:onModalHide',
+                _onModalReady: 'cc:onModalReady'
+                //{{END: GUI}}
+            };
+        }
+    }
+
+    const globalObj = new GlobalState();
+
+    /**
+     * Helper console.log function
+     * @param {any} [params]
+     */
+    const debug = (...params) => {
+        console.log(...params);
+    };
+
+    /**
+     * Helper indexOf
+     * @param {any[]|string} el
+     * @param {any} value
+     */
+    const indexOf = (el, value) => el.indexOf(value);
+
+    /**
+     * Returns true if el. (array or string) contains the specified value
+     * @param {any[]|string} el
+     */
+    const elContains = (el, value) => indexOf(el, value) !== -1;
+
+    const isArray = el => Array.isArray(el);
+
+    const isString = el => typeof el === 'string';
+
+    const isObject = el => !!el && typeof el === 'object' && !isArray(el);
+
+    const isFunction = el => typeof el === 'function';
+
+    const getKeys = obj => Object.keys(obj);
+
+    /**
+     * Return array without duplicates
+     * @param {any[]} arr
+     */
+    const unique = (arr) => Array.from(new Set(arr));
+
+    const getActiveElement = () => document.activeElement;
+
+    /**
+     * @param {Event} e
+     */
+    const preventDefault = (e) => e.preventDefault();
+
+    /**
+     * @param {Element} el
+     * @param {string} selector
+     */
+    const querySelectorAll = (el, selector) => el.querySelectorAll(selector);
+
+    /**
+     * @param {HTMLInputElement} input
+     */
+    const dispatchInputChangeEvent = (input) => input.dispatchEvent(new Event('change'));
+
+    /**
+     * @param {keyof HTMLElementTagNameMap} type
+     */
+    const createNode = (type) => {
+        const el = document.createElement(type);
+
+        if (type === BUTTON_TAG) {
+            el.type = type;
+        }
+
+        return el;
+    };
+
+    /**
+     * @param {HTMLElement} el
+     * @param {string} attribute
+     * @param {string} value
+     */
+    const setAttribute = (el, attribute, value) => el.setAttribute(attribute, value);
+
+    /**
+     * @param {HTMLElement} el
+     * @param {string} attribute
+     * @param {boolean} [prependData]
+     */
+    const removeAttribute = (el, attribute, prependData) => {
+        el.removeAttribute(prependData
+            ? 'data-' + attribute
+            : attribute
+        );
+    };
+
+    /**
+     * @param {HTMLElement} el
+     * @param {string} attribute
+     * @param {boolean} [prependData]
+     * @returns {string}
+     */
+    const getAttribute = (el, attribute, prependData) => {
+        return el.getAttribute(prependData
+            ? 'data-' + attribute
+            : attribute
+        );
+    };
+
+    /**
+     * @param {Node} parent
+     * @param {Node} child
+     */
+    const appendChild = (parent, child) => parent.appendChild(child);
+
+    /**
+     * @param {HTMLElement} elem
+     * @param {string} className
+     */
+    const addClass = (elem, className) => elem.classList.add(className);
+
+    /**
+     * @param {HTMLElement} elem
+     * @param {string} className
+     */
+    const addClassCm = (elem, className) => addClass(elem, 'cm__' + className);
+    /**
+     * @param {HTMLElement} elem
+     * @param {string} className
+     */
+    const addClassPm = (elem, className) => addClass(elem, 'pm__' + className);
+
+    /**
+     * @param {HTMLElement} elem
+     * @param {string} className
+     */
+    const removeClass = (el, className) => el.classList.remove(className);
+
+    /**
+     * @param {HTMLElement} el
+     * @param {string} className
+     */
+    const hasClass = (el, className) => el.classList.contains(className);
+
+    const deepCopy = (el) => {
+        if (typeof el !== 'object' )
+            return el;
+
+        if (el instanceof Date)
+            return new Date(el.getTime());
+
+        let clone = Array.isArray(el) ? [] : {};
+
+        for (let key in el) {
+            let value = el[key];
+            clone[key] = deepCopy(value);
+        }
+
+        return clone;
+    };
+
+    /**
+     * Store categories and services' config. details
+     * @param {string[]} allCategoryNames
+     */
+    const fetchCategoriesAndServices = (allCategoryNames) => {
+        const {
+            _allDefinedCategories,
+            _allDefinedServices,
+            _acceptedServices,
+            _enabledServices,
+            _readOnlyCategories
+        } = globalObj._state;
+
+        for (let categoryName of allCategoryNames) {
+
+            const currCategory = _allDefinedCategories[categoryName];
+            const services = currCategory.services || {};
+            const serviceNames = isObject(services) && getKeys(services) || [];
+
+            _allDefinedServices[categoryName] = {};
+            _acceptedServices[categoryName] = [];
+            _enabledServices[categoryName] = [];
+
+            /**
+             * Keep track of readOnly categories
+             */
+            if (currCategory.readOnly) {
+                _readOnlyCategories.push(categoryName);
+                _acceptedServices[categoryName] = serviceNames;
+            }
+
+            globalObj._dom._serviceCheckboxInputs[categoryName] = {};
+
+            for (let serviceName of serviceNames) {
+                const service = services[serviceName];
+                service._enabled = false;
+                _allDefinedServices[categoryName][serviceName] = service;
+            }
+        }
+    };
+
+    /**
+     * Retrieves all script elements with 'data-category' attribute
+     * and save the following attributes: category-name and service
+     */
+    const retrieveScriptElements = () => {
+        if (!globalObj._config.manageScriptTags)
+            return;
+
+        const state = globalObj._state;
+
+        /**
+         * @type {NodeListOf<HTMLScriptElement>}
+         */
+        const scripts = querySelectorAll(document, 'script[' + SCRIPT_TAG_SELECTOR +']');
+
+        for (const scriptTag of scripts) {
+            let scriptCategoryName = getAttribute(scriptTag, SCRIPT_TAG_SELECTOR);
+            let scriptServiceName = scriptTag.dataset.service || '';
+            let runOnDisable = false;
+
+            /**
+             * Remove the '!' char if it is present
+             */
+            if (scriptCategoryName && scriptCategoryName.charAt(0) === '!') {
+                scriptCategoryName = scriptCategoryName.slice(1);
+                runOnDisable = true;
+            }
+
+            if (scriptServiceName.charAt(0) === '!') {
+                scriptServiceName = scriptServiceName.slice(1);
+                runOnDisable = true;
+            }
+
+            if (elContains(state._allCategoryNames, scriptCategoryName)) {
+                state._allScriptTags.push({
+                    _script: scriptTag,
+                    _executed: false,
+                    _runOnDisable: runOnDisable,
+                    _categoryName: scriptCategoryName,
+                    _serviceName: scriptServiceName
+                });
+
+                if (scriptServiceName) {
+                    const categoryServices = state._allDefinedServices[scriptCategoryName];
+                    if (!categoryServices[scriptServiceName]) {
+                        categoryServices[scriptServiceName] = {
+                            _enabled: false
+                        };
+                    }
+                }
+            }
+        }
+    };
+
+    /**
+     * Calculate rejected services (all services - enabled services)
+     * @returns {Object.<string, string[]>}
+     */
+    const retrieveRejectedServices = () => {
+        const rejectedServices = {};
+
+        const {
+            _allCategoryNames,
+            _allDefinedServices,
+            _acceptedServices
+        } = globalObj._state;
+
+        for (const categoryName of _allCategoryNames) {
+            rejectedServices[categoryName] = arrayDiff(
+                _acceptedServices[categoryName],
+                getKeys(_allDefinedServices[categoryName])
+            );
+        }
+
+        return rejectedServices;
+    };
+
+    const retrieveCategoriesFromModal = () => {
+        const toggles = globalObj._dom._categoryCheckboxInputs;
+
+        if (!toggles)
+            return [];
+
+        let enabledCategories = [];
+
+        for (let categoryName in toggles) {
+            if (toggles[categoryName].checked) {
+                enabledCategories.push(categoryName);
+            }
+        }
+
+        return enabledCategories;
+    };
+
+    /**
+     * @param {string[]|string} categories - Categories to accept
+     * @param {string[]} [excludedCategories]
+     */
+    const resolveEnabledCategories = (categories, excludedCategories) => {
+        const {
+            _allCategoryNames,
+            _acceptedCategories,
+            _readOnlyCategories,
+            _preferencesModalExists,
+            _enabledServices,
+            _defaultEnabledCategories,
+            _allDefinedServices
+        } = globalObj._state;
+
+        /**
+         * @type {string[]}
+         */
+        let enabledCategories = [];
+
+        if (!categories) {
+            enabledCategories = [..._acceptedCategories, ..._defaultEnabledCategories];
+            //{{START: GUI}}
+            if (_preferencesModalExists) {
+                enabledCategories = retrieveCategoriesFromModal();
+            }
+            //{{END: GUI}}
+        } else {
+            if (isArray(categories)) {
+                enabledCategories.push(...categories);
+            } else if (isString(categories)) {
+                enabledCategories = categories === 'all'
+                    ? _allCategoryNames
+                    : [categories];
+            }
+
+            /**
+             * If there are services, turn them all on or off
+             */
+            for (const categoryName of _allCategoryNames) {
+                _enabledServices[categoryName] = elContains(enabledCategories, categoryName)
+                    ? getKeys(_allDefinedServices[categoryName])
+                    : [];
+            }
+        }
+
+        // Remove invalid and excluded categories
+        enabledCategories = enabledCategories.filter(category =>
+            !elContains(_allCategoryNames, category) ||
+            !elContains(excludedCategories, category)
+        );
+
+        // Add back all the categories set as "readonly/required"
+        enabledCategories.push(..._readOnlyCategories);
+
+        setAcceptedCategories(enabledCategories);
+    };
+
+    /**
+     * @param {string} [relativeCategory]
+     */
+    const resolveEnabledServices = (relativeCategory) => {
+        const state = globalObj._state;
+
+        const {
+            _enabledServices,
+            _readOnlyCategories,
+            _acceptedServices,
+            _allDefinedServices,
+            _allCategoryNames
+        } = state;
+
+        const categoriesToConsider = relativeCategory
+            ? [relativeCategory]
+            : _allCategoryNames;
+
+        /**
+         * Save previously enabled services to calculate later on which of them was changed
+         */
+        state._lastEnabledServices = deepCopy(_acceptedServices);
+
+        for (const categoryName of categoriesToConsider) {
+            const services = _allDefinedServices[categoryName];
+            const serviceNames = getKeys(services);
+            const customServicesSelection = _enabledServices[categoryName] && _enabledServices[categoryName].length > 0;
+            const readOnlyCategory = elContains(_readOnlyCategories, categoryName);
+
+            /**
+             * Stop here if there are no services
+             */
+            if (serviceNames.length === 0)
+                continue;
+
+            // Empty (previously) enabled services
+            _acceptedServices[categoryName] = [];
+
+            // If category is marked as readOnly enable all its services
+            if (readOnlyCategory) {
+                _acceptedServices[categoryName].push(...serviceNames);
+            } else {
+                if (customServicesSelection) {
+                    const selectedServices = _enabledServices[categoryName];
+                    _acceptedServices[categoryName].push(...selectedServices);
+                } else {
+                    _acceptedServices[categoryName] = state._enabledServices[categoryName];
+                }
+            }
+
+            /**
+             * Make sure there are no duplicates inside array
+             */
+            _acceptedServices[categoryName] = unique(_acceptedServices[categoryName]);
+        }
+    };
+
+    /**
+     * @param {string} eventName
+     */
+    const dispatchPluginEvent = (eventName, data) => dispatchEvent(new CustomEvent(eventName, {detail: data}));
+
+    /**
+     * Update services state internally and tick/untick checkboxes
+     * @param {string|string[]} service
+     * @param {string} category
+     */
+    const updateModalToggles = (service, category) => {
+        const state = globalObj._state;
+        const {
+            _allDefinedServices,
+            _enabledServices,
+            _preferencesModalExists
+        } = state;
+
+        const servicesInputs = globalObj._dom._serviceCheckboxInputs[category] || {};
+        const categoryInput = globalObj._dom._categoryCheckboxInputs[category] || {};
+        const allServiceNames = getKeys(_allDefinedServices[category]);
+
+        // Clear previously enabled services
+        _enabledServices[category] = [];
+
+        if (isString(service)) {
+            if (service === 'all') {
+
+                // Enable all services
+                _enabledServices[category].push(...allServiceNames);
+
+                if (_preferencesModalExists) {
+                    for (let serviceName in servicesInputs) {
+                        servicesInputs[serviceName].checked = true;
+                        dispatchInputChangeEvent(servicesInputs[serviceName]);
+                    }
+                }
+
+            } else {
+
+                // Enable only one service (if valid) and disable all the others
+                if (elContains(allServiceNames, service))
+                    _enabledServices[category].push(service);
+
+                if (_preferencesModalExists) {
+                    for (let serviceName in servicesInputs) {
+                        servicesInputs[serviceName].checked = service === serviceName;
+                        dispatchInputChangeEvent(servicesInputs[serviceName]);
+                    }
+                }
+            }
+        } else if (isArray(service)) {
+            for (let serviceName of allServiceNames) {
+                const validService = elContains(service, serviceName);
+                validService && _enabledServices[category].push(serviceName);
+
+                if (_preferencesModalExists) {
+                    servicesInputs[serviceName].checked = validService;
+                    dispatchInputChangeEvent(servicesInputs[serviceName]);
+                }
+            }
+        }
+
+        const uncheckCategory = _enabledServices[category].length === 0;
+
+        /**
+         * Remove/add the category from acceptedCategories
+         */
+        state._acceptedCategories = uncheckCategory
+            ? state._acceptedCategories.filter(cat => cat !== category)
+            : unique([...state._acceptedCategories, category]);
+
+        /**
+         * If there are no services enabled in the
+         * current category, uncheck the category
+         */
+        if (_preferencesModalExists) {
+            categoryInput.checked = !uncheckCategory;
+            dispatchInputChangeEvent(categoryInput);
+        }
+    };
+
+    /**
+     * Generate RFC4122-compliant UUIDs.
+     * https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid?page=1&tab=votes#tab-top
+     * @returns {string} unique uuid string
+     */
+    const uuidv4 = () => {
+        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, (c) => {
+            return (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
+        });
+    };
+
+    /**
+     * Add event listener to dom object (cross browser function)
+     * @param {Element} elem
+     * @param {keyof WindowEventMap} event
+     * @param {EventListener} fn
+     * @param {boolean} [saveListener]
+     */
+    const addEvent = (elem, event, fn, saveListener) => {
+        elem.addEventListener(event, fn);
+
+        /**
+         * Keep track of specific event listeners
+         * that must be removed on `.reset()`
+         */
+        if (saveListener) {
+            globalObj._state._dataEventListeners.push({
+                _element: elem,
+                _event: event,
+                _listener: fn
+            });
+        }
+    };
+
+    /**
+     * Calculate the existing cookie's remaining time until expiration (in milliseconds)
+     */
+    const getRemainingExpirationTimeMS = () => {
+        const lastTimestamp = globalObj._state._lastConsentTimestamp;
+
+        const elapsedTimeMilliseconds = lastTimestamp
+            ? new Date() - lastTimestamp
+            : 0;
+
+        return getExpiresAfterDaysValue()*86400000 - elapsedTimeMilliseconds;
+    };
+
+    /**
+     * Used to fetch external language files (.json)
+     * @param {string} url
+     * @returns {Promise<import('../core/global').Translation | boolean>}
+     */
+    const fetchJson = async (url) => {
+        try {
+            const response = await fetch(url);
+            return await response.json();
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+    };
+
+    /**
+     * Helper function to retrieve cookie duration
+     * @returns {number}
+     */
+    const getExpiresAfterDaysValue = () => {
+        const expiresAfterDays = globalObj._config.cookie.expiresAfterDays;
+
+        return isFunction(expiresAfterDays)
+            ? expiresAfterDays(globalObj._state._acceptType)
+            : expiresAfterDays;
+    };
+
+    /**
+     * Symmetric difference between 2 arrays
+     * @param {any[]} arr1
+     * @param {any[]} arr2
+     */
+    const arrayDiff = (arr1, arr2) => {
+        const a = arr1 || [];
+        const b = arr2 || [];
+
+        return a
+            .filter(x => !elContains(b, x))
+            .concat(b.filter(x => !elContains(a, x)));
+    };
+
+    /**
+     * Calculate "accept type"
+     * @returns {'all'|'custom'|'necessary'} accept type
+     */
+    const resolveAcceptType = () => {
+        let type = 'custom';
+
+        const { _acceptedCategories, _allCategoryNames, _readOnlyCategories } = globalObj._state;
+        const nAcceptedCategories = _acceptedCategories.length;
+
+        if (nAcceptedCategories === _allCategoryNames.length)
+            type = 'all';
+        else if (nAcceptedCategories === _readOnlyCategories.length)
+            type = 'necessary';
+
+        return type;
+    };
+
+    /**
+     * Note: getUserPreferences() depends on "acceptType"
+     * @param {string[]} acceptedCategories
+     */
+    const setAcceptedCategories = (acceptedCategories) => {
+        globalObj._state._acceptedCategories = unique(acceptedCategories);
+        globalObj._state._acceptType = resolveAcceptType();
+    };
+
+    /**
+     * This callback type is called `requestCallback` and is displayed as a global symbol.
+     *
+     * @callback createModal
+     * @param {import('../core/global').Api} api
+     */
+
+    /**
+     * Add an onClick listeners to all html elements with data-cc attribute
+     * @param {HTMLElement} [elem]
+     * @param {import('../core/global').Api} api
+     * @param {createModal} [createPreferencesModal]
+     */
+    const addDataButtonListeners = (elem, api, createPreferencesModal, createMainContainer) => {
+        const ACCEPT_PREFIX = 'accept-';
+
+        const {
+            show,
+            showPreferences,
+            hide,
+            hidePreferences,
+            acceptCategory
+        } = api;
+
+        const rootEl = elem || document;
+        const getElements = dataRole => querySelectorAll(rootEl, `[data-cc="${dataRole}"]`);
+
+        /**
+         * Helper function: accept and then hide modals
+         * @param {Event} event source event
+         * @param {string|string[]} [acceptType]
+         */
+        const acceptAction = (event, acceptType) => {
+            preventDefault(event);
+            acceptCategory(acceptType);
+            hidePreferences();
+            hide();
+        };
+
+        const
+            showPreferencesModalElements = getElements('show-preferencesModal'),
+            showConsentModalElements = getElements('show-consentModal'),
+            acceptAllElements = getElements(ACCEPT_PREFIX + 'all'),
+            acceptNecessaryElements = getElements(ACCEPT_PREFIX + 'necessary'),
+            acceptCustomElements = getElements(ACCEPT_PREFIX + 'custom'),
+            createPreferencesModalOnHover = globalObj._config.lazyHtmlGeneration;
+
+        //{{START: GUI}}
+        for (const el of showPreferencesModalElements) {
+            setAttribute(el, 'aria-haspopup', 'dialog');
+            addEvent(el, CLICK_EVENT, (event) => {
+                preventDefault(event);
+                showPreferences();
+            });
+
+            if (createPreferencesModalOnHover) {
+                addEvent(el, 'mouseenter', (event) => {
+                    preventDefault(event);
+                    if (!globalObj._state._preferencesModalExists)
+                        createPreferencesModal(api, createMainContainer);
+                }, true);
+
+                addEvent(el, 'focus', () => {
+                    if (!globalObj._state._preferencesModalExists)
+                        createPreferencesModal(api, createMainContainer);
+                });
+            }
+        }
+
+        for (let el of showConsentModalElements) {
+            setAttribute(el, 'aria-haspopup', 'dialog');
+            addEvent(el, CLICK_EVENT, (event) => {
+                preventDefault(event);
+                show(true);
+            }, true);
+        }
+        //{{END: GUI}}
+
+        for (let el of acceptAllElements) {
+            addEvent(el, CLICK_EVENT, (event) => {
+                acceptAction(event, 'all');
+            }, true);
+        }
+
+        for (let el of acceptCustomElements) {
+            addEvent(el, CLICK_EVENT, (event) => {
+                acceptAction(event);
+            }, true);
+        }
+
+        for (let el of acceptNecessaryElements) {
+            addEvent(el, CLICK_EVENT, (event) => {
+                acceptAction(event, []);
+            }, true);
+        }
+    };
+
+    /**
+     * @param {HTMLElement} el
+     * @param {boolean} [toggleTabIndex]
+     */
+    const focus = (el, toggleTabIndex) => {
+        if (!el) return;
+
+        /**
+         * Momentarily add the `tabindex` attribute to fix
+         * a bug with focus restoration in chrome
+         */
+        toggleTabIndex && (el.tabIndex = -1);
+
+        el.focus();
+
+        /**
+         * Remove the `tabindex` attribute so
+         * that the html markup is valid again
+         */
+        toggleTabIndex && el.removeAttribute('tabindex');
+    };
+
+    /**
+     * @param {HTMLDivElement} element
+     * @param {1 | 2} modalId
+     */
+    const focusAfterTransition = (element, modalId) => {
+        const getVisibleDiv = (modalId) => modalId === 1
+            ? globalObj._dom._cmDivTabindex
+            : globalObj._dom._pmDivTabindex;
+
+        const setFocus = (event) => {
+            event.target.removeEventListener('transitionend', setFocus);
+            if (event.propertyName === 'opacity' && getComputedStyle(element).opacity === '1') {
+                focus(getVisibleDiv(modalId));
+            }
+        };
+
+        addEvent(element, 'transitionend', setFocus);
+    };
+
+    /**
+     * Obtain accepted and rejected categories
+     * @returns {{accepted: string[], rejected: string[]}}
+     */
+    const getCurrentCategoriesState = () => {
+        const {
+            _invalidConsent,
+            _acceptedCategories,
+            _allCategoryNames
+        } = globalObj._state;
+
+        return {
+            accepted: _acceptedCategories,
+            rejected: _invalidConsent
+                ? []
+                : _allCategoryNames.filter(category =>
+                    !elContains(_acceptedCategories, category)
+                )
+        };
+    };
+
+    let disableInteractionTimeout;
+
+    /**
+     * @param {boolean} [enable]
+     */
+    const toggleDisableInteraction = (enable) => {
+        clearTimeout(disableInteractionTimeout);
+
+        if (enable) {
+            addClass(globalObj._dom._htmlDom, TOGGLE_DISABLE_INTERACTION_CLASS);
+        }else {
+            disableInteractionTimeout = setTimeout(() => {
+                removeClass(globalObj._dom._htmlDom, TOGGLE_DISABLE_INTERACTION_CLASS);
+            }, 500);
+        }
+    };
+
+    const iconStrokes = [
+        'M 19.5 4.5 L 4.5 19.5 M 4.5 4.501 L 19.5 19.5',    // X
+        'M 3.572 13.406 L 8.281 18.115 L 20.428 5.885',     // TICK
+        'M 21.999 6.94 L 11.639 17.18 L 2.001 6.82 '        // ARROW
+    ];
+
+    /**
+     * [0: x, 1: tick, 2: arrow]
+     * @param {0 | 1 | 2} [iconIndex]
+     * @param {number} [strokeWidth]
+     */
+    const getSvgIcon = (iconIndex = 0, strokeWidth = 1.5) => {
+        return `<svg viewBox="0 0 24 24" stroke-width="${strokeWidth}"><path d="${iconStrokes[iconIndex]}"/></svg>`;
+    };
+
+    /**
+     * Trap focus inside modal and focus the first
+     * focusable element of current active modal
+     * @param {HTMLDivElement} modal
+     */
+    const handleFocusTrap = (modal) => {
+        const dom = globalObj._dom;
+        const state = globalObj._state;
+
+        /**
+         * @param {HTMLDivElement} modal
+         * @param {HTMLElement[]} focusableElements
+         */
+        const trapFocus = (modal) => {
+            const isConsentModal = modal === dom._cm;
+
+            const scope = state._userConfig.disablePageInteraction
+                ? dom._htmlDom
+                : isConsentModal
+                    ? dom._ccMain
+                    : dom._htmlDom;
+
+            const getFocusableElements = () => isConsentModal
+                ? state._cmFocusableElements
+                : state._pmFocusableElements;
+
+            const isModalVisible = () => isConsentModal
+                ? state._consentModalVisible && !state._preferencesModalVisible
+                : state._preferencesModalVisible;
+
+            addEvent(scope, 'keydown', (e) => {
+                if (e.key !== 'Tab' || !isModalVisible())
+                    return;
+
+                const currentActiveElement = getActiveElement();
+                const focusableElements = getFocusableElements();
+
+                if (focusableElements.length === 0)
+                    return;
+
+                /**
+                 * If reached natural end of the tab sequence => restart
+                 * If current focused element is not inside modal => focus modal
+                 */
+                if (e.shiftKey) {
+                    if (currentActiveElement === focusableElements[0] || !modal.contains(currentActiveElement)) {
+                        preventDefault(e);
+                        focus(focusableElements[1]);
+                    }
+                } else {
+                    if (currentActiveElement === focusableElements[1] || !modal.contains(currentActiveElement)) {
+                        preventDefault(e);
+                        focus(focusableElements[0]);
+                    }
+                }
+            }, true);
+        };
+
+        trapFocus(modal);
+    };
+
+    /**
+     * Note: any of the below focusable elements, which has the attribute tabindex="-1" AND is either
+     * the first or last element of the modal, won't receive focus during "open/close" modal
+     */
+    const focusableTypesSelector = ['[href]', BUTTON_TAG, 'input', 'details', '[tabindex]']
+        .map(selector => selector+':not([tabindex="-1"])').join(',');
+
+    const getFocusableElements = (root) => querySelectorAll(root, focusableTypesSelector);
+
+    /**
+     * Save reference to first and last focusable elements inside each modal
+     * to prevent losing focus while navigating with TAB
+     * @param {1 | 2} [modalId]
+     */
+    const getModalFocusableData = (modalId) => {
+        const { _state, _dom } = globalObj;
+
+        /**
+         * Saves all focusable elements inside modal, into the array
+         * @param {HTMLElement} modal
+         * @param {Element[]} array
+         */
+        const saveAllFocusableElements = (modal, array) => {
+            const focusableElements = getFocusableElements(modal);
+
+            /**
+             * Save first and last elements (trap focus inside modal)
+             */
+            array[0] = focusableElements[0];
+            array[1] = focusableElements[focusableElements.length - 1];
+        };
+
+        if (modalId === 1 && _state._consentModalExists)
+            saveAllFocusableElements(_dom._cm, _state._cmFocusableElements);
+
+        if (modalId === 2 && _state._preferencesModalExists)
+            saveAllFocusableElements(_dom._pm, _state._pmFocusableElements);
+    };
+
+    /**
+     * Fire custom event
+     * @param {string} eventName
+     * @param {string} [modalName]
+     * @param {HTMLElement} [modal]
+     */
+    const fireEvent = (eventName, modalName, modal) => {
+        const {
+            _onChange,
+            _onConsent,
+            _onFirstConsent,
+            _onModalHide,
+            _onModalReady,
+            _onModalShow
+        } = globalObj._callbacks;
+
+        const events = globalObj._customEvents;
+
+        //{{START: GUI}}
+        if (modalName) {
+            const modalParams = { modalName };
+
+            if (eventName === events._onModalShow) {
+                isFunction(_onModalShow) && _onModalShow(modalParams);
+            } else if (eventName === events._onModalHide) {
+                isFunction(_onModalHide) && _onModalHide(modalParams);
+            } else {
+                modalParams.modal = modal;
+                isFunction(_onModalReady) && _onModalReady(modalParams);
+            }
+
+            return dispatchPluginEvent(eventName, modalParams);
+        }
+        //{{END: GUI}}
+
+        const params = {
+            cookie: globalObj._state._savedCookieContent
+        };
+
+        if (eventName === events._onFirstConsent) {
+            isFunction(_onFirstConsent) && _onFirstConsent(deepCopy(params));
+        } else if (eventName === events._onConsent) {
+            isFunction(_onConsent) && _onConsent(deepCopy(params));
+        } else {
+            params.changedCategories = globalObj._state._lastChangedCategoryNames;
+            params.changedServices = globalObj._state._lastChangedServices;
+            isFunction(_onChange) && _onChange(deepCopy(params));
+        }
+
+        dispatchPluginEvent(eventName, deepCopy(params));
+    };
+
+    /**
+     * @param {CallableFunction} fn
+     */
+    const safeRun = (fn, hideError) => {
+        try {
+            return fn();
+        } catch (e) {
+            !hideError && console.warn('CookieConsent:', e);
+            return false;
+        }
+    };
+
+    /**
+     * @param {string} type
+     */
+    const validMimeType = type => ['text/javascript', 'module'].includes(type);
+
+    /**
+     * This function handles the loading/activation logic of the already
+     * existing scripts based on the current accepted cookie categories
+     *
+     * @param {string[]} [defaultEnabledCategories]
+     */
+    const manageExistingScripts = (defaultEnabledCategories) => {
+        const {
+            _acceptedServices,
+            _lastChangedServices,
+            _allCategoryNames,
+            _allDefinedServices,
+            _allScriptTags,
+            _savedCookieContent,
+            _lastChangedCategoryNames,
+        } = globalObj._state;
+
+        /**
+         * Automatically Enable/Disable internal services
+         */
+        for (const categoryName of _allCategoryNames) {
+            const lastChangedServices = _lastChangedServices[categoryName]
+                || _acceptedServices[categoryName]
+                || [];
+
+            for (const serviceName of lastChangedServices) {
+                const service = _allDefinedServices[categoryName][serviceName];
+
+                if (!service)
+                    continue;
+
+                const { onAccept, onReject } = service;
+
+                if (
+                    !service._enabled
+                    && elContains(_acceptedServices[categoryName], serviceName)
+                ) {
+                    service._enabled = true;
+                    isFunction(onAccept) && onAccept();
+                }
+
+                else if (
+                    service._enabled
+                    && !elContains(_acceptedServices[categoryName], serviceName)
+                ) {
+                    service._enabled = false;
+                    isFunction(onReject) && onReject();
+                }
+            }
+        }
+
+        if (!globalObj._config.manageScriptTags)
+            return;
+
+        const scripts = _allScriptTags;
+        const acceptedCategories = defaultEnabledCategories
+            || _savedCookieContent.categories
+            || [];
+
+        /**
+         * Load scripts (sequentially), using a recursive function
+         * which loops through the scripts array
+         * @param {import('../core/global').ScriptInfo[]} scripts scripts to load
+         * @param {number} index current script to load
+         */
+        const loadScriptsHelper = (scripts, index) => {
+            if (index >= scripts.length)
+                return;
+
+            const currScriptInfo = _allScriptTags[index];
+
+            /**
+             * Skip script if it was already executed
+             */
+            if (currScriptInfo._executed)
+                return loadScriptsHelper(scripts, index+1);
+
+            const currScript = currScriptInfo._script;
+            const currScriptCategory = currScriptInfo._categoryName;
+            const currScriptService = currScriptInfo._serviceName;
+            const categoryAccepted = elContains(acceptedCategories, currScriptCategory);
+            const serviceAccepted = currScriptService
+                ? elContains(_acceptedServices[currScriptCategory], currScriptService)
+                : false;
+
+            const categoryWasJustEnabled = () => !currScriptService
+                && !currScriptInfo._runOnDisable
+                && categoryAccepted;
+
+            const serviceWasJustEnabled = () => currScriptService
+                && !currScriptInfo._runOnDisable
+                && serviceAccepted;
+
+            const categoryWasJustDisabled = () => !currScriptService
+                && currScriptInfo._runOnDisable
+                && !categoryAccepted
+                && elContains(_lastChangedCategoryNames, currScriptCategory);
+
+            const serviceWasJustDisabled = () => currScriptService
+                && currScriptInfo._runOnDisable
+                && !serviceAccepted
+                && elContains(_lastChangedServices[currScriptCategory] || [], currScriptService);
+
+            const shouldRunScript =
+                categoryWasJustEnabled()
+                || categoryWasJustDisabled()
+                || serviceWasJustEnabled()
+                || serviceWasJustDisabled();
+
+            if (shouldRunScript) {
+                currScriptInfo._executed = true;
+                const dataType = getAttribute(currScript, 'type', true);
+
+                removeAttribute(currScript, 'type', !!dataType);
+                removeAttribute(currScript, SCRIPT_TAG_SELECTOR);
+
+                // Get current script data-src (if there is one)
+                let src = getAttribute(currScript, 'src', true);
+
+                // Some scripts (like ga) might throw warning if data-src is present
+                src && removeAttribute(currScript, 'src', true);
+
+                /**
+                 * Fresh script
+                 * @type {HTMLScriptElement}
+                 */
+                const freshScript = createNode('script');
+
+                freshScript.textContent = currScript.innerHTML;
+
+                //Copy attributes over to the new "revived" script
+                for (const {nodeName} of currScript.attributes) {
+                    setAttribute(
+                        freshScript,
+                        nodeName,
+                        currScript[nodeName] || getAttribute(currScript, nodeName)
+                    );
+                }
+
+                /**
+                 * Set custom type
+                 */
+                dataType && (freshScript.type = dataType);
+
+                // Set src (if data-src found)
+                src
+                    ? (freshScript.src = src)
+                    : (src = currScript.src);
+
+                const externalScript = !!src && (dataType ? validMimeType(dataType) : true);
+
+                // If script has valid "src" attribute
+                // try loading it sequentially
+                if (externalScript) {
+                    // load script sequentially => the next script will not be loaded
+                    // until the current's script onload event triggers
+                    freshScript.onload = freshScript.onerror = () => {
+                        loadScriptsHelper(scripts, ++index);
+                    };
+                }
+
+                // Replace current "sleeping" script with the new "revived" one
+                currScript.replaceWith(freshScript);
+
+                /**
+                 * If we managed to get here and src is still set, it means that
+                 * the script is loading/loaded sequentially so don't go any further
+                 */
+                if (externalScript)
+                    return;
+            }
+
+
+            // Go to next script right away
+            loadScriptsHelper(scripts, ++index);
+        };
+
+        loadScriptsHelper(scripts, 0);
+    };
+
+    /**
+     * Keep track of categories enabled by default (useful when mode==OPT_OUT_MODE)
+     */
+    const retrieveEnabledCategoriesAndServices = () => {
+        const state = globalObj._state;
+
+        for (const categoryName of state._allCategoryNames) {
+            const category = state._allDefinedCategories[categoryName];
+
+            if (category.readOnly || category.enabled) {
+                state._defaultEnabledCategories.push(categoryName);
+                const services = state._allDefinedServices[categoryName] || {};
+
+                for (let serviceName in services) {
+                    state._enabledServices[categoryName].push(serviceName);
+                    if (state._userConfig.mode === OPT_OUT_MODE) {
+                        state._acceptedServices[categoryName].push(serviceName);
+                    }
+                }
+            }
+        }
+    };
+
+    /**
+     * @typedef {Object} Layout
+     * @property {string[]} _variants
+     * @property {string[]} _alignV
+     * @property {string[]} _alignH
+     * @property {string} _defaultAlignV
+     * @property {string} _defaultAlignH
+     */
+
+    /**
+     * @typedef {Object.<string, Layout>} Layouts
+     */
+
+    const CLASS_CONSTANTS = {
+        _top: 'top',
+        _middle: 'middle',
+        _bottom: 'bottom',
+        _left: 'left',
+        _center: 'center',
+        _right: 'right',
+        _inline: 'inline',
+        _wide: 'wide',
+        _pmPrefix: 'pm--',
+        _cmPrefix: 'cm--',
+        _box: 'box'
+    };
+
+    const alignV = [
+        CLASS_CONSTANTS._middle,
+        CLASS_CONSTANTS._top,
+        CLASS_CONSTANTS._bottom
+    ];
+
+    const alignH = [
+        CLASS_CONSTANTS._left,
+        CLASS_CONSTANTS._center,
+        CLASS_CONSTANTS._right
+    ];
+
+    const ALL_CM_LAYOUTS = {
+        box: {
+            _variants: [CLASS_CONSTANTS._wide, CLASS_CONSTANTS._inline],
+            _alignV: alignV,
+            _alignH: alignH,
+            _defaultAlignV: CLASS_CONSTANTS._bottom,
+            _defaultAlignH: CLASS_CONSTANTS._right
+        },
+        cloud: {
+            _variants: [CLASS_CONSTANTS._inline],
+            _alignV: alignV,
+            _alignH: alignH,
+            _defaultAlignV: CLASS_CONSTANTS._bottom,
+            _defaultAlignH: CLASS_CONSTANTS._center
+        },
+        bar: {
+            _variants: [CLASS_CONSTANTS._inline],
+            _alignV: alignV.slice(1),   //remove the first "middle" option
+            _alignH: [],
+            _defaultAlignV: CLASS_CONSTANTS._bottom,
+            _defaultAlignH: ''
+        }
+    };
+
+    const ALL_PM_LAYOUTS = {
+        box: {
+            _variants: [],
+            _alignV: [],
+            _alignH: [],
+            _defaultAlignV: '',
+            _defaultAlignH: ''
+        },
+        bar: {
+            _variants: [CLASS_CONSTANTS._wide],
+            _alignV: [],
+            _alignH: [CLASS_CONSTANTS._left, CLASS_CONSTANTS._right],
+            _defaultAlignV: '',
+            _defaultAlignH: CLASS_CONSTANTS._left
+        }
+    };
+
+    /**
+     * Add appropriate classes to modals and buttons
+     * @param {0 | 1} applyToModal
+     */
+    const guiManager = (applyToModal) => {
+        const guiOptions = globalObj._state._userConfig.guiOptions;
+        const consentModalOptions = guiOptions && guiOptions.consentModal;
+        const preferencesModalOptions = guiOptions && guiOptions.preferencesModal;
+        const manageByBTSModalOptions = guiOptions && guiOptions.manageByBTSModal;
+
+        if (applyToModal === 0) {
+            setLayout(
+                globalObj._dom._cm,
+                ALL_CM_LAYOUTS,
+                consentModalOptions,
+                CLASS_CONSTANTS._cmPrefix,
+                CLASS_CONSTANTS._box,
+                'cm'
+            );
+        }
+
+        if (applyToModal === 1) {
+            setLayout(
+                globalObj._dom._pm,
+                ALL_PM_LAYOUTS,
+                preferencesModalOptions,
+                CLASS_CONSTANTS._pmPrefix,
+                CLASS_CONSTANTS._box,
+                'pm'
+            );
+        }
+
+        if (applyToModal === 2) {
+            setLayout(
+                globalObj._dom._btsm,
+                ALL_PM_LAYOUTS,
+                manageByBTSModalOptions,
+                CLASS_CONSTANTS._cmPrefix,
+                CLASS_CONSTANTS._box,
+                'pm'
+            );
+        }
+    };
+
+    /**
+     * Helper function to set the proper layout classes
+     * @param {HTMLElement} modal
+     * @param {Layouts} allowedLayoutsObj
+     * @param {import("../core/global").GuiModalOption} userGuiOptions
+     * @param {'cm--' | 'pm--'} modalClassPrefix
+     * @param {string} defaultLayoutName
+     * @param {'cm' | 'pm'} modalClassName
+     */
+    const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, defaultLayoutName, modalClassName) => {
+        /**
+         * Reset modal classes to default
+         */
+        modal.className = modalClassName;
+
+        const layout = userGuiOptions && userGuiOptions.layout;
+        const position = userGuiOptions && userGuiOptions.position;
+        const flipButtons = userGuiOptions && userGuiOptions.flipButtons;
+        const equalWeightButtons = !userGuiOptions || userGuiOptions.equalWeightButtons !== false;
+
+        const layoutSplit = layout && layout.split(' ') || [];
+
+        const layoutName = layoutSplit[0];
+        const layoutVariant = layoutSplit[1];
+
+        const currentLayoutName = layoutName in allowedLayoutsObj
+            ? layoutName
+            : defaultLayoutName;
+
+        const currentLayout = allowedLayoutsObj[currentLayoutName];
+        const currentLayoutVariant = elContains(currentLayout._variants, layoutVariant) && layoutVariant;
+
+        const positionSplit = position && position.split(' ') || [];
+        const positionV = positionSplit[0];
+
+        const positionH = modalClassPrefix === CLASS_CONSTANTS._pmPrefix
+            ? positionSplit[0]
+            : positionSplit[1];
+
+        const currentPositionV = elContains(currentLayout._alignV, positionV)
+            ? positionV
+            : currentLayout._defaultAlignV;
+
+        const currentPositionH = elContains(currentLayout._alignH, positionH)
+            ? positionH
+            : currentLayout._defaultAlignH;
+
+        const addModalClass = className => {
+            className && addClass(modal, modalClassPrefix + className);
+        };
+
+        addModalClass(currentLayoutName);
+        addModalClass(currentLayoutVariant);
+        addModalClass(currentPositionV);
+        addModalClass(currentPositionH);
+        flipButtons && addModalClass('flip');
+
+        const secondaryBtnClass = 'btn--secondary';
+        const btnClassPrefix = modalClassName + '__';
+        const btnClass = btnClassPrefix + secondaryBtnClass;
+
+        /**
+         * Add classes to buttons
+         */
+        if (modalClassName === 'cm') {
+            const {_cmAcceptNecessaryBtn, _cmCloseIconBtn} = globalObj._dom;
+
+            if (_cmAcceptNecessaryBtn) {
+                equalWeightButtons
+                    ? removeClass(_cmAcceptNecessaryBtn, btnClass)
+                    : addClass(_cmAcceptNecessaryBtn, btnClass);
+            }
+
+            if (_cmCloseIconBtn) {
+                equalWeightButtons
+                    ? removeClass(_cmCloseIconBtn, btnClass)
+                    : addClass(_cmCloseIconBtn, btnClass);
+            }
+        } else {
+            const { _pmAcceptNecessaryBtn } =  globalObj._dom;
+
+            if (_pmAcceptNecessaryBtn) {
+                equalWeightButtons
+                    ? removeClass(_pmAcceptNecessaryBtn, btnClass)
+                    : addClass(_pmAcceptNecessaryBtn, btnClass);
+            }
+        }
+    };
+
+    /**
+     * @callback CreateMainContainer
+     */
+
+    /**
+     * Generates preferences modal and appends it to "cc-main" el.
+     * @param {import("../global").Api} api
+     * @param {CreateMainContainer} createMainContainer
+     */
+    const createPreferencesModal = (api, createMainContainer) => {
+        const state = globalObj._state;
+        const dom = globalObj._dom;
+        const {hide, hidePreferences, acceptCategory} = api;
+
+        /**
+         * @param {string|string[]} [categories]
+         */
+        const acceptHelper = (categories) => {
+            acceptCategory(categories);
+            hidePreferences();
+            hide();
+        };
+
+        /**
+         * @type {import("../global").PreferencesModalOptions}
+         */
+        const modalData = state._currentTranslation && state._currentTranslation.preferencesModal;
+
+        if (!modalData)
+            return;
+
+        const
+            titleData = modalData.title,
+            closeIconLabelData = modalData.closeIconLabel,
+            acceptAllBtnData = modalData.acceptAllBtn,
+            acceptNecessaryBtnData = modalData.acceptNecessaryBtn,
+            savePreferencesBtnData = modalData.savePreferencesBtn,
+            sectionsData = modalData.sections || [],
+            createFooter = acceptAllBtnData
+                || acceptNecessaryBtnData
+                || savePreferencesBtnData;
+
+        if (!dom._pmContainer) {
+            dom._pmContainer = createNode(DIV_TAG);
+            addClass(dom._pmContainer, 'pm-wrapper');
+
+            const pmOverlay = createNode('div');
+            addClass(pmOverlay, 'pm-overlay');
+            appendChild(dom._pmContainer, pmOverlay);
+
+            /**
+             * Hide modal when overlay is clicked
+             */
+            addEvent(pmOverlay, CLICK_EVENT, hidePreferences);
+
+            // Preferences modal
+            dom._pm = createNode(DIV_TAG);
+
+            addClass(dom._pm, 'pm');
+            setAttribute(dom._pm, 'role', 'dialog');
+            setAttribute(dom._pm, ARIA_HIDDEN, true);
+            setAttribute(dom._pm, 'aria-modal', true);
+            setAttribute(dom._pm, 'aria-labelledby', 'pm__title');
+
+            // Hide preferences on 'esc' key press
+            addEvent(dom._htmlDom, 'keydown', (event) => {
+                if (event.keyCode === 27)
+                    hidePreferences();
+            }, true);
+
+            dom._pmHeader = createNode(DIV_TAG);
+            addClassPm(dom._pmHeader, 'header');
+
+            dom._pmTitle = createNode('h2');
+            addClassPm(dom._pmTitle, 'title');
+            dom._pmTitle.id = 'pm__title';
+
+            dom._pmCloseBtn = createNode(BUTTON_TAG);
+            addClassPm(dom._pmCloseBtn, 'close-btn');
+            setAttribute(dom._pmCloseBtn, 'aria-label', modalData.closeIconLabel || '');
+            addEvent(dom._pmCloseBtn, CLICK_EVENT, hidePreferences);
+
+            dom._pmFocusSpan = createNode('span');
+            dom._pmFocusSpan.innerHTML = getSvgIcon();
+            appendChild(dom._pmCloseBtn, dom._pmFocusSpan);
+
+            dom._pmBody = createNode(DIV_TAG);
+            addClassPm(dom._pmBody, 'body');
+
+            dom._pmFooter = createNode(DIV_TAG);
+            addClassPm(dom._pmFooter, 'footer');
+
+            var _pmBtnContainer = createNode(DIV_TAG);
+            addClass(_pmBtnContainer, 'btns');
+
+            var _pmBtnGroup1 = createNode(DIV_TAG);
+            var _pmBtnGroup2 = createNode(DIV_TAG);
+            addClassPm(_pmBtnGroup1, BTN_GROUP_CLASS);
+            addClassPm(_pmBtnGroup2, BTN_GROUP_CLASS);
+
+            appendChild(dom._pmFooter, _pmBtnGroup1);
+            appendChild(dom._pmFooter, _pmBtnGroup2);
+
+            appendChild(dom._pmHeader, dom._pmTitle);
+            appendChild(dom._pmHeader, dom._pmCloseBtn);
+
+            dom._pmDivTabindex = createNode(DIV_TAG);
+            setAttribute(dom._pmDivTabindex, 'tabIndex', -1);
+            appendChild(dom._pm, dom._pmDivTabindex);
+
+            appendChild(dom._pm, dom._pmHeader);
+            appendChild(dom._pm, dom._pmBody);
+
+            createFooter && appendChild(dom._pm, dom._pmFooter);
+
+            appendChild(dom._pmContainer, dom._pm);
+        } else {
+            dom._pmNewBody = createNode(DIV_TAG);
+            addClassPm(dom._pmNewBody, 'body');
+        }
+
+        if (titleData) {
+            dom._pmTitle.innerHTML = titleData;
+            closeIconLabelData && setAttribute(dom._pmCloseBtn, 'aria-label', closeIconLabelData);
+        }
+
+        let sectionToggleContainer;
+
+        sectionsData.forEach((section, sectionIndex) => {
+            const
+                sTitleData = section.title,
+                sDescriptionData = section.description,
+                sLinkedCategory = section.linkedCategory,
+                sCurrentCategoryObject = sLinkedCategory && state._allDefinedCategories[sLinkedCategory],
+                sCookieTableData = section.cookieTable,
+                sCookieTableBody = sCookieTableData && sCookieTableData.body,
+                sCookieTableCaption = sCookieTableData && sCookieTableData.caption,
+                sCreateCookieTable = sCookieTableBody && sCookieTableBody.length > 0,
+                hasToggle = !!sCurrentCategoryObject,
+
+                /**
+                 * @type {Object.<string, import('../global').Service>}
+                 */
+                sServices = hasToggle && state._allDefinedServices[sLinkedCategory],
+                sServiceNames = isObject(sServices) && getKeys(sServices) || [],
+                sIsExpandableToggle = hasToggle && (!!sDescriptionData || !!sCreateCookieTable || getKeys(sServices).length>0);
+
+
+            // section
+            var s = createNode(DIV_TAG);
+            addClassPm(s, 'section');
+
+            if (sIsExpandableToggle || sDescriptionData) {
+                var sDescContainer = createNode(DIV_TAG);
+                addClassPm(sDescContainer, 'section-desc-wrapper');
+            }
+
+            let nServices = sServiceNames.length;
+
+            if (sIsExpandableToggle) {
+                if (nServices > 0) {
+
+                    const servicesContainer = createNode(DIV_TAG);
+                    addClassPm(servicesContainer, 'section-services');
+
+                    for (const serviceName of sServiceNames) {
+                        const service = sServices[serviceName];
+                        const serviceLabel = service && service.label || serviceName;
+                        const serviceDiv = createNode(DIV_TAG);
+                        const serviceHeader = createNode(DIV_TAG);
+                        const serviceIconContainer = createNode(DIV_TAG);
+                        const serviceTitle = createNode(DIV_TAG);
+
+                        addClassPm(serviceDiv, 'service');
+                        addClassPm(serviceTitle, 'service-title');
+                        addClassPm(serviceHeader, 'service-header');
+                        addClassPm(serviceIconContainer, 'service-icon');
+
+                        const toggleLabel = createToggleLabel(serviceLabel, serviceName, sCurrentCategoryObject, true, sLinkedCategory);
+
+                        serviceTitle.innerHTML = serviceLabel;
+
+                        appendChild(serviceHeader, serviceIconContainer);
+                        appendChild(serviceHeader, serviceTitle);
+                        appendChild(serviceDiv, serviceHeader);
+                        appendChild(serviceDiv, toggleLabel);
+                        appendChild(servicesContainer, serviceDiv);
+                    }
+
+                    appendChild(sDescContainer, servicesContainer);
+                }
+            }
+
+            if (sTitleData) {
+                var sTitleContainer = createNode(DIV_TAG);
+
+                var sTitle = hasToggle
+                    ? createNode(BUTTON_TAG)
+                    : createNode(DIV_TAG);
+
+                addClassPm(sTitleContainer, 'section-title-wrapper');
+                addClassPm(sTitle, 'section-title');
+
+                sTitle.innerHTML = sTitleData;
+                appendChild(sTitleContainer, sTitle);
+
+                if (hasToggle) {
+
+                    /**
+                     * Arrow icon span
+                     */
+                    const sTitleIcon = createNode('span');
+                    sTitleIcon.innerHTML = getSvgIcon(2, 3.5);
+                    addClassPm(sTitleIcon, 'section-arrow');
+                    appendChild(sTitleContainer, sTitleIcon);
+
+                    s.className += '--toggle';
+
+                    const toggleLabel = createToggleLabel(sTitleData, sLinkedCategory, sCurrentCategoryObject);
+
+                    let serviceCounterLabel = modalData.serviceCounterLabel;
+
+                    if (nServices > 0 && isString(serviceCounterLabel)) {
+                        let serviceCounter = createNode('span');
+
+                        addClassPm(serviceCounter, 'badge');
+                        addClassPm(serviceCounter, 'service-counter');
+                        setAttribute(serviceCounter, ARIA_HIDDEN, true);
+                        setAttribute(serviceCounter, 'data-servicecounter', nServices);
+
+                        if (serviceCounterLabel) {
+                            serviceCounterLabel = serviceCounterLabel.split('|');
+
+                            if (serviceCounterLabel.length > 1 && nServices > 1)
+                                serviceCounterLabel = serviceCounterLabel[1];
+                            else
+                                serviceCounterLabel = serviceCounterLabel[0];
+
+                            setAttribute(serviceCounter, 'data-counterlabel', serviceCounterLabel);
+                        }
+
+                        serviceCounter.innerHTML = nServices + (serviceCounterLabel
+                            ? ' ' + serviceCounterLabel
+                            : '');
+
+                        appendChild(sTitle, serviceCounter);
+                    }
+
+                    if (sIsExpandableToggle) {
+                        addClassPm(s, 'section--expandable');
+                        var expandableDivId = sLinkedCategory + '-desc';
+                        setAttribute(sTitle, 'aria-expanded', false);
+                        setAttribute(sTitle, 'aria-controls', expandableDivId);
+                    }
+
+                    appendChild(sTitleContainer, toggleLabel);
+
+                } else {
+                    setAttribute(sTitle, 'role', 'heading');
+                    setAttribute(sTitle, 'aria-level', '3');
+                }
+
+                appendChild(s, sTitleContainer);
+            }
+
+            if (sDescriptionData) {
+                var sDesc = createNode('p');
+                addClassPm(sDesc, 'section-desc');
+                sDesc.innerHTML = sDescriptionData;
+                appendChild(sDescContainer, sDesc);
+            }
+
+            if (sIsExpandableToggle) {
+                setAttribute(sDescContainer, ARIA_HIDDEN, 'true');
+                sDescContainer.id = expandableDivId;
+
+                /**
+                 * On button click handle the following :=> aria-expanded, aria-hidden and act class for current section
+                 */
+                ((accordion, section, btn) => {
+                    addEvent(sTitle, CLICK_EVENT, () => {
+                        if (!hasClass(section, 'is-expanded')) {
+                            addClass(section, 'is-expanded');
+                            setAttribute(btn, 'aria-expanded', 'true');
+                            setAttribute(accordion, ARIA_HIDDEN, 'false');
+                        } else {
+                            removeClass(section, 'is-expanded');
+                            setAttribute(btn, 'aria-expanded', 'false');
+                            setAttribute(accordion, ARIA_HIDDEN, 'true');
+                        }
+                    });
+                })(sDescContainer, s, sTitle);
+
+
+                if (sCreateCookieTable) {
+                    const table = createNode('table');
+                    const thead = createNode('thead');
+                    const tbody = createNode('tbody');
+
+                    if (sCookieTableCaption) {
+                        const caption = createNode('caption');
+                        addClassPm(caption, 'table-caption');
+                        caption.innerHTML = sCookieTableCaption;
+                        table.appendChild(caption);
+                    }
+
+                    addClassPm(table, 'section-table');
+                    addClassPm(thead, 'table-head');
+                    addClassPm(tbody, 'table-body');
+
+                    const headerData = sCookieTableData.headers;
+                    const tableHeadersKeys = getKeys(headerData);
+
+                    /**
+                     * Create table headers
+                     */
+                    const trHeadFragment = dom._document.createDocumentFragment();
+                    const trHead = createNode('tr');
+
+                    for (const headerKey of tableHeadersKeys) {
+                        const headerValue = headerData[headerKey];
+                        const th = createNode('th');
+
+                        th.id = 'cc__row-' + headerValue + sectionIndex;
+                        setAttribute(th, 'scope', 'col');
+                        addClassPm(th, 'table-th');
+
+                        th.innerHTML = headerValue;
+                        appendChild(trHeadFragment, th);
+                    }
+
+                    appendChild(trHead, trHeadFragment);
+                    appendChild(thead, trHead);
+
+                    /**
+                     * Create table body
+                     */
+                    const bodyFragment = dom._document.createDocumentFragment();
+
+                    for (const bodyItem of sCookieTableBody) {
+                        const tr = createNode('tr');
+                        addClassPm(tr, 'table-tr');
+
+                        for (const tdKey of tableHeadersKeys) {
+                            const tdHeader = headerData[tdKey];
+                            const tdValue = bodyItem[tdKey];
+
+                            const td = createNode('td');
+                            const tdInner = createNode(DIV_TAG);
+
+                            addClassPm(td, 'table-td');
+                            setAttribute(td, 'data-column', tdHeader);
+                            setAttribute(td, 'headers', 'cc__row-' + tdHeader + sectionIndex);
+
+                            tdInner.insertAdjacentHTML('beforeend', tdValue);
+
+                            appendChild(td, tdInner);
+                            appendChild(tr, td);
+                        }
+
+                        appendChild(bodyFragment, tr);
+                    }
+
+                    appendChild(tbody, bodyFragment);
+                    appendChild(table, thead);
+                    appendChild(table, tbody);
+                    appendChild(sDescContainer, table);
+                }
+            }
+
+            if (sIsExpandableToggle || sDescriptionData)
+                appendChild(s, sDescContainer);
+
+            const currentBody = dom._pmNewBody || dom._pmBody;
+
+            if (hasToggle) {
+                if (!sectionToggleContainer) {
+                    sectionToggleContainer = createNode(DIV_TAG);
+                    addClassPm(sectionToggleContainer, 'section-toggles');
+                }
+                sectionToggleContainer.appendChild(s);
+            } else {
+                sectionToggleContainer = null;
+            }
+
+            appendChild(currentBody, sectionToggleContainer || s);
+
+        });
+
+        if (acceptAllBtnData) {
+            if (!dom._pmAcceptAllBtn) {
+                dom._pmAcceptAllBtn = createNode(BUTTON_TAG);
+                addClassPm(dom._pmAcceptAllBtn, 'btn');
+                setAttribute(dom._pmAcceptAllBtn, DATA_ROLE, 'all');
+                appendChild(_pmBtnGroup1, dom._pmAcceptAllBtn);
+                addEvent(dom._pmAcceptAllBtn, CLICK_EVENT, () =>
+                    acceptHelper('all')
+                );
+            }
+
+            dom._pmAcceptAllBtn.innerHTML = acceptAllBtnData;
+        }
+
+        if (acceptNecessaryBtnData) {
+            if (!dom._pmAcceptNecessaryBtn) {
+                dom._pmAcceptNecessaryBtn = createNode(BUTTON_TAG);
+                addClassPm(dom._pmAcceptNecessaryBtn, 'btn');
+                setAttribute(dom._pmAcceptNecessaryBtn, DATA_ROLE, 'necessary');
+                appendChild(_pmBtnGroup1, dom._pmAcceptNecessaryBtn);
+                addEvent(dom._pmAcceptNecessaryBtn, CLICK_EVENT, () =>
+                    acceptHelper([])
+                );
+            }
+
+            dom._pmAcceptNecessaryBtn.innerHTML = acceptNecessaryBtnData;
+        }
+
+        if (savePreferencesBtnData) {
+            if (!dom._pmSavePreferencesBtn) {
+                dom._pmSavePreferencesBtn = createNode(BUTTON_TAG);
+                addClassPm(dom._pmSavePreferencesBtn, 'btn');
+                addClassPm(dom._pmSavePreferencesBtn, 'btn--secondary');
+                setAttribute(dom._pmSavePreferencesBtn, DATA_ROLE, 'save');
+                appendChild(_pmBtnGroup2, dom._pmSavePreferencesBtn);
+
+                addEvent(dom._pmSavePreferencesBtn, CLICK_EVENT, () =>
+                    acceptHelper()
+                );
+            }
+
+            dom._pmSavePreferencesBtn.innerHTML = savePreferencesBtnData;
+        }
+
+        if (dom._pmNewBody) {
+            dom._pm.replaceChild(dom._pmNewBody, dom._pmBody);
+            dom._pmBody = dom._pmNewBody;
+        }
+
+        guiManager(1);
+
+        if (!state._preferencesModalExists) {
+            state._preferencesModalExists = true;
+
+            debug('CookieConsent [HTML] created', PREFERENCES_MODAL_NAME);
+
+            fireEvent(globalObj._customEvents._onModalReady, PREFERENCES_MODAL_NAME, dom._pm);
+            createMainContainer(api);
+            appendChild(dom._ccMain, dom._pmContainer);
+            handleFocusTrap(dom._pm);
+
+            /**
+             * Enable transition
+             */
+            setTimeout(() => addClass(dom._pmContainer, 'cc--anim'), 100);
+        }
+
+        getModalFocusableData(2);
+    };
+
+    /**
+     * Generate toggle
+     * @param {string} label block title
+     * @param {string} value category/service
+     * @param {import('../global').Category} sCurrentCategoryObject
+     * @param {boolean} [isService]
+     * @param {string} categoryName
+     */
+    function createToggleLabel(label, value, sCurrentCategoryObject, isService, categoryName) {
+        const state = globalObj._state;
+        const dom = globalObj._dom;
+
+        /** @type {HTMLLabelElement} */ const toggleLabel = createNode('label');
+        /** @type {HTMLInputElement} */ const toggle = createNode('input');
+        /** @type {HTMLSpanElement} */  const toggleIcon = createNode('span');
+        /** @type {HTMLSpanElement} */  const toggleIconCircle = createNode('span');
+        /** @type {HTMLSpanElement} */  const toggleLabelSpan = createNode('span');
+
+        // each will contain 2 pseudo-elements to generate 'tick' and 'x' icons
+        /** @type {HTMLSpanElement} */  const toggleOnIcon = createNode('span');
+        /** @type {HTMLSpanElement} */  const toggleOffIcon = createNode('span');
+
+        toggleOnIcon.innerHTML = getSvgIcon(1, 3);
+        toggleOffIcon.innerHTML = getSvgIcon(0, 3);
+
+        toggle.type = 'checkbox';
+
+        addClass(toggleLabel, 'section__toggle-wrapper');
+        addClass(toggle, 'section__toggle');
+        addClass(toggleOnIcon, 'toggle__icon-on');
+        addClass(toggleOffIcon, 'toggle__icon-off');
+        addClass(toggleIcon, 'toggle__icon');
+        addClass(toggleIconCircle, 'toggle__icon-circle');
+        addClass(toggleLabelSpan, 'toggle__label');
+
+        setAttribute(toggleIcon, ARIA_HIDDEN, 'true');
+
+        if (isService) {
+            addClass(toggleLabel, 'toggle-service');
+            setAttribute(toggle, SCRIPT_TAG_SELECTOR, categoryName);
+
+            // Save reference to toggles to avoid using document.querySelector later on
+            dom._serviceCheckboxInputs[categoryName][value] = toggle;
+        } else {
+            dom._categoryCheckboxInputs[value] = toggle;
+        }
+
+        if (!isService) {
+            ((value)=> {
+                addEvent(toggle, CLICK_EVENT, () => {
+                    const categoryServicesToggles = dom._serviceCheckboxInputs[value];
+                    const checked = toggle.checked;
+                    state._enabledServices[value] = [];
+
+                    /**
+                     * Enable/disable all services
+                     */
+                    for (let serviceName in categoryServicesToggles) {
+                        categoryServicesToggles[serviceName].checked = checked;
+                        checked && state._enabledServices[value].push(serviceName);
+                    }
+                });
+            })(value);
+        } else {
+            ((categoryName) => {
+                addEvent(toggle, 'change', () => {
+                    const categoryServicesToggles = dom._serviceCheckboxInputs[categoryName];
+                    const categoryToggle = dom._categoryCheckboxInputs[categoryName];
+
+                    state._enabledServices[categoryName] = [];
+
+                    for (let serviceName in categoryServicesToggles) {
+                        const serviceInput = categoryServicesToggles[serviceName];
+
+                        if (serviceInput.checked) {
+                            state._enabledServices[categoryName].push(serviceInput.value);
+                        }
+                    }
+
+                    categoryToggle.checked = state._enabledServices[categoryName].length > 0;
+                });
+            })(categoryName);
+
+        }
+
+        toggle.value = value;
+        toggleLabelSpan.textContent = label.replace(/<.*>.*<\/.*>/gm, '');
+
+        appendChild(toggleIconCircle, toggleOffIcon);
+        appendChild(toggleIconCircle, toggleOnIcon);
+        appendChild(toggleIcon, toggleIconCircle);
+
+        /**
+         * If consent is valid => retrieve category states from cookie
+         * Otherwise use states defined in the userConfig. object
+         */
+        if (!state._invalidConsent) {
+            if (isService) {
+                const enabledServices = state._acceptedServices[categoryName];
+                toggle.checked = sCurrentCategoryObject.readOnly || elContains(enabledServices, value);
+            } else if (elContains(state._acceptedCategories, value)) {
+                toggle.checked = true;
+            }
+        } else if (sCurrentCategoryObject.readOnly || sCurrentCategoryObject.enabled) {
+            toggle.checked = true;
+        }
+
+        /**
+         * Set toggle as readonly if true (disable checkbox)
+         */
+        if (sCurrentCategoryObject.readOnly) {
+            toggle.disabled = true;
+        }
+
+        appendChild(toggleLabel, toggle);
+        appendChild(toggleLabel, toggleIcon);
+        appendChild(toggleLabel, toggleLabelSpan);
+
+        return toggleLabel;
+    }
+
+    /**
+     * Generates manage by bts modal and appends it to "cc-main" el.
+     * @param {import("../global").Api} api
+     * @param {CreateMainContainer} createMainContainer
+     */
+    const createManageByBTSModal = (api, createMainContainer) => {
+        const state = globalObj._state;
+        const dom = globalObj._dom;
+        const { hide, hideManageByBTSModal } = api;
+
+        const modalData = state._currentTranslation && state._currentTranslation.manageByBTSModal;
+        if (!modalData) {
+            return;
+        }
+
+        if (!dom.pm) {
+            dom._btsmContainer = createNode(DIV_TAG);
+            addClass(dom._btsmContainer, 'pm-wrapper');
+
+            const btsmOverlay = createNode(DIV_TAG);
+            addClass(btsmOverlay, 'pm-overlay');
+            appendChild(dom._btsmContainer, btsmOverlay);
+
+            addEvent(btsmOverlay, CLICK_EVENT, hideManageByBTSModal);
+
+            dom._btsm =  createNode(DIV_TAG);
+
+            addClass(dom._btsm, 'pm');
+            setAttribute(dom._btsm, 'role', 'dialog');
+            setAttribute(dom._btsm, ARIA_HIDDEN, true);
+            setAttribute(dom._btsm, 'aria-modal', true);
+            setAttribute(dom._btsm, 'aria-labelledby', 'btsm__title');
+
+            addEvent(dom._htmlDom, 'keydown', (event) => {
+                if (event.keyCode === 27) {
+                    hideManageByBTSModal();
+                }
+            }, true);
+
+            dom._btsmContent = createNode(DIV_TAG);
+            const pTag = createNode('p');
+            pTag.textContent = 'This is managed by BTS';
+            appendChild(dom._btsmContent, pTag);
+
+            dom._btsmDivTabindex = createNode(DIV_TAG);
+            setAttribute(dom._btsmDivTabindex, 'tabIndex', -1);
+            appendChild(dom._btsm, dom._btsmDivTabindex);
+        }
+        guiManager(2);
+
+        if (state._manageByBTSModalExists) {
+            state._manageByBTSModalExists = true;
+            debug('CookieConsent [HTML] created', MANAGE_BY_BTS_MODAL_NAME);
+
+            fireEvent(globalObj._customEvents._onModalReady, MANAGE_BY_BTS_MODAL_NAME, dom._btsm);
+            createMainContainer(api);
+            appendChild(dom._ccMain, dom._btsmContainer);
+            handleFocusTrap(dom._btsm);
+
+            setTimeout(() => addClass(dom._pmContainer, 'cc--anim'), 100);
+        }
+        getModalFocusableData(2);
+    };
+
+    /**
+     * @callback CreateMainContainer
+     */
+
+    /**
+     * @returns {HTMLSpanElement}
+     */
+    const createFocusSpan = () => {
+        const span = createNode('span');
+
+        if (!globalObj._dom._focusSpan)
+            globalObj._dom._focusSpan = span;
+
+        return span;
+    };
+
+    /**
+     * Create consent modal and append it to "cc-main" el.
+     * @param {import("../global").Api} api
+     * @param {CreateMainContainer} createMainContainer
+     */
+    const createConsentModal = (api, createMainContainer) => {
+        const state = globalObj._state;
+        const dom = globalObj._dom;
+        const {hide, showPreferences, acceptCategory, showManageByBTSModal} = api;
+
+        /**
+         * @type {import("../global").ConsentModalOptions}
+         */
+        const consentModalData = state._currentTranslation && state._currentTranslation.consentModal;
+
+        if (!consentModalData)
+            return;
+
+        const acceptAllBtnData = consentModalData.acceptAllBtn,
+            acceptNecessaryBtnData = consentModalData.acceptNecessaryBtn,
+            showPreferencesBtnData = consentModalData.showPreferencesBtn,
+            closeIconLabelData = consentModalData.closeIconLabel,
+            footerData = consentModalData.footer,
+            consentModalLabelValue = consentModalData.label,
+            consentModalTitleValue = consentModalData.title,
+            consentModalCustomThirdButton = consentModalData.manageBTSBtn;
+
+        /**
+         * @param {string|string[]} [categories]
+         */
+        const acceptAndHide = (categories) => {
+            hide();
+            acceptCategory(categories);
+        };
+
+        // Create modal if it doesn't exist
+        if (!dom._cmContainer) {
+            dom._cmContainer = createNode(DIV_TAG);
+            dom._cm = createNode(DIV_TAG);
+            dom._cmBody = createNode(DIV_TAG);
+            dom._cmTexts = createNode(DIV_TAG);
+            dom._cmBtns = createNode(DIV_TAG);
+
+            addClass(dom._cmContainer, 'cm-wrapper');
+            addClass(dom._cm, 'cm');
+            addClassCm(dom._cmBody, 'body');
+            addClassCm(dom._cmTexts, 'texts');
+            addClassCm(dom._cmBtns, 'btns');
+
+            setAttribute(dom._cm, 'role', 'dialog');
+            setAttribute(dom._cm, 'aria-modal', 'true');
+            setAttribute(dom._cm, ARIA_HIDDEN, 'false');
+            setAttribute(dom._cm, 'aria-describedby', 'cm__desc');
+
+            if (consentModalLabelValue)
+                setAttribute(dom._cm, 'aria-label', consentModalLabelValue);
+            else if (consentModalTitleValue)
+                setAttribute(dom._cm, 'aria-labelledby', 'cm__title');
+
+            const
+                boxLayout = 'box',
+                guiOptions = state._userConfig.guiOptions,
+                consentModalOptions = guiOptions && guiOptions.consentModal,
+                consentModalLayout = consentModalOptions && consentModalOptions.layout || boxLayout,
+                isBoxLayout = consentModalLayout.split(' ')[0] === boxLayout;
+
+            /**
+             * Close icon-button (visible only in the 'box' layout)
+             */
+            if (consentModalTitleValue && closeIconLabelData && isBoxLayout) {
+                if (!dom._cmCloseIconBtn) {
+                    dom._cmCloseIconBtn = createNode(BUTTON_TAG);
+                    dom._cmCloseIconBtn.innerHTML = getSvgIcon();
+                    addClassCm(dom._cmCloseIconBtn, 'btn');
+                    addClassCm(dom._cmCloseIconBtn, 'btn--close');
+                    addEvent(dom._cmCloseIconBtn, CLICK_EVENT, () => {
+                        debug('CookieConsent [ACCEPT]: necessary');
+                        acceptAndHide([]);
+                    });
+                    appendChild(dom._cmBody, dom._cmCloseIconBtn);
+                }
+
+                setAttribute(dom._cmCloseIconBtn, 'aria-label', closeIconLabelData);
+            }
+
+            appendChild(dom._cmBody, dom._cmTexts);
+
+            if (acceptAllBtnData || acceptNecessaryBtnData || showPreferencesBtnData || consentModalCustomThirdButton)
+                appendChild(dom._cmBody, dom._cmBtns);
+
+            dom._cmDivTabindex = createNode(DIV_TAG);
+            setAttribute(dom._cmDivTabindex, 'tabIndex', -1);
+            appendChild(dom._cm, dom._cmDivTabindex);
+
+            appendChild(dom._cm, dom._cmBody);
+            appendChild(dom._cmContainer, dom._cm);
+        }
+
+        if (consentModalTitleValue) {
+            if (!dom._cmTitle) {
+                dom._cmTitle = createNode('h2');
+                dom._cmTitle.className = dom._cmTitle.id = 'cm__title';
+                appendChild(dom._cmTexts, dom._cmTitle);
+            }
+
+            dom._cmTitle.innerHTML = consentModalTitleValue;
+        }
+
+        let description = consentModalData.description;
+
+        if (description) {
+            if (state._revisionEnabled) {
+                description = description.replace(
+                    '{{revisionMessage}}',
+                    state._validRevision
+                        ? ''
+                        : consentModalData.revisionMessage || ''
+                );
+            }
+
+            if (!dom._cmDescription) {
+                dom._cmDescription = createNode('p');
+                dom._cmDescription.className = dom._cmDescription.id = 'cm__desc';
+                appendChild(dom._cmTexts, dom._cmDescription);
+            }
+
+            dom._cmDescription.innerHTML = description;
+        }
+
+        if (acceptAllBtnData) {
+            if (!dom._cmAcceptAllBtn) {
+                dom._cmAcceptAllBtn = createNode(BUTTON_TAG);
+                appendChild(dom._cmAcceptAllBtn, createFocusSpan());
+                addClassCm(dom._cmAcceptAllBtn, 'btn');
+                setAttribute(dom._cmAcceptAllBtn, DATA_ROLE, 'all');
+
+                addEvent(dom._cmAcceptAllBtn, CLICK_EVENT, () => {
+                    debug('CookieConsent [ACCEPT]: all');
+                    acceptAndHide('all');
+                });
+            }
+
+            dom._cmAcceptAllBtn.firstElementChild.innerHTML = acceptAllBtnData;
+        }
+
+        if (acceptNecessaryBtnData) {
+            if (!dom._cmAcceptNecessaryBtn) {
+                dom._cmAcceptNecessaryBtn = createNode(BUTTON_TAG);
+                appendChild(dom._cmAcceptNecessaryBtn, createFocusSpan());
+                addClassCm(dom._cmAcceptNecessaryBtn, 'btn');
+                setAttribute(dom._cmAcceptNecessaryBtn, DATA_ROLE, 'necessary');
+
+                addEvent(dom._cmAcceptNecessaryBtn, CLICK_EVENT, () => {
+                    debug('CookieConsent [ACCEPT]: necessary');
+                    acceptAndHide([]);
+                });
+            }
+
+            dom._cmAcceptNecessaryBtn.firstElementChild.innerHTML = acceptNecessaryBtnData;
+        }
+
+        if (showPreferencesBtnData) {
+            if (!dom._cmShowPreferencesBtn) {
+                dom._cmShowPreferencesBtn = createNode(BUTTON_TAG);
+                appendChild(dom._cmShowPreferencesBtn, createFocusSpan());
+                addClassCm(dom._cmShowPreferencesBtn, 'btn');
+                addClassCm(dom._cmShowPreferencesBtn, 'btn--secondary');
+                setAttribute(dom._cmShowPreferencesBtn, DATA_ROLE, 'show');
+
+                addEvent(dom._cmShowPreferencesBtn, 'mouseenter', () => {
+                    if (!state._preferencesModalExists)
+                        createPreferencesModal(api, createMainContainer);
+                });
+                addEvent(dom._cmShowPreferencesBtn, CLICK_EVENT, showPreferences);
+            }
+
+            dom._cmShowPreferencesBtn.firstElementChild.innerHTML = showPreferencesBtnData;
+        }
+
+        if (consentModalCustomThirdButton) {
+            if (!dom._cmMangeByBTS) {
+                dom._cmMangeByBTS = createNode(BUTTON_TAG);
+                appendChild(dom._cmMangeByBTS, createFocusSpan());
+                addClassCm(dom._cmMangeByBTS, 'btn');
+                setAttribute(dom._cmMangeByBTS, DATA_ROLE, 'optional');
+                
+                addEvent(dom._cmMangeByBTS, 'mouseenter', () => {
+                    if (!state._manageByBTSModalExists) {
+                        createManageByBTSModal(api, createMainContainer);
+                    }
+                });
+                addEvent(dom._cmMangeByBTS, CLICK_EVENT, showManageByBTSModal);
+            }
+            dom._cmMangeByBTS.firstElementChild.innerHTML = consentModalCustomThirdButton;
+        }
+
+        if (!dom._cmBtnGroup) {
+            dom._cmBtnGroup = createNode(DIV_TAG);
+            addClassCm(dom._cmBtnGroup, BTN_GROUP_CLASS);
+
+            acceptAllBtnData && appendChild(dom._cmBtnGroup, dom._cmAcceptAllBtn);
+            acceptNecessaryBtnData && appendChild(dom._cmBtnGroup, dom._cmAcceptNecessaryBtn);
+
+            (acceptAllBtnData || acceptNecessaryBtnData) && appendChild(dom._cmBody, dom._cmBtnGroup);
+            appendChild(dom._cmBtns, dom._cmBtnGroup);
+        }
+
+        if (dom._cmShowPreferencesBtn && !dom._cmBtnGroup2) {
+            dom._cmBtnGroup2 = createNode(DIV_TAG);
+
+            if ((!dom._cmAcceptNecessaryBtn || !dom._cmAcceptAllBtn)) {
+                appendChild(dom._cmBtnGroup, dom._cmShowPreferencesBtn);
+                addClassCm(dom._cmBtnGroup, BTN_GROUP_CLASS + '--uneven');
+            }else {
+                addClassCm(dom._cmBtnGroup2, BTN_GROUP_CLASS);
+                appendChild(dom._cmBtnGroup2, dom._cmShowPreferencesBtn);
+                appendChild(dom._cmBtns, dom._cmBtnGroup2);
+            }
+        }
+
+        if (dom._cmMangeByBTS && !dom._cmBtnGroup3) {
+            dom._cmBtnGroup3 = createNode(DIV_TAG);
+            if ((!dom._cmAcceptNecessaryBtn || !dom._cmAcceptAllBtn || !dom._cmShowPreferencesBtn)) {
+                appendChild(dom._cmBtnGroup, dom._cmMangeByBTS);
+                addClassCm(dom._cmBtnGroup, BTN_GROUP_CLASS + '--uneven');
+            }else {
+                addClassCm(dom._cmBtnGroup3, BTN_GROUP_CLASS);
+                appendChild(dom._cmBtnGroup3, dom._cmMangeByBTS);
+                appendChild(dom._cmBtns, dom._cmBtnGroup3);
+            }
+        }
+
+        if (footerData) {
+            if (!dom._cmFooterLinksGroup) {
+                let _consentModalFooter = createNode(DIV_TAG);
+                let _consentModalFooterLinks = createNode(DIV_TAG);
+                dom._cmFooterLinksGroup = createNode(DIV_TAG);
+
+                addClassCm(_consentModalFooter, 'footer');
+                addClassCm(_consentModalFooterLinks, 'links');
+                addClassCm(dom._cmFooterLinksGroup, 'link-group');
+
+                appendChild(_consentModalFooterLinks, dom._cmFooterLinksGroup);
+                appendChild(_consentModalFooter, _consentModalFooterLinks);
+                appendChild(dom._cm, _consentModalFooter);
+            }
+
+            dom._cmFooterLinksGroup.innerHTML = footerData;
+        }
+
+        guiManager(0);
+
+        if (!state._consentModalExists) {
+            state._consentModalExists = true;
+
+            debug('CookieConsent [HTML] created', CONSENT_MODAL_NAME);
+
+            fireEvent(globalObj._customEvents._onModalReady, CONSENT_MODAL_NAME, dom._cm);
+            createMainContainer(api);
+            appendChild(dom._ccMain, dom._cmContainer);
+            handleFocusTrap(dom._cm);
+
+            /**
+             * Enable transition
+             */
+            setTimeout(() => addClass(dom._cmContainer, 'cc--anim'), 100);
+        }
+
+        getModalFocusableData(1);
+
+        addDataButtonListeners(dom._cmBody, api, createPreferencesModal, createMainContainer);
+    };
+
+    /**
+     * Detect the available language. The language autodetection process prioritizes finding translations
+     * for the complete language code. If translations for the complete code are unavailable, the detection
+     * mechanism then resorts to searching for the language-only version.
+     * Works with 'en', 'en_US' and 'en-US'.
+     *
+     * @param {string} languageCode - The language code to be detected.
+     * @returns {?string} The detected language code, or null if not detected.
+     */
+    const getAvailableLanguage = (languageCode) => {
+        if (!isString(languageCode))
+            return null;
+
+        if (languageCode in globalObj._state._allTranslations)
+            return languageCode;
+
+        /**
+         * @type {string}
+         */
+        let language = languageCode.slice(0, 2);
+
+        if (language in globalObj._state._allTranslations)
+            return language;
+
+        return null;
+    };
+
+    /**
+     * Returns the current language code
+     * @returns {string}
+     */
+    const getCurrentLanguageCode = () => {
+        return globalObj._state._currentLanguageCode || globalObj._state._userConfig.language.default;
+    };
+
+    /**
+     * Set language code
+     * @param {string} newLanguageCode
+     */
+    const setCurrentLanguageCode = (newLanguageCode) => {
+        newLanguageCode && (globalObj._state._currentLanguageCode = newLanguageCode);
+    };
+
+    /**
+     * Get current client's browser language
+     * returns only the first 2 chars: en-US => en
+     * @returns {string} language
+     */
+    const getBrowserLanguageCode = () => navigator.language;
+
+    /**
+     * Get the lang attribute
+     * @returns lang attribute
+     */
+    const getDocumentLanguageCode = () => document.documentElement.lang;
+
+    /**
+     * Resolve the language to use.
+     * @returns {string} language code
+     */
+    const resolveCurrentLanguageCode = () =>  {
+        const autoDetect = globalObj._state._userConfig.language.autoDetect;
+
+        if (autoDetect) {
+            debug('CookieConsent [LANG]: autoDetect strategy: "' + autoDetect + '"');
+
+            const detectionStrategies = {
+                browser: getBrowserLanguageCode(),
+                document: getDocumentLanguageCode()
+            };
+
+            /**
+             * @type {string}
+             */
+            const newLanguageCode = getAvailableLanguage(detectionStrategies[autoDetect]);
+
+            if (newLanguageCode)
+                return newLanguageCode;
+        }
+
+        /**
+         * Use current language
+         */
+        return getCurrentLanguageCode();
+    };
+
+    /**
+     * Load translation
+     * @param {string | null} [desiredLanguageCode]
+     */
+    const loadTranslationData = async (desiredLanguageCode) => {
+        const state = globalObj._state;
+
+        /**
+         * @type {string}
+         */
+        let currentLanguageCode = getAvailableLanguage(desiredLanguageCode)
+            ? desiredLanguageCode
+            : getCurrentLanguageCode();
+
+        let translationData = state._allTranslations[currentLanguageCode];
+
+        /**
+         * Fetch translation if a string or function is provided
+         */
+        if (isString(translationData)) {
+            translationData = await fetchJson(translationData);
+        } else if (isFunction(translationData)) {
+            translationData = await translationData();
+        }
+
+        if (!translationData) {
+            return false;
+        }
+
+        state._currentTranslation = translationData;
+        setCurrentLanguageCode(currentLanguageCode);
+
+        debug('CookieConsent [LANG]: set language: "' + currentLanguageCode + '"');
+
+        return true;
+    };
+
+    /**
+     * Toggle RTL class on/off based on current language
+     */
+    const handleRtlLanguage = () => {
+        let rtlLanguages = globalObj._state._userConfig.language.rtl;
+        let ccMain = globalObj._dom._ccMain;
+
+        if (rtlLanguages && ccMain) {
+            if (!isArray(rtlLanguages))
+                rtlLanguages = [rtlLanguages];
+
+            elContains(rtlLanguages, globalObj._state._currentLanguageCode)
+                ? addClass(ccMain, 'cc--rtl')
+                : removeClass(ccMain, 'cc--rtl');
+        }
+    };
+
+    const createMainContainer = () => {
+        const dom = globalObj._dom;
+
+        if (dom._ccMain) return;
+
+        dom._ccMain = createNode(DIV_TAG);
+        dom._ccMain.id = 'cc-main';
+        dom._ccMain.setAttribute('data-nosnippet', '');
+
+        handleRtlLanguage();
+
+        let root = globalObj._state._userConfig.root;
+
+        if (root && isString(root))
+            root = document.querySelector(root);
+
+        // Append main container to dom
+        (root || dom._document.body).appendChild(dom._ccMain);
+    };
+
+    /**
+     * @param {import('../global').Api} api
+     */
+    const generateHtml = (api) => {
+        addDataButtonListeners(null, api, createPreferencesModal, createMainContainer);
+        addDataButtonListeners(null, api, createManageByBTSModal, createMainContainer);
+
+        if (globalObj._state._invalidConsent)
+            createConsentModal(api, createMainContainer);
+
+        if (!globalObj._config.lazyHtmlGeneration)
+            createPreferencesModal(api, createMainContainer);
+    };
+
+    const localStorageManager = {
+        /**
+         * @param {string} key
+         * @param {string} value
+         */
+        _setItem: (key, value) => {
+            safeRun(() => localStorage.setItem(key, value));
+        },
+
+        /**
+         * @param {string} key
+         */
+        _getItem: (key) => safeRun(() => localStorage.getItem(key)) || '',
+
+        /**
+         * @param {string} key
+         */
+        _removeItem: (key) => safeRun(() => localStorage.removeItem(key))
+    };
+
+    /**
+     * @param {boolean} [isFirstConsent]
+     */
+    const getCategoriesWithCookies = (isFirstConsent) => {
+        const state = globalObj._state;
+
+        const categoriesToFilter = isFirstConsent
+            ? state._allCategoryNames
+            : state._lastChangedCategoryNames;
+
+        /**
+         * Filter out categories with readOnly=true or don't have an autoClear object
+         */
+        return categoriesToFilter.filter(categoryName => {
+            const currentCategoryObject = state._allDefinedCategories[categoryName];
+
+            return !!currentCategoryObject
+                && !currentCategoryObject.readOnly
+                && !!currentCategoryObject.autoClear;
+        });
+    };
+
+    /**
+     * @param {string[]} allCookies
+     * @param {string} cookieName
+     */
+    const findMatchingCookies = (allCookies, cookieName) => {
+        if (cookieName instanceof RegExp) {
+            return allCookies.filter(cookie => cookieName.test(cookie));
+        } else {
+            const cookieIndex = indexOf(allCookies, cookieName);
+            return cookieIndex > -1
+                ? [allCookies[cookieIndex]]
+                : [];
+        }
+    };
+
+    /**
+     * Delete all unused cookies
+     * @param {boolean} [isFirstConsent]
+     */
+    const autoclearCookiesHelper = (isFirstConsent) => {
+        const state = globalObj._state;
+        const allCookiesArray = getAllCookies();
+        const categoriesToClear = getCategoriesWithCookies(isFirstConsent);
+
+        /**
+         * Clear cookies for each disabled service
+         */
+        for (const categoryName in state._lastChangedServices) {
+            for (const serviceName of state._lastChangedServices[categoryName]) {
+                const serviceCookies = state._allDefinedServices[categoryName][serviceName].cookies;
+                const serviceIsDisabled = !elContains(state._acceptedServices[categoryName], serviceName);
+
+                if (!serviceIsDisabled || !serviceCookies)
+                    continue;
+
+                for (const cookieItem of serviceCookies) {
+                    const foundCookies = findMatchingCookies(allCookiesArray, cookieItem.name);
+                    eraseCookiesHelper(foundCookies, cookieItem.path, cookieItem.domain);
+                }
+            }
+        }
+
+        for (const currentCategoryName of categoriesToClear) {
+            const category = state._allDefinedCategories[currentCategoryName];
+            const autoClear = category.autoClear;
+            const autoClearCookies = autoClear && autoClear.cookies || [];
+
+            const categoryWasJustChanged = elContains(state._lastChangedCategoryNames, currentCategoryName);
+            const categoryIsDisabled = !elContains(state._acceptedCategories, currentCategoryName);
+            const categoryWasJustDisabled = categoryWasJustChanged && categoryIsDisabled;
+
+            const shouldClearCookies = isFirstConsent
+                ? categoryIsDisabled
+                : categoryWasJustDisabled;
+
+            if (!shouldClearCookies)
+                continue;
+
+            if (autoClear.reloadPage && categoryWasJustDisabled)
+                state._reloadPage = true;
+
+            for (const cookieItem of autoClearCookies) {
+                const foundCookies = findMatchingCookies(allCookiesArray, cookieItem.name);
+                eraseCookiesHelper(foundCookies, cookieItem.path, cookieItem.domain);
+            }
+        }
+    };
+
+    const saveCookiePreferences = () => {
+        const state = globalObj._state;
+
+        /**
+         * Determine if categories were changed from last state (saved in the cookie)
+         */
+        state._lastChangedCategoryNames = globalObj._config.mode === OPT_OUT_MODE && state._invalidConsent
+            ? arrayDiff(state._defaultEnabledCategories, state._acceptedCategories)
+            : arrayDiff(state._acceptedCategories, state._savedCookieContent.categories);
+
+        let categoriesWereChanged = state._lastChangedCategoryNames.length > 0;
+        let servicesWereChanged = false;
+
+        /**
+         * Determine if services were changed from last state
+         */
+        for (const categoryName of state._allCategoryNames) {
+            state._lastChangedServices[categoryName] = arrayDiff(
+                state._acceptedServices[categoryName],
+                state._lastEnabledServices[categoryName]
+            );
+
+            if (state._lastChangedServices[categoryName].length > 0)
+                servicesWereChanged = true;
+        }
+
+        //{{START: GUI}}
+        const categoryToggles = globalObj._dom._categoryCheckboxInputs;
+
+        /**
+         * If the category is accepted check checkbox,
+         * otherwise uncheck it
+         */
+        for (const categoryName in categoryToggles) {
+            categoryToggles[categoryName].checked = elContains(state._acceptedCategories, categoryName);
+        }
+
+        for (const categoryName of state._allCategoryNames) {
+            const servicesToggles = globalObj._dom._serviceCheckboxInputs[categoryName];
+            const enabledServices = state._acceptedServices[categoryName];
+
+            for (const serviceName in servicesToggles) {
+                const serviceInput = servicesToggles[serviceName];
+                serviceInput.checked = elContains(enabledServices, serviceName);
+            }
+        }
+        //{{END: GUI}}
+
+        if (!state._consentTimestamp)
+            state._consentTimestamp = new Date();
+
+        if (!state._consentId)
+            state._consentId = uuidv4();
+
+        state._savedCookieContent = {
+            categories: deepCopy(state._acceptedCategories),
+            revision: globalObj._config.revision,
+            data: state._cookieData,
+            consentTimestamp: state._consentTimestamp.toISOString(),
+            consentId: state._consentId,
+            services: deepCopy(state._acceptedServices)
+        };
+    	
+        if (state._lastConsentTimestamp) {
+            state._savedCookieContent.lastConsentTimestamp = state._lastConsentTimestamp.toISOString();
+        }
+
+        let isFirstConsent = false;
+        const stateChanged = categoriesWereChanged || servicesWereChanged;
+
+        if (state._invalidConsent || stateChanged) {
+            /**
+             * Set consent as valid
+             */
+            if (state._invalidConsent) {
+                state._invalidConsent = false;
+                isFirstConsent = true;
+            }
+
+            state._lastConsentTimestamp = !state._lastConsentTimestamp
+                ? state._consentTimestamp
+                : new Date();
+
+            state._savedCookieContent.lastConsentTimestamp = state._lastConsentTimestamp.toISOString();
+
+            setCookie();
+
+            const isAutoClearEnabled = globalObj._config.autoClearCookies;
+            const shouldClearCookies = isFirstConsent || stateChanged;
+
+            if (isAutoClearEnabled && shouldClearCookies)
+                autoclearCookiesHelper(isFirstConsent);
+
+            manageExistingScripts();
+        }
+
+        if (isFirstConsent) {
+            fireEvent(globalObj._customEvents._onFirstConsent);
+            fireEvent(globalObj._customEvents._onConsent);
+
+            if (globalObj._config.mode === OPT_IN_MODE)
+                return;
+        }
+
+        if (stateChanged)
+            fireEvent(globalObj._customEvents._onChange);
+
+        /**
+         * Reload page if needed
+         */
+        if (state._reloadPage) {
+            state._reloadPage = false;
+            location.reload();
+        }
+    };
+
+    /**
+     * Set plugin's cookie
+     * @param {boolean} [useRemainingExpirationTime]
+     */
+    const setCookie = (useRemainingExpirationTime) => {
+        const { hostname, protocol } = location;
+        const { name, path, domain, sameSite, useLocalStorage } = globalObj._config.cookie;
+
+        const expiresAfterMs = useRemainingExpirationTime
+            ? getRemainingExpirationTimeMS()
+            : getExpiresAfterDaysValue()*86400000;
+
+        /**
+         * Expiration date
+         */
+        const date = new Date();
+        date.setTime(date.getTime() + expiresAfterMs);
+
+        /**
+         * Store the expiration date in the cookie (in case localstorage is used)
+         */
+
+        globalObj._state._savedCookieContent.expirationTime = date.getTime();
+
+        const value = JSON.stringify(globalObj._state._savedCookieContent);
+
+        /**
+         * Encode value (RFC compliant)
+         */
+        const cookieValue = encodeURIComponent(value);
+
+        let cookieStr = name + '='
+            + cookieValue
+            + (expiresAfterMs !== 0 ? '; expires=' + date.toUTCString() : '')
+            + '; Path=' + path
+            + '; SameSite=' + sameSite;
+
+        /**
+         * Set "domain" only if hostname contains a dot (e.g domain.com)
+         * to ensure that cookie works with 'localhost'
+         */
+        if (elContains(hostname, '.'))
+            cookieStr += '; Domain=' + domain;
+
+        if (protocol === 'https:')
+            cookieStr += '; Secure';
+
+        useLocalStorage
+            ? localStorageManager._setItem(name, value)
+            : document.cookie = cookieStr;
+
+        debug('CookieConsent [SET_COOKIE]: ' + name + ':', globalObj._state._savedCookieContent);
+    };
+
+    /**
+     * Parse cookie value using JSON.parse
+     * @param {string} value
+     */
+    const parseCookie = (value, skipDecode) => {
+        /**
+         * @type {import('../../types').CookieValue}
+         */
+        let parsedValue;
+
+        parsedValue = safeRun(() => JSON.parse(skipDecode
+            ? value
+            : decodeURIComponent(value)
+        ), true) || {};
+
+        return parsedValue;
+    };
+
+    /**
+     * Delete cookie by name & path
+     * @param {string[]} cookies Array of cookie names
+     * @param {string} [customPath]
+     * @param {string} [customDomain]
+     */
+    const eraseCookiesHelper = (cookies, customPath, customDomain) => {
+        if (cookies.length === 0)
+            return;
+
+        const domain = customDomain || globalObj._config.cookie.domain;
+        const path = customPath || globalObj._config.cookie.path;
+        const isWwwSubdomain = domain.slice(0, 4) === 'www.';
+        const mainDomain = isWwwSubdomain && domain.substring(4);
+
+        /**
+         * Helper function to erase cookie
+         * @param {string} cookie
+         * @param {string} [domain]
+         */
+        const erase = (cookie, domain) => {
+            document.cookie = cookie + '='
+                + '; path=' + path
+                + (domain ? '; domain=.' + domain : '')
+                + '; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        };
+
+        for (const cookieName of cookies) {
+
+            /**
+             * 2 attempts to erase the cookie:
+             * - without domain
+             * - with domain
+             */
+            erase(cookieName);
+            erase(cookieName, domain);
+
+            /**
+             * If domain starts with 'www.',
+             * also erase the cookie for the
+             * main domain (without www)
+             */
+            if (isWwwSubdomain)
+                erase(cookieName, mainDomain);
+
+            debug('CookieConsent [AUTOCLEAR]: deleting cookie: "' + cookieName + '" path: "' + path + '" domain:', domain);
+        }
+    };
+
+    /**
+     * Get plugin cookie
+     * @param {string} [customName]
+     */
+    const getPluginCookie = (customName) => {
+        const name = customName || globalObj._config.cookie.name;
+        const useLocalStorage = globalObj._config.cookie.useLocalStorage;
+        const valueStr = useLocalStorage
+            ? localStorageManager._getItem(name)
+            : getSingleCookie(name, true);
+        return parseCookie(valueStr, useLocalStorage);
+    };
+
+    /**
+     * Returns the cookie name/value, if it exists
+     * @param {string} name
+     * @param {boolean} getValue
+     * @returns {string}
+     */
+    const getSingleCookie = (name, getValue) => {
+        const found = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+
+        return found
+            ? (getValue ? found.pop() : name)
+            : '';
+    };
+
+    /**
+     * Returns array with all the cookie names
+     * @param {RegExp} regex
+     * @returns {string[]}
+     */
+    const getAllCookies = (regex) => {
+        const allCookies = document.cookie.split(/;\s*/);
+
+        /**
+         * @type {string[]}
+         */
+        const cookieNames = [];
+
+        /**
+         * Save only the cookie names
+         */
+        for (const cookie of allCookies) {
+            let name = cookie.split('=')[0];
+
+            if (regex) {
+                safeRun(() => {
+                    regex.test(name) && cookieNames.push(name);
+                });
+            } else {
+                cookieNames.push(name);
+            }
+        }
+
+        return cookieNames;
+    };
+
+    /**
+     * Configure CookieConsent
+     * @param {import("./global").UserConfig} userConfig
+     */
+    const setConfig = (userConfig) => {
+        const { _dom, _config, _state } = globalObj;
+
+        const
+            config = _config,
+            state = _state,
+            { cookie } = config,
+            callbacks = globalObj._callbacks,
+            userCookieConfig = userConfig.cookie,
+            userCategories = userConfig.categories,
+            allCategoryNames = getKeys(userCategories) || [],
+            nav = navigator,
+            doc = document;
+
+        /**
+         * Access the 'window' and 'document' objects
+         * during execution, rather than on import
+         * (avoid window/document is not defined error)
+         */
+        _dom._document = doc;
+        //{{START: GUI}}
+        _dom._htmlDom = doc.documentElement;
+        //{{END: GUI}}
+        cookie.domain = location.hostname;
+
+        /**
+         * Make user configuration globally available
+         */
+        state._userConfig = userConfig;
+        state._allDefinedCategories = userCategories;
+        state._allCategoryNames = allCategoryNames;
+
+        //{{START: GUI}}
+        state._allTranslations = userConfig.language.translations;
+        state._disablePageInteraction = !!userConfig.disablePageInteraction;
+        //{{END: GUI}}
+
+        /**
+         * Save references to callback functions
+         */
+        callbacks._onFirstConsent = userConfig.onFirstConsent;
+        callbacks._onConsent = userConfig.onConsent;
+        callbacks._onChange = userConfig.onChange;
+
+        //{{START: GUI}}
+        callbacks._onModalHide = userConfig.onModalHide;
+        callbacks._onModalShow = userConfig.onModalShow;
+        callbacks._onModalReady = userConfig.onModalReady;
+        //{{END: GUI}}
+
+        const {
+            mode,
+            //{{START: GUI}}
+            autoShow,
+            lazyHtmlGeneration,
+            //{{END: GUI}}
+            autoClearCookies,
+            revision,
+            manageScriptTags,
+            hideFromBots,
+        } = userConfig;
+
+        if (mode === OPT_OUT_MODE)
+            config.mode = mode;
+
+        if (typeof autoClearCookies === 'boolean')
+            config.autoClearCookies = autoClearCookies;
+
+        if (typeof manageScriptTags === 'boolean')
+            config.manageScriptTags = manageScriptTags;
+
+        if (typeof revision === 'number' && revision >= 0) {
+            config.revision = revision;
+            state._revisionEnabled = true;
+        }
+
+        //{{START: GUI}}
+
+        if (typeof autoShow === 'boolean')
+            config.autoShow = autoShow;
+
+        if (typeof lazyHtmlGeneration === 'boolean')
+            config.lazyHtmlGeneration = lazyHtmlGeneration;
+
+        //{{END: GUI}}
+
+        if (hideFromBots === false)
+            config.hideFromBots = false;
+
+        if (config.hideFromBots === true && nav)
+            state._botAgentDetected = (nav.userAgent && /bot|crawl|spider|slurp|teoma/i.test(nav.userAgent)) || nav.webdriver;
+
+        if (isObject(userCookieConfig))
+            config.cookie = {...cookie, ...userCookieConfig};
+
+        debug('CookieConsent [CONFIG]: configuration:', userConfig);
+        debug('CookieConsent [CONFIG]: autoClearCookies:', config.autoClearCookies);
+        debug('CookieConsent [CONFIG]: revision enabled:', state._revisionEnabled);
+        debug('CookieConsent [CONFIG]: manageScriptTags:', config.manageScriptTags);
+
+        fetchCategoriesAndServices(allCategoryNames);
+        retrieveScriptElements();
+
+        //{{START: GUI}}
+        setCurrentLanguageCode(resolveCurrentLanguageCode());
+        //{{END: GUI}}
+    };
+
+    /**
+     * Accept API
+     * @param {string[]|string} categories - Categories to accept
+     * @param {string[]} [excludedCategories]
+     */
+    const acceptCategory = (categories, excludedCategories = []) => {
+        resolveEnabledCategories(categories, excludedCategories);
+        resolveEnabledServices();
+        saveCookiePreferences();
+    };
+
+    /**
+     * Returns true if cookie category is accepted
+     * @param {string} category
+     */
+    const acceptedCategory = (category) => {
+
+        const acceptedCategories = !globalObj._state._invalidConsent
+            ? globalObj._state._acceptedCategories
+            : [];
+
+        return elContains(acceptedCategories, category);
+    };
+
+    /**
+     * Accept one or multiple services under a specific category
+     * @param {string|string[]} service
+     * @param {string} category
+     */
+    const acceptService = (service, category) => {
+        const { _allCategoryNames, _allDefinedServices,  } = globalObj._state;
+
+        if (
+            !service
+            || !category
+            || !isString(category)
+            || !elContains(_allCategoryNames, category)
+            || getKeys(_allDefinedServices[category]).length === 0
+        ) {
+            return false;
+        }
+
+        //{{START: GUI}}
+        updateModalToggles(service, category);
+        //{{END: GUI}}
+
+        acceptCategory();
+    };
+
+    /**
+     * Returns true if the service in the specified
+     * category is accepted/enabled
+     * @param {string} service
+     * @param {string} category
+     */
+    const acceptedService = (service, category) => {
+        const acceptedServices = !globalObj._state._invalidConsent
+            ? (globalObj._state._acceptedServices[category] || [])
+            : [];
+
+        return elContains(acceptedServices, service);
+    };
+
+    /**
+     * Returns true if cookie was found and has valid value (not an empty string)
+     * @param {string} cookieName
+     */
+    const validCookie = (cookieName) => getSingleCookie(cookieName, true) !== '';
+
+    /**
+     * Erase cookies API
+     * @param {(string|RegExp|(string|RegExp)[])} cookies
+     * @param {string} [path]
+     * @param {string} [domain]
+     */
+    const eraseCookies = (cookies, path, domain) => {
+        let allCookies = [];
+
+        /**
+         * Add cookie to allCookies array if it exists
+         * @param {string | RegExp} cookieName
+         */
+        const addCookieIfExists = (cookieName) => {
+            if (isString(cookieName)) {
+                let name = getSingleCookie(cookieName);
+                name !== '' && allCookies.push(name);
+            } else {
+                allCookies.push(...getAllCookies(cookieName));
+            }
+        };
+
+        if (isArray(cookies)) {
+            for (let cookie of cookies) {
+                addCookieIfExists(cookie);
+            }
+        } else {
+            addCookieIfExists(cookies);
+        }
+
+        eraseCookiesHelper(allCookies, path, domain);
+    };
+
+    //{{START: GUI}}
+
+    /**
+     * Show cookie consent modal
+     * @param {boolean} [createModal] create modal if it doesn't exist
+     */
+    const show = (createModal) => {
+        const { _dom, _state } = globalObj;
+
+        if (_state._consentModalVisible)
+            return;
+
+        if (!_state._consentModalExists) {
+            if (createModal) {
+                createConsentModal(miniAPI, createMainContainer);
+            } else {
+                return;
+            }
+        }
+
+        _state._consentModalVisible = true;
+        _state._lastFocusedElemBeforeModal = getActiveElement();
+
+        if (_state._disablePageInteraction)
+            toggleDisableInteraction(true);
+
+        focusAfterTransition(_dom._cm, 1);
+
+        addClass(_dom._htmlDom, TOGGLE_CONSENT_MODAL_CLASS);
+        setAttribute(_dom._cm, ARIA_HIDDEN, 'false');
+
+        /**
+         * Set focus to consentModal
+         */
+        setTimeout(() => {
+            focus(globalObj._dom._cmDivTabindex);
+        }, 100);
+
+        debug('CookieConsent [TOGGLE]: show consentModal');
+
+        fireEvent(globalObj._customEvents._onModalShow, CONSENT_MODAL_NAME);
+    };
+
+    /**
+     * Hide consent modal
+     */
+    const hide = () => {
+        const { _dom, _state, _customEvents } = globalObj;
+
+        if (!_state._consentModalVisible)
+            return;
+
+        _state._consentModalVisible = false;
+
+        if (_state._disablePageInteraction)
+            toggleDisableInteraction();
+
+        /**
+         * Fix focus restoration to body with Chrome
+         */
+        focus(_dom._focusSpan, true);
+
+        removeClass(_dom._htmlDom, TOGGLE_CONSENT_MODAL_CLASS);
+        setAttribute(_dom._cm, ARIA_HIDDEN, 'true');
+
+        /**
+         * Restore focus to last focused element
+         */
+        focus(_state._lastFocusedElemBeforeModal);
+        _state._lastFocusedElemBeforeModal = null;
+
+        debug('CookieConsent [TOGGLE]: hide consentModal');
+
+        fireEvent(_customEvents._onModalHide, CONSENT_MODAL_NAME);
+    };
+
+    /**
+     * Show preferences modal
+     */
+    const showPreferences = () => {
+        const state = globalObj._state;
+
+        if (state._preferencesModalVisible)
+            return;
+
+        if (!state._preferencesModalExists)
+            createPreferencesModal(miniAPI, createMainContainer);
+
+        state._preferencesModalVisible = true;
+
+        // If there is no consent-modal, keep track of the last focused elem.
+        if (!state._consentModalVisible) {
+            state._lastFocusedElemBeforeModal = getActiveElement();
+        } else {
+            state._lastFocusedModalElement = getActiveElement();
+        }
+
+        focusAfterTransition(globalObj._dom._pm, 2);
+
+        addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+        setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'false');
+
+        /**
+         * Set focus to preferencesModal
+         */
+        setTimeout(() => {
+            focus(globalObj._dom._pmDivTabindex);
+        }, 100);
+
+        debug('CookieConsent [TOGGLE]: show preferencesModal');
+
+        fireEvent(globalObj._customEvents._onModalShow, PREFERENCES_MODAL_NAME);
+    };
+
+    /**
+     * https://github.com/orestbida/cookieconsent/issues/481
+     */
+    const discardUnsavedPreferences = () => {
+        const consentIsValid = validConsent();
+        const allDefinedCategories = globalObj._state._allDefinedCategories;
+        const categoryInputs = globalObj._dom._categoryCheckboxInputs;
+        const serviceInputs = globalObj._dom._serviceCheckboxInputs;
+
+        /**
+         * @param {string} category
+         */
+        const categoryEnabledByDefault = (category) => elContains(globalObj._state._defaultEnabledCategories, category);
+
+        for (const category in categoryInputs) {
+            const isReadOnly = !!allDefinedCategories[category].readOnly;
+
+            categoryInputs[category].checked = isReadOnly || (consentIsValid
+                ? acceptedCategory(category)
+                : categoryEnabledByDefault(category)
+            );
+
+            for (const service in serviceInputs[category]) {
+                serviceInputs[category][service].checked = isReadOnly || (consentIsValid
+                    ? acceptedService(service, category)
+                    : categoryEnabledByDefault(category)
+                );
+            }
+        }
+    };
+
+    /**
+     * Hide preferences modal
+     */
+    const hidePreferences = () => {
+        const state = globalObj._state;
+
+        if (!state._preferencesModalVisible)
+            return;
+
+        state._preferencesModalVisible = false;
+
+        discardUnsavedPreferences();
+
+        /**
+         * Fix focus restoration to body with Chrome
+         */
+        focus(globalObj._dom._pmFocusSpan, true);
+
+        removeClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+        setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'true');
+
+        /**
+         * If consent modal is visible, focus him (instead of page document)
+         */
+        if (state._consentModalVisible) {
+            focus(state._lastFocusedModalElement);
+            state._lastFocusedModalElement = null;
+        } else {
+            /**
+             * Restore focus to last page element which had focus before modal opening
+             */
+            focus(state._lastFocusedElemBeforeModal);
+            state._lastFocusedElemBeforeModal = null;
+        }
+
+        debug('CookieConsent [TOGGLE]: hide preferencesModal');
+
+        fireEvent(globalObj._customEvents._onModalHide, PREFERENCES_MODAL_NAME);
+    };
+
+    var miniAPI = {
+        show,
+        hide,
+        showPreferences,
+        hidePreferences,
+        acceptCategory,
+        hideManageByBTSModal,
+        showManageByBTSModal,
+    };
+
+    /**
+     * Update/change modal's language
+     * @param {string} lang new language
+     * @param {boolean} [forceUpdate] update language fields forcefully
+     * @returns {Promise<boolean>}
+     */
+    const setLanguage = async (newLanguageCode, forceUpdate) => {
+        if (!getAvailableLanguage(newLanguageCode))
+            return false;
+
+        const state = globalObj._state;
+
+        /**
+         * Set language only if it differs from current
+         */
+        if (newLanguageCode !== getCurrentLanguageCode() || forceUpdate === true) {
+
+            const loaded = await loadTranslationData(newLanguageCode);
+
+            if (!loaded)
+                return false;
+
+            setCurrentLanguageCode(newLanguageCode);
+
+            if (state._consentModalExists)
+                createConsentModal(miniAPI, createMainContainer);
+
+            if (state._preferencesModalExists)
+                createPreferencesModal(miniAPI, createMainContainer);
+
+            handleRtlLanguage();
+
+            return true;
+        }
+
+        return false;
+    };
+
+    //{{END: GUI}}
+
+    /**
+     * Retrieve current user preferences (summary)
+     * @returns {import("./global").UserPreferences}
+     */
+    const getUserPreferences = () => {
+        const { _acceptType, _acceptedServices } = globalObj._state;
+        const { accepted, rejected } = getCurrentCategoriesState();
+
+        return deepCopy({
+            acceptType: _acceptType,
+            acceptedCategories: accepted,
+            rejectedCategories: rejected,
+            acceptedServices: _acceptedServices,
+            rejectedServices: retrieveRejectedServices()
+        });
+    };
+
+    /**
+     * Dynamically load script (append to head)
+     * @param {string} src
+     * @param {{[key: string]: string}} [attrs] Custom attributes
+     * @returns {Promise<boolean>} promise
+     */
+    const loadScript = (src, attrs) => {
+        /**
+         * @type {HTMLScriptElement}
+         */
+        let script = document.querySelector('script[src="' + src + '"]');
+
+        return new Promise((resolve) => {
+            if (script)
+                return resolve(true);
+
+            script = createNode('script');
+
+            /**
+             * Add custom attributes
+             */
+            if (isObject(attrs)) {
+                for (const key in attrs) {
+                    setAttribute(script, key, attrs[key]);
+                }
+            }
+
+            script.onload = () => resolve(true);
+            script.onerror = () => {
+                /**
+                 * Remove script from dom if error is thrown
+                 */
+                script.remove();
+                resolve(false);
+            };
+
+            script.src = src;
+
+            appendChild(document.head, script);
+        });
+    };
+
+    /**
+     * Save custom data inside cookie
+     * @param {{
+     *  value: any,
+     *  mode: string
+     * }} props
+     * @returns {boolean}
+     */
+    const setCookieData = (props) => {
+        let newData = props.value,
+            mode = props.mode,
+            set = false,
+            cookieData;
+
+        const state = globalObj._state;
+
+        /**
+         * If mode is 'update':
+         * add/update only the specified props.
+         */
+        if (mode === 'update') {
+            state._cookieData = cookieData = getCookie('data');
+            const sameType = typeof cookieData === typeof newData;
+
+            if (sameType && typeof cookieData === 'object') {
+                !cookieData && (cookieData = {});
+
+                for (let prop in newData) {
+                    if (cookieData[prop] !== newData[prop]) {
+                        cookieData[prop] = newData[prop];
+                        set = true;
+                    }
+                }
+            } else if ((sameType || !cookieData) && cookieData !== newData) {
+                cookieData = newData;
+                set = true;
+            }
+        } else {
+            cookieData = newData;
+            set = true;
+        }
+
+        if (set) {
+            state._cookieData = cookieData;
+            state._savedCookieContent.data = cookieData;
+            setCookie(true);
+        }
+
+        return set;
+    };
+
+    /**
+     * Retrieve data from existing cookie
+     * @param {string} field
+     * @param {string} [cookieName]
+     * @returns {any}
+     */
+    const getCookie = (field, cookieName) => {
+        const cookie = getPluginCookie(cookieName);
+
+        return field
+            ? cookie[field]
+            : cookie;
+    };
+
+    /**
+     * Return configuration object or just one of its fields.
+     * @param {string} field
+     * @returns {any}
+     */
+    const getConfig = (field) => {
+        const config = globalObj._config;
+        const userConfig = globalObj._state._userConfig;
+
+        return field
+            ? config[field] || userConfig[field]
+            : {...config, ...userConfig, cookie:{...config.cookie}};
+    };
+
+    /**
+     * Returns true if consent is valid
+     * @returns {boolean}
+     */
+    const validConsent = () => !globalObj._state._invalidConsent;
+
+    const retrieveState = () => {
+        const state = globalObj._state;
+        const config = globalObj._config;
+
+        const cookieValue = getPluginCookie();
+
+        const {
+            categories,
+            services,
+            consentId,
+            consentTimestamp,
+            lastConsentTimestamp,
+            data,
+            revision
+        } = cookieValue;
+
+        const validCategories = isArray(categories);
+
+        state._savedCookieContent = cookieValue;
+        state._consentId = consentId;
+
+        // If "_consentId" is present => assume that consent was previously given
+        const validConsentId = !!consentId && isString(consentId);
+
+        // Retrieve "_consentTimestamp"
+        state._consentTimestamp = consentTimestamp;
+        state._consentTimestamp && (state._consentTimestamp = new Date(consentTimestamp));
+
+        // Retrieve "_lastConsentTimestamp"
+        state._lastConsentTimestamp = lastConsentTimestamp;
+        state._lastConsentTimestamp && (state._lastConsentTimestamp = new Date(lastConsentTimestamp));
+
+        // Retrieve "data"
+        state._cookieData = typeof data !== 'undefined'
+            ? data
+            : null;
+
+        // If revision is enabled and current value !== saved value inside the cookie => revision is not valid
+        if (state._revisionEnabled && validConsentId && revision !== config.revision)
+            state._validRevision = false;
+
+        state._invalidConsent = !validConsentId
+            || !state._validRevision
+            || !state._consentTimestamp
+            || !state._lastConsentTimestamp
+            || !validCategories;
+
+        /**
+         * If localStorage is enabled, also check the stored `expirationTime`
+         */
+        if (config.cookie.useLocalStorage && !state._invalidConsent) {
+            state._invalidConsent = new Date().getTime() > (cookieValue.expirationTime || 0);
+            state._invalidConsent && (localStorageManager._removeItem(config.cookie.name));
+        }
+
+        debug('CookieConsent [STATUS] valid consent:', !state._invalidConsent);
+        retrieveEnabledCategoriesAndServices();
+
+        /**
+         * Retrieve last accepted categories from cookie
+         * and calculate acceptType
+         */
+        if (!state._invalidConsent) {
+            state._acceptedServices = {
+                ...state._acceptedServices,
+                ...services
+            };
+
+            state._enabledServices = {...state._acceptedServices};
+
+            setAcceptedCategories([
+                ...state._readOnlyCategories,
+                ...categories
+            ]);
+        } else {
+            if (config.mode === OPT_OUT_MODE) {
+                state._acceptedCategories = [
+                    ...state._defaultEnabledCategories
+                ];
+            }
+        }
+    };
+
+    /**
+     * Will run once and only if modals do not exist.
+     * @param {import("./global").UserConfig} userConfig
+     */
+    const run = async (userConfig) => {
+        const {
+            _state,
+            _config,
+            _customEvents
+        } = globalObj;
+
+        const win = window;
+
+        if (!win._ccRun) {
+            win._ccRun = true;
+
+            setConfig(userConfig);
+
+            if (_state._botAgentDetected)
+                return;
+
+            retrieveState();
+
+            const consentIsValid = validConsent();
+
+            //{{START: GUI}}
+            const translationLoaded = await loadTranslationData();
+
+            if (!translationLoaded)
+                return false;
+
+            generateHtml(miniAPI);
+
+            if (_config.autoShow && !consentIsValid)
+                show(true);
+            //{{END: GUI}}
+
+            if (consentIsValid) {
+                manageExistingScripts();
+                return fireEvent(_customEvents._onConsent);
+            }
+
+            if (_config.mode === OPT_OUT_MODE)
+                manageExistingScripts(_state._defaultEnabledCategories);
+        }
+    };
+
+    /**
+     * Reset cookieconsent.
+     * @param {boolean} [deleteCookie] Delete plugin's cookie
+     */
+    const reset = (deleteCookie) => {
+        //{{START: GUI}}
+        const { _ccMain, _htmlDom } = globalObj._dom;
+        //{{END: GUI}}
+
+        const { name, path, domain, useLocalStorage } = globalObj._config.cookie;
+
+        if (deleteCookie) {
+            useLocalStorage
+                ? localStorageManager._removeItem(name)
+                : eraseCookies(name, path, domain);
+        }
+
+        /**
+         * Remove data-cc event listeners
+         */
+        for (const {_element, _event, _listener} of globalObj._state._dataEventListeners) {
+            _element.removeEventListener(_event, _listener);
+        }
+
+        //{{START: GUI}}
+        /**
+         * Remove main container from DOM
+         */
+        _ccMain && _ccMain.remove();
+
+        /**
+         * Remove any remaining classes
+         */
+        _htmlDom && _htmlDom.classList.remove(
+            TOGGLE_DISABLE_INTERACTION_CLASS,
+            TOGGLE_PREFERENCES_MODAL_CLASS,
+            TOGGLE_CONSENT_MODAL_CLASS
+        );
+        //{{END: GUI}}
+
+        const newGlobal = new GlobalState();
+
+        /**
+         * Reset all global state props.
+         */
+        for (const key in globalObj) {
+            globalObj[key] = newGlobal[key];
+        }
+
+        window._ccRun = false;
+    };
+
+    const showManageByBTSModal = () => {
+        console.log('Show modal');
+        const state = globalObj._state;
+
+        if (state._manageByBTSModalVisible)
+            return;
+
+        if (!state._manageByBTSModalExists)
+            createManageByBTSModal(miniAPI, createMainContainer);
+
+        state._manageByBTSModalVisible = true;
+
+        // If there is no consent-modal, keep track of the last focused elem.
+        if (!state._consentModalVisible) {
+            state._lastFocusedElemBeforeModal = getActiveElement();
+        } else {
+            state._lastFocusedModalElement = getActiveElement();
+        }
+
+        focusAfterTransition(globalObj._dom._btsm, 2);
+
+        addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+        setAttribute(globalObj._dom._btsm, ARIA_HIDDEN, 'false');
+
+        /**
+         * Set focus to preferencesModal
+         */
+        setTimeout(() => {
+            focus(globalObj._dom._btsmDivTabindex);
+        }, 100);
+
+        debug('CookieConsent [TOGGLE]: show manageByBTSModal');
+
+        fireEvent(globalObj._customEvents._onModalShow, MANAGE_BY_BTS_MODAL_NAME);
+    };
+
+
+    const hideManageByBTSModal = () => {
+        const state = globalObj._state;
+        if (!state._manageByBTSModalVisible) {
+            return;
+        }
+        state._manageByBTSModalVisible = false;
+
+        /**
+        * Fix focus restoration to body with Chrome
+        */
+        focus(globalObj._dom._pmFocusSpan, true);
+
+        removeClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+        setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'true');
+
+        /**
+         * If consent modal is visible, focus him (instead of page document)
+         */
+        if (state._consentModalVisible) {
+            focus(state._lastFocusedModalElement);
+            state._lastFocusedModalElement = null;
+        } else {
+            /**
+             * Restore focus to last page element which had focus before modal opening
+             */
+            focus(state._lastFocusedElemBeforeModal);
+            state._lastFocusedElemBeforeModal = null;
+        }
+
+        debug('CookieConsent [TOGGLE]: hide manageByBTSModal');
+
+        fireEvent(globalObj._customEvents._onModalHide, PREFERENCES_MODAL_NAME);
+    };
+
+    exports.acceptCategory = acceptCategory;
+    exports.acceptService = acceptService;
+    exports.acceptedCategory = acceptedCategory;
+    exports.acceptedService = acceptedService;
+    exports.eraseCookies = eraseCookies;
+    exports.getConfig = getConfig;
+    exports.getCookie = getCookie;
+    exports.getUserPreferences = getUserPreferences;
+    exports.hide = hide;
+    exports.hideManageByBTSModal = hideManageByBTSModal;
+    exports.hidePreferences = hidePreferences;
+    exports.loadScript = loadScript;
+    exports.reset = reset;
+    exports.run = run;
+    exports.setCookieData = setCookieData;
+    exports.setLanguage = setLanguage;
+    exports.show = show;
+    exports.showManageByBTSModal = showManageByBTSModal;
+    exports.showPreferences = showPreferences;
+    exports.validConsent = validConsent;
+    exports.validCookie = validCookie;
+
+}));
