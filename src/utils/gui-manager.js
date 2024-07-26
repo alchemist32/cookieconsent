@@ -89,6 +89,7 @@ export const guiManager = (applyToModal) => {
     const guiOptions = globalObj._state._userConfig.guiOptions;
     const consentModalOptions = guiOptions && guiOptions.consentModal;
     const preferencesModalOptions = guiOptions && guiOptions.preferencesModal;
+    const manageByBTSModalOptions = guiOptions && guiOptions.manageByBTSModal;
 
     if (applyToModal === 0) {
         setLayout(
@@ -107,6 +108,17 @@ export const guiManager = (applyToModal) => {
             ALL_PM_LAYOUTS,
             preferencesModalOptions,
             CLASS_CONSTANTS._pmPrefix,
+            CLASS_CONSTANTS._box,
+            'pm'
+        );
+    }
+
+    if (applyToModal === 2) {
+        setLayout(
+            globalObj._dom._btsm,
+            ALL_PM_LAYOUTS,
+            manageByBTSModalOptions,
+            CLASS_CONSTANTS._cmPrefix,
             CLASS_CONSTANTS._box,
             'pm'
         );

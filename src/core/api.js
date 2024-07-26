@@ -364,7 +364,8 @@ var miniAPI = {
     hide,
     showPreferences,
     hidePreferences,
-    acceptCategory
+    acceptCategory,
+    hideManageByBTSModal
 };
 
 /**
@@ -731,4 +732,38 @@ export const reset = (deleteCookie) => {
     }
 
     window._ccRun = false;
+};
+
+export const hideManageByBTSModal = () => {
+    const state = globalObj._state;
+    if (!state._manageByBTSModalVisible) {
+        return;
+    }
+    state._manageByBTSModalVisible = false;
+
+    /**
+    * Fix focus restoration to body with Chrome
+    */
+    focus(globalObj._dom._pmFocusSpan, true);
+
+    removeClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+    setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'true');
+
+    /**
+     * If consent modal is visible, focus him (instead of page document)
+     */
+    if (state._consentModalVisible) {
+        focus(state._lastFocusedModalElement);
+        state._lastFocusedModalElement = null;
+    } else {
+        /**
+         * Restore focus to last page element which had focus before modal opening
+         */
+        focus(state._lastFocusedElemBeforeModal);
+        state._lastFocusedElemBeforeModal = null;
+    }
+
+    debug('CookieConsent [TOGGLE]: hide manageByBTSModal');
+
+    fireEvent(globalObj._customEvents._onModalHide, PREFERENCES_MODAL_NAME);
 };

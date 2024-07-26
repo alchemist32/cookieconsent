@@ -1,3 +1,5 @@
+import { ManageByBTSModalModalOptions } from "../src/core/global"
+
 export = CookieConsent
 export as namespace CookieConsent
 
@@ -283,6 +285,11 @@ declare namespace CookieConsent {
              */
             equalWeightButtons?: boolean
         }
+        manageByBTSModal?: {
+            title: string,
+            apiURL?: string,
+            content: HTMLElement
+        }
     }
 
     interface ConsentModalOptions {
@@ -379,6 +386,7 @@ declare namespace CookieConsent {
     interface Translation {
         consentModal: ConsentModalOptions
         preferencesModal: PreferencesModalOptions
+        manageByBTSModal: ManageByBTSModalModalOptions
     }
 
     interface CookieConsentConfig {
@@ -677,6 +685,10 @@ declare namespace CookieConsent {
      * @param eraseCookie delete plugin's cookie
      */
     function reset(eraseCookie?: boolean): void
+
+    function showManageByBTSModal(): void
+
+    function hideManageByBTSModal(): void
 }
 
 declare global {

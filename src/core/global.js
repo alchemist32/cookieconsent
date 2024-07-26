@@ -15,9 +15,11 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * @typedef {CookieConsent.Translation} Translation
  * @typedef {CookieConsent.ConsentModalOptions} ConsentModalOptions
  * @typedef {CookieConsent.PreferencesModalOptions} PreferencesModalOptions
+ * @typedef {CookieConsent.ManageByBTSModalModalOptions} ManageByBTSModalModalOptions
  * @typedef {CookieConsent.CookieTable} CookieTable
  * @typedef {CookieConsent.Section} Section
  * @typedef {CookieConsent.CookieValue} CookieValue
+ * @typedef {CookieConsent.UserPreferences} UserPreferences
  * @typedef {CookieConsent.UserPreferences} UserPreferences
  */
 
@@ -69,6 +71,12 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * @property {HTMLElement} _pmAcceptAllBtn
  * @property {HTMLElement} _pmAcceptNecessaryBtn
  * @property {HTMLElement} _pmSavePreferencesBtn
+ * 
+ * @property {HTMLElement} _btsm
+ * @property {HTMLElement} _btsmTitle
+ * @property {HTMLElement} _btsmContent
+ * @property {HTMLElement} _btsmContainer
+ * @property {HTMLElement} _btsmOverlay
  *
  * @property {Object.<string, HTMLInputElement>} _categoryCheckboxInputs
  * @property {Object.<string, ServiceToggle>} _serviceCheckboxInputs
@@ -188,6 +196,9 @@ export class GlobalState {
 
             _preferencesModalVisible : false,
             _preferencesModalExists: false,
+
+            _manageByBTSModalVisible : false,
+            _manageByBTSModalExists : false,
 
             /**
             * @type {HTMLElement[]}

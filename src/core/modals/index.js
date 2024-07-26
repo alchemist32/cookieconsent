@@ -2,6 +2,7 @@ import { globalObj } from '../global';
 import { createNode, isString, addDataButtonListeners } from '../../utils/general';
 import { createConsentModal } from './consentModal';
 import { createPreferencesModal } from './preferencesModal';
+import { createManageByBTSModal } from './manageByBTSModal';
 import { DIV_TAG } from '../../utils/constants';
 import { handleRtlLanguage } from '../../utils/language';
 
@@ -30,6 +31,7 @@ export const createMainContainer = () => {
  */
 export const generateHtml = (api) => {
     addDataButtonListeners(null, api, createPreferencesModal, createMainContainer);
+    addDataButtonListeners(null, api, createManageByBTSModal, createMainContainer);
 
     if (globalObj._state._invalidConsent)
         createConsentModal(api, createMainContainer);
@@ -40,3 +42,4 @@ export const generateHtml = (api) => {
 
 export * from './consentModal';
 export * from './preferencesModal';
+export * from './manageByBTSModal';

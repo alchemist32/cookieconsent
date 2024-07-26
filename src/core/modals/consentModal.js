@@ -27,6 +27,7 @@ import {
 
 import { guiManager } from '../../utils/gui-manager';
 import { createPreferencesModal } from './preferencesModal';
+import { createManageByBTSModal } from './manageByBTSModal';
 
 /**
  * @callback CreateMainContainer
@@ -52,7 +53,7 @@ const createFocusSpan = () => {
 export const createConsentModal = (api, createMainContainer) => {
     const state = globalObj._state;
     const dom = globalObj._dom;
-    const {hide, showPreferences, acceptCategory} = api;
+    const {hide, showPreferences, acceptCategory, showManageByBTSModal} = api;
 
     /**
      * @type {import("../global").ConsentModalOptions}
@@ -70,7 +71,6 @@ export const createConsentModal = (api, createMainContainer) => {
         consentModalLabelValue = consentModalData.label,
         consentModalTitleValue = consentModalData.title,
         consentModalCustomThirdButton = consentModalData.manageBTSBtn;
-    console.log('button text: ', consentModalCustomThirdButton);
 
     /**
      * @param {string|string[]} [categories]
@@ -225,19 +225,20 @@ export const createConsentModal = (api, createMainContainer) => {
     }
 
     if (consentModalCustomThirdButton) {
-        console.log('_cmManageBTS: ', dom._cmMangeByBTS);
         if (!dom._cmMangeByBTS) {
             dom._cmMangeByBTS = createNode(BUTTON_TAG);
             appendChild(dom._cmMangeByBTS, createFocusSpan());
             addClassCm(dom._cmMangeByBTS, 'btn');
             setAttribute(dom._cmMangeByBTS, DATA_ROLE, 'optional');
             
-            addEvent(dom._cmMangeByBTS, CLICK_EVENT, () => {
-                alert('Custom Button was clicked');
+            addEvent(dom._cmMangeByBTS, 'mouseenter', () => {
+                if (!state._manageByBTSModalExists) {
+                    createManageByBTSModal(api, createMainContainer);
+                }
             });
+            addEvent(dom._cmMangeByBTS, CLICK_EVENT, showManageByBTSModal);
         }
         dom._cmMangeByBTS.firstElementChild.innerHTML = consentModalCustomThirdButton;
-        console.log('_cmManageBTS: ', dom._cmMangeByBTS);
     }
 
     if (!dom._cmBtnGroup) {
