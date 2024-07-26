@@ -37,9 +37,10 @@ import {
  * @param {CreateMainContainer} createMainContainer
  */
 export const createManageByBTSModal = (api, createMainContainer) => {
+    debugger;
     const state = globalObj._state;
     const dom = globalObj._dom;
-    const { hide, hideManageByBTSModal } = api;
+    const { hideManageByBTSModal } = api;
 
     const modalData = state._currentTranslation && state._currentTranslation.manageByBTSModal;
     if (!modalData) {
