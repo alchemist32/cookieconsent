@@ -74,6 +74,10 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         const pTag = createNode('p');
         pTag.textContent = 'This is managed by BTS';
         appendChild(dom._btsmContent, pTag);
+
+        dom._btsmDivTabindex = createNode(DIV_TAG);
+        setAttribute(dom._btsmDivTabindex, 'tabIndex', -1);
+        appendChild(dom._btsm, dom._btsmDivTabindex);
     }
     guiManager(2);
 

@@ -37,7 +37,8 @@ import {
     createConsentModal,
     createPreferencesModal,
     generateHtml,
-    createMainContainer
+    createMainContainer,
+    createManageByBTSModal
 } from './modals/index';
 
 import {
@@ -68,7 +69,8 @@ import {
     OPT_OUT_MODE,
     CONSENT_MODAL_NAME,
     ARIA_HIDDEN,
-    PREFERENCES_MODAL_NAME
+    PREFERENCES_MODAL_NAME,
+    MANAGE_BY_BTS_MODAL_NAME
 } from '../utils/constants';
 import { localStorageManager } from '../utils/localstorage';
 
@@ -365,7 +367,8 @@ var miniAPI = {
     showPreferences,
     hidePreferences,
     acceptCategory,
-    hideManageByBTSModal
+    hideManageByBTSModal,
+    showManageByBTSModal,
 };
 
 /**
@@ -733,6 +736,43 @@ export const reset = (deleteCookie) => {
 
     window._ccRun = false;
 };
+
+export const showManageByBTSModal = () => {
+    console.log('Show modal');
+    const state = globalObj._state;
+
+    if (state._manageByBTSModalVisible)
+        return;
+
+    if (!state._manageByBTSModalExists)
+        createManageByBTSModal(miniAPI, createMainContainer);
+
+    state._manageByBTSModalVisible = true;
+
+    // If there is no consent-modal, keep track of the last focused elem.
+    if (!state._consentModalVisible) {
+        state._lastFocusedElemBeforeModal = getActiveElement();
+    } else {
+        state._lastFocusedModalElement = getActiveElement();
+    }
+
+    focusAfterTransition(globalObj._dom._btsm, 2);
+
+    addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+    setAttribute(globalObj._dom._btsm, ARIA_HIDDEN, 'false');
+
+    /**
+     * Set focus to preferencesModal
+     */
+    setTimeout(() => {
+        focus(globalObj._dom._btsmDivTabindex);
+    }, 100);
+
+    debug('CookieConsent [TOGGLE]: show manageByBTSModal');
+
+    fireEvent(globalObj._customEvents._onModalShow, MANAGE_BY_BTS_MODAL_NAME);
+};
+
 
 export const hideManageByBTSModal = () => {
     const state = globalObj._state;
