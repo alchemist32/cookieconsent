@@ -2350,7 +2350,7 @@
     const createManageByBTSModal = (api, createMainContainer) => {
         const state = globalObj._state;
         const dom = globalObj._dom;
-        const { hide, hideManageByBTSModal } = api;
+        const { hideManageByBTSModal } = api;
 
         const modalData = state._currentTranslation && state._currentTranslation.manageByBTSModal;
         if (!modalData) {
@@ -2609,7 +2609,7 @@
                 setAttribute(dom._cmMangeByBTS, DATA_ROLE, 'optional');
                 
                 addEvent(dom._cmMangeByBTS, 'mouseenter', () => {
-                    debugger;
+                    console.log('mouseEnter');
                     if (!state._manageByBTSModalExists) {
                         createManageByBTSModal(api, createMainContainer);
                     }
@@ -3674,6 +3674,77 @@
         fireEvent(globalObj._customEvents._onModalHide, PREFERENCES_MODAL_NAME);
     };
 
+    const showManageByBTSModal = () => {
+        console.log('Show modal');
+        const state = globalObj._state;
+
+        if (state._manageByBTSModalVisible)
+            return;
+
+        if (!state._manageByBTSModalExists)
+            createManageByBTSModal(miniAPI, createMainContainer);
+
+        state._manageByBTSModalVisible = true;
+
+        // If there is no consent-modal, keep track of the last focused elem.
+        if (!state._consentModalVisible) {
+            state._lastFocusedElemBeforeModal = getActiveElement();
+        } else {
+            state._lastFocusedModalElement = getActiveElement();
+        }
+
+        focusAfterTransition(globalObj._dom._btsm, 2);
+
+        addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+        setAttribute(globalObj._dom._btsm, ARIA_HIDDEN, 'false');
+
+        /**
+         * Set focus to preferencesModal
+         */
+        setTimeout(() => {
+            focus(globalObj._dom._btsmDivTabindex);
+        }, 100);
+
+        debug('CookieConsent [TOGGLE]: show manageByBTSModal');
+
+        fireEvent(globalObj._customEvents._onModalShow, MANAGE_BY_BTS_MODAL_NAME);
+    };
+
+
+    const hideManageByBTSModal = () => {
+        const state = globalObj._state;
+        if (!state._manageByBTSModalVisible) {
+            return;
+        }
+        state._manageByBTSModalVisible = false;
+
+        /**
+        * Fix focus restoration to body with Chrome
+        */
+        focus(globalObj._dom._pmFocusSpan, true);
+
+        removeClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+        setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'true');
+
+        /**
+         * If consent modal is visible, focus him (instead of page document)
+         */
+        if (state._consentModalVisible) {
+            focus(state._lastFocusedModalElement);
+            state._lastFocusedModalElement = null;
+        } else {
+            /**
+             * Restore focus to last page element which had focus before modal opening
+             */
+            focus(state._lastFocusedElemBeforeModal);
+            state._lastFocusedElemBeforeModal = null;
+        }
+
+        debug('CookieConsent [TOGGLE]: hide manageByBTSModal');
+
+        fireEvent(globalObj._customEvents._onModalHide, PREFERENCES_MODAL_NAME);
+    };
+
     var miniAPI = {
         show,
         hide,
@@ -4048,77 +4119,6 @@
         }
 
         window._ccRun = false;
-    };
-
-    const showManageByBTSModal = () => {
-        console.log('Show modal');
-        const state = globalObj._state;
-
-        if (state._manageByBTSModalVisible)
-            return;
-
-        if (!state._manageByBTSModalExists)
-            createManageByBTSModal(miniAPI, createMainContainer);
-
-        state._manageByBTSModalVisible = true;
-
-        // If there is no consent-modal, keep track of the last focused elem.
-        if (!state._consentModalVisible) {
-            state._lastFocusedElemBeforeModal = getActiveElement();
-        } else {
-            state._lastFocusedModalElement = getActiveElement();
-        }
-
-        focusAfterTransition(globalObj._dom._btsm, 2);
-
-        addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
-        setAttribute(globalObj._dom._btsm, ARIA_HIDDEN, 'false');
-
-        /**
-         * Set focus to preferencesModal
-         */
-        setTimeout(() => {
-            focus(globalObj._dom._btsmDivTabindex);
-        }, 100);
-
-        debug('CookieConsent [TOGGLE]: show manageByBTSModal');
-
-        fireEvent(globalObj._customEvents._onModalShow, MANAGE_BY_BTS_MODAL_NAME);
-    };
-
-
-    const hideManageByBTSModal = () => {
-        const state = globalObj._state;
-        if (!state._manageByBTSModalVisible) {
-            return;
-        }
-        state._manageByBTSModalVisible = false;
-
-        /**
-        * Fix focus restoration to body with Chrome
-        */
-        focus(globalObj._dom._pmFocusSpan, true);
-
-        removeClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
-        setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'true');
-
-        /**
-         * If consent modal is visible, focus him (instead of page document)
-         */
-        if (state._consentModalVisible) {
-            focus(state._lastFocusedModalElement);
-            state._lastFocusedModalElement = null;
-        } else {
-            /**
-             * Restore focus to last page element which had focus before modal opening
-             */
-            focus(state._lastFocusedElemBeforeModal);
-            state._lastFocusedElemBeforeModal = null;
-        }
-
-        debug('CookieConsent [TOGGLE]: hide manageByBTSModal');
-
-        fireEvent(globalObj._customEvents._onModalHide, PREFERENCES_MODAL_NAME);
     };
 
     exports.acceptCategory = acceptCategory;

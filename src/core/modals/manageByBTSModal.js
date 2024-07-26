@@ -37,7 +37,6 @@ import {
  * @param {CreateMainContainer} createMainContainer
  */
 export const createManageByBTSModal = (api, createMainContainer) => {
-    debugger;
     const state = globalObj._state;
     const dom = globalObj._dom;
     const { hideManageByBTSModal } = api;
