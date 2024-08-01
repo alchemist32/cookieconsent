@@ -2375,10 +2375,10 @@ const createManageByBTSModal = (api, createMainContainer) => {
     console.log('btsM: ', dom._btsm);
     if (!dom._btsm) {
         dom._btsmContainer = createNode(DIV_TAG);
-        addClass(dom._btsmContainer, 'pm-wrapper');
+        addClass(dom._btsmContainer, 'btsm-wrapper');
 
         const btsmOverlay = createNode(DIV_TAG);
-        addClass(btsmOverlay, 'pm-overlay');
+        addClass(btsmOverlay, 'btsm-overlay');
         appendChild(dom._btsmContainer, btsmOverlay);
 
         addEvent(btsmOverlay, CLICK_EVENT, hideManageByBTSModal);
@@ -2386,7 +2386,7 @@ const createManageByBTSModal = (api, createMainContainer) => {
         dom._btsm =  createNode(DIV_TAG);
         console.log('btsM: ', dom._btsm);
 
-        addClass(dom._btsm, 'pm');
+        addClass(dom._btsm, 'btsm');
         setAttribute(dom._btsm, 'role', 'dialog');
         setAttribute(dom._btsm, ARIA_HIDDEN, true);
         setAttribute(dom._btsm, 'aria-modal', true);
@@ -2618,11 +2618,11 @@ const createConsentModal = (api, createMainContainer) => {
             addClassCm(dom._cmShowPreferencesBtn, 'btn--secondary');
             setAttribute(dom._cmShowPreferencesBtn, DATA_ROLE, 'show');
 
-            // addEvent(dom._cmShowPreferencesBtn, 'mouseenter', () => {
-            //     if (!state._preferencesModalExists)
-            //         createPreferencesModal(api, createMainContainer);
-            // });
-            // addEvent(dom._cmShowPreferencesBtn, CLICK_EVENT, showPreferences);
+            addEvent(dom._cmShowPreferencesBtn, 'mouseenter', () => {
+                if (!state._preferencesModalExists)
+                    createPreferencesModal(api, createMainContainer);
+            });
+            addEvent(dom._cmShowPreferencesBtn, CLICK_EVENT, showPreferences);
         }
 
         dom._cmShowPreferencesBtn.firstElementChild.innerHTML = showPreferencesBtnData;

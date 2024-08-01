@@ -1,0 +1,117 @@
+@import "../global";
+
+$padding-y: 1em;
+$padding-x: 1.4em;
+
+$toggle-knob-height: 23px;
+$toggle-knob-width: 50px;
+$toggle-knob-icon-width: 2px;
+
+$service-toggle-knob-height: 19px;
+$service-toggle-knob-width: 42px;
+$service-toggle-knob-icon-width: 1.7px;
+
+#cc-main {
+    .btsm-wrapper {
+        position: relative;
+        z-index: 2;
+    }
+    .btsm {
+        position: fixed;
+        display: flex;
+        width: 100%;
+        width: unset;
+        background: var(--cc-bg);
+        flex-direction: column;
+        border-radius: var(--cc-modal-border-radius);
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
+        z-index: 1;
+        box-shadow: $modal-box-shadow;
+    }
+
+    .btsm__close-btn {
+        width: calc(#{$btn-height} - 2px);
+        height: calc(#{$btn-height} - 2px);
+        position: relative;
+        background: var(--cc-btn-secondary-bg);
+        border-radius: var(--cc-btn-border-radius);
+        border: 1px solid var(--cc-btn-secondary-border-color);
+        transition: all .15s ease;
+
+        span {
+            display: flex;
+            height: 100%;
+            width: 100%;
+        }
+
+        svg{
+            stroke: var(--cc-btn-secondary-color);
+            transform: scale(.5);
+            transition: stroke .15s ease;
+        }
+
+        &:hover{
+            border-color: var(--cc-btn-secondary-hover-border-color);
+            background: var(--cc-btn-secondary-hover-bg);
+
+            svg{
+                stroke: var(--cc-btn-secondary-hover-color);
+            }
+        }
+    }
+
+    .btsm-content {
+        flex: 1;
+        overflow-y: overlay;
+    }
+
+    .btsm-overlay {
+        content: '';
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+        background: var(--cc-overlay-bg);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .cc--anim{
+        .btsm,
+        .btsm-overlay{
+            transition: opacity var(--cc-modal-transition-duration) ease,
+                    visibility var(--cc-modal-transition-duration) ease,
+                    transform var(--cc-modal-transition-duration) ease;
+        }
+    }
+}
+
+#cc-main {
+    .btsm--box {
+        transform: translateY(calc(-50% + $translate-y));
+    }
+}
+
+.show--bts-modal {
+    #cc-main {
+        .cc--anim {
+            .btsm {
+                opacity: 1;
+                visibility: visible !important;
+            }
+
+            .btsm--box {
+                transform: translateY(-50%);
+            }
+
+            .btsm-overlay {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+}
