@@ -27,6 +27,7 @@ const DATA_ROLE = 'data-role';
 const CONSENT_MODAL_NAME = 'consentModal';
 const PREFERENCES_MODAL_NAME = 'preferencesModal';
 const MANAGE_BY_BTS_MODAL_NAME = 'btsModal';
+const TOGGLE_BTS_MODAL_CLASS = 'show--bts-modal';
 
 /**
  * @typedef {import('../../types')} CookieConsent
@@ -3711,7 +3712,7 @@ const showManageByBTSModal = () => {
 
     focusAfterTransition(globalObj._dom._btsm, 3);
 
-    addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+    addClass(globalObj._dom._htmlDom, TOGGLE_BTS_MODAL_CLASS);
     setAttribute(globalObj._dom._btsm, ARIA_HIDDEN, 'false');
 
     /**

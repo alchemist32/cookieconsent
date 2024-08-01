@@ -70,7 +70,8 @@ import {
     CONSENT_MODAL_NAME,
     ARIA_HIDDEN,
     PREFERENCES_MODAL_NAME,
-    MANAGE_BY_BTS_MODAL_NAME
+    MANAGE_BY_BTS_MODAL_NAME,
+    TOGGLE_BTS_MODAL_CLASS
 } from '../utils/constants';
 import { localStorageManager } from '../utils/localstorage';
 
@@ -382,7 +383,7 @@ export const showManageByBTSModal = () => {
 
     focusAfterTransition(globalObj._dom._btsm, 3);
 
-    addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+    addClass(globalObj._dom._htmlDom, TOGGLE_BTS_MODAL_CLASS);
     setAttribute(globalObj._dom._btsm, ARIA_HIDDEN, 'false');
 
     /**

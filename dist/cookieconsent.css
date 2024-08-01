@@ -461,11 +461,13 @@ html.disable--interaction.show--consent, html.disable--interaction.show--consent
   border-color: var(--cc-btn-primary-hover-border-color);
 }
 #cc-main .btsm__btn--primary {
+  border-color: #38b872;
   color: #fff;
   background-color: #38b872;
 }
 #cc-main .btsm__btn--primary:hover {
   background-color: #4acb84;
+  border-color: #4acb84;
 }
 #cc-main .cm--inline .cm__btn-group {
   grid-auto-flow: column;

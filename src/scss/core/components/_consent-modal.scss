@@ -280,11 +280,13 @@ $footer-links-gap: 1.3rem;
         }
     
         &--primary {
+            border-color: #38b872;
             color: #fff;
             background-color: #38b872;
     
             &:hover {
                 background-color: #4acb84;
+                border-color: #4acb84;
             }
         }
     
