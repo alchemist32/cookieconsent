@@ -725,12 +725,22 @@ export const focus = (el, toggleTabIndex) => {
 
 /**
  * @param {HTMLDivElement} element
- * @param {1 | 2} modalId
+ * @param {1 | 2 | 3} modalId
  */
 export const focusAfterTransition = (element, modalId) => {
-    const getVisibleDiv = (modalId) => modalId === 1
-        ? globalObj._dom._cmDivTabindex
-        : globalObj._dom._pmDivTabindex;
+    // const getVisibleDiv = (modalId) => modalId === 1
+    //     ? globalObj._dom._cmDivTabindex
+    //     : globalObj._dom._pmDivTabindex;
+    const getVisibleDiv = (modalId) => {
+        switch (modalId) {
+        case 1:
+            return globalObj._dom._cmDivTabindex;
+        case 2:
+            return globalObj._dom._pmDivTabindex;
+        case 3:
+            return globalObj._dom._btsmDivTabindex;
+        }
+    };
 
     const setFocus = (event) => {
         event.target.removeEventListener('transitionend', setFocus);

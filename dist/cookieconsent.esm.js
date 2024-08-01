@@ -1102,12 +1102,22 @@ const focus = (el, toggleTabIndex) => {
 
 /**
  * @param {HTMLDivElement} element
- * @param {1 | 2} modalId
+ * @param {1 | 2 | 3} modalId
  */
 const focusAfterTransition = (element, modalId) => {
-    const getVisibleDiv = (modalId) => modalId === 1
-        ? globalObj._dom._cmDivTabindex
-        : globalObj._dom._pmDivTabindex;
+    // const getVisibleDiv = (modalId) => modalId === 1
+    //     ? globalObj._dom._cmDivTabindex
+    //     : globalObj._dom._pmDivTabindex;
+    const getVisibleDiv = (modalId) => {
+        switch (modalId) {
+        case 1:
+            return globalObj._dom._cmDivTabindex;
+        case 2:
+            return globalObj._dom._pmDivTabindex;
+        case 3:
+            return globalObj._dom._btsmDivTabindex;
+        }
+    };
 
     const setFocus = (event) => {
         event.target.removeEventListener('transitionend', setFocus);
@@ -2610,8 +2620,8 @@ const createConsentModal = (api, createMainContainer) => {
         if (!dom._cmMangeByBTS) {
             dom._cmMangeByBTS = createNode(BUTTON_TAG);
             appendChild(dom._cmMangeByBTS, createFocusSpan());
-            addClass(dom._cmMangeByBTS, 'btn');
-            addClass(dom._cmMangeByBTS, 'bts-btn');
+            addClass(dom._cmMangeByBTS, 'btsm__btn');
+            addClass(dom._cmMangeByBTS, 'btsm__btn--primary');
             setAttribute(dom._cmMangeByBTS, DATA_ROLE, 'optional');
             
             addEvent(dom._cmMangeByBTS, 'mouseenter', () => {

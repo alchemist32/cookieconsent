@@ -687,6 +687,30 @@ html.disable--interaction.show--consent, html.disable--interaction.show--consent
   margin-right: 1.3rem;
 }
 
+.btsm__btn {
+  color: var(--cc-btn-primary-color);
+  background: var(--cc-btn-primary-bg);
+  border: 1px solid var(--cc-btn-primary-border-color);
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.82em;
+  min-height: 42px;
+  padding: 0.5em 1em;
+  border-radius: var(--cc-btn-border-radius);
+}
+.btsm__btn:hover {
+  color: var(--cc-btn-primary-hover-color);
+  background: var(--cc-btn-primary-hover-bg);
+  border-color: var(--cc-btn-primary-hover-border-color);
+}
+.btsm__btn--primary {
+  color: #fff;
+  background-color: #38b872;
+}
+.btsm__btn--primary:hover {
+  background-color: #4acb84;
+}
+
 /* End: Fix RTL alyout */
 @media screen and (max-width: 640px) {
   #cc-main {
