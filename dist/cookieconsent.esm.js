@@ -2619,7 +2619,7 @@ const createConsentModal = (api, createMainContainer) => {
                     createManageByBTSModal(api, createMainContainer);
                 }
             });
-            addEvent(dom._cmMangeByBTS, CLICK_EVENT, console.log('Modal'));
+            addEvent(dom._cmMangeByBTS, CLICK_EVENT, () => showManageByBTSModal());
         }
         dom._cmMangeByBTS.firstElementChild.innerHTML = consentModalCustomThirdButton;
     }
