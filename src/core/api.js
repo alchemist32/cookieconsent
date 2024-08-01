@@ -380,7 +380,7 @@ export const showManageByBTSModal = () => {
         state._lastFocusedModalElement = getActiveElement();
     }
 
-    focusAfterTransition(globalObj._dom._btsm, 2);
+    focusAfterTransition(globalObj._dom._btsm, 3);
 
     addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
     setAttribute(globalObj._dom._btsm, ARIA_HIDDEN, 'false');
