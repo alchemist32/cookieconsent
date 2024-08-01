@@ -25,6 +25,7 @@ const CLASS_CONSTANTS = {
     _wide: 'wide',
     _pmPrefix: 'pm--',
     _cmPrefix: 'cm--',
+    _btsmPrefix: 'btsm--',
     _box: 'box'
 };
 
@@ -118,9 +119,9 @@ export const guiManager = (applyToModal) => {
             globalObj._dom._btsm,
             ALL_PM_LAYOUTS,
             manageByBTSModalOptions,
-            CLASS_CONSTANTS._cmPrefix,
+            CLASS_CONSTANTS._btsmPrefix,
             CLASS_CONSTANTS._box,
-            'pm'
+            'btsm'
         );
     }
 };
@@ -132,7 +133,7 @@ export const guiManager = (applyToModal) => {
  * @param {import("../core/global").GuiModalOption} userGuiOptions
  * @param {'cm--' | 'pm--'} modalClassPrefix
  * @param {string} defaultLayoutName
- * @param {'cm' | 'pm'} modalClassName
+ * @param {'cm' | 'pm' | 'btsm'} modalClassName
  */
 const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, defaultLayoutName, modalClassName) => {
     /**
@@ -160,7 +161,7 @@ const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, d
     const positionSplit = position && position.split(' ') || [];
     const positionV = positionSplit[0];
 
-    const positionH = modalClassPrefix === CLASS_CONSTANTS._pmPrefix
+    const positionH = (modalClassPrefix === CLASS_CONSTANTS._pmPrefix || modalClassPrefix === CLASS_CONSTANTS._btsmPrefix)
         ? positionSplit[0]
         : positionSplit[1];
 
@@ -203,13 +204,20 @@ const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, d
                 ? removeClass(_cmCloseIconBtn, btnClass)
                 : addClass(_cmCloseIconBtn, btnClass);
         }
-    } else {
+    } else if (modalClassName === 'pm') {
         const { _pmAcceptNecessaryBtn } =  globalObj._dom;
 
         if (_pmAcceptNecessaryBtn) {
             equalWeightButtons
                 ? removeClass(_pmAcceptNecessaryBtn, btnClass)
                 : addClass(_pmAcceptNecessaryBtn, btnClass);
+        }
+    } else {
+        const { _cmMangeByBTSBtn } = globalObj._dom;
+        if (_cmMangeByBTSBtn) {
+            equalWeightButtons
+                ? removeClass(_cmMangeByBTSBtn, btnClass)
+                : addClass(_cmMangeByBTSBtn, btnClass);
         }
     }
 };

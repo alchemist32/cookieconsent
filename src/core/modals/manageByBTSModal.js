@@ -46,7 +46,8 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         return;
     }
 
-    if (!dom.pm) {
+    console.log('btsM: ', dom._btsm);
+    if (!dom._btsm) {
         dom._btsmContainer = createNode(DIV_TAG);
         addClass(dom._btsmContainer, 'pm-wrapper');
 
@@ -57,6 +58,7 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         addEvent(btsmOverlay, CLICK_EVENT, hideManageByBTSModal);
 
         dom._btsm =  createNode(DIV_TAG);
+        console.log('btsM: ', dom._btsm);
 
         addClass(dom._btsm, 'pm');
         setAttribute(dom._btsm, 'role', 'dialog');
@@ -81,7 +83,7 @@ export const createManageByBTSModal = (api, createMainContainer) => {
     }
     guiManager(2);
 
-    if (state._manageByBTSModalExists) {
+    if (!state._manageByBTSModalExists) {
         state._manageByBTSModalExists = true;
         debug('CookieConsent [HTML] created', MANAGE_BY_BTS_MODAL_NAME);
 

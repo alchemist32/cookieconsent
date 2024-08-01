@@ -87,6 +87,7 @@ const MANAGE_BY_BTS_MODAL_NAME = 'btsModal';
  * @property {HTMLElement} _cmFooterLinksGroup
  * @property {HTMLElement} _cmCloseIconBtn
  * @property {HTMLElement} _cmMangeByBTS
+ * @property {HTMLElement} _cmMangeByBTSBtn
  *
  * @property {HTMLElement} _pm
  * @property {HTMLElement} _pmHeader
@@ -1567,6 +1568,7 @@ const CLASS_CONSTANTS = {
     _wide: 'wide',
     _pmPrefix: 'pm--',
     _cmPrefix: 'cm--',
+    _btsmPrefix: 'btsm--',
     _box: 'box'
 };
 
@@ -1660,9 +1662,9 @@ const guiManager = (applyToModal) => {
             globalObj._dom._btsm,
             ALL_PM_LAYOUTS,
             manageByBTSModalOptions,
-            CLASS_CONSTANTS._cmPrefix,
+            CLASS_CONSTANTS._btsmPrefix,
             CLASS_CONSTANTS._box,
-            'pm'
+            'btsm'
         );
     }
 };
@@ -1674,7 +1676,7 @@ const guiManager = (applyToModal) => {
  * @param {import("../core/global").GuiModalOption} userGuiOptions
  * @param {'cm--' | 'pm--'} modalClassPrefix
  * @param {string} defaultLayoutName
- * @param {'cm' | 'pm'} modalClassName
+ * @param {'cm' | 'pm' | 'btsm'} modalClassName
  */
 const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, defaultLayoutName, modalClassName) => {
     /**
@@ -1702,7 +1704,7 @@ const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, d
     const positionSplit = position && position.split(' ') || [];
     const positionV = positionSplit[0];
 
-    const positionH = modalClassPrefix === CLASS_CONSTANTS._pmPrefix
+    const positionH = (modalClassPrefix === CLASS_CONSTANTS._pmPrefix || modalClassPrefix === CLASS_CONSTANTS._btsmPrefix)
         ? positionSplit[0]
         : positionSplit[1];
 
@@ -1745,13 +1747,20 @@ const setLayout = (modal, allowedLayoutsObj, userGuiOptions, modalClassPrefix, d
                 ? removeClass(_cmCloseIconBtn, btnClass)
                 : addClass(_cmCloseIconBtn, btnClass);
         }
-    } else {
+    } else if (modalClassName === 'pm') {
         const { _pmAcceptNecessaryBtn } =  globalObj._dom;
 
         if (_pmAcceptNecessaryBtn) {
             equalWeightButtons
                 ? removeClass(_pmAcceptNecessaryBtn, btnClass)
                 : addClass(_pmAcceptNecessaryBtn, btnClass);
+        }
+    } else {
+        const { _cmMangeByBTSBtn } = globalObj._dom;
+        if (_cmMangeByBTSBtn) {
+            equalWeightButtons
+                ? removeClass(_cmMangeByBTSBtn, btnClass)
+                : addClass(_cmMangeByBTSBtn, btnClass);
         }
     }
 };
@@ -2351,7 +2360,8 @@ const createManageByBTSModal = (api, createMainContainer) => {
         return;
     }
 
-    if (!dom.pm) {
+    console.log('btsM: ', dom._btsm);
+    if (!dom._btsm) {
         dom._btsmContainer = createNode(DIV_TAG);
         addClass(dom._btsmContainer, 'pm-wrapper');
 
@@ -2362,6 +2372,7 @@ const createManageByBTSModal = (api, createMainContainer) => {
         addEvent(btsmOverlay, CLICK_EVENT, hideManageByBTSModal);
 
         dom._btsm =  createNode(DIV_TAG);
+        console.log('btsM: ', dom._btsm);
 
         addClass(dom._btsm, 'pm');
         setAttribute(dom._btsm, 'role', 'dialog');
@@ -2386,7 +2397,7 @@ const createManageByBTSModal = (api, createMainContainer) => {
     }
     guiManager(2);
 
-    if (state._manageByBTSModalExists) {
+    if (!state._manageByBTSModalExists) {
         state._manageByBTSModalExists = true;
         debug('CookieConsent [HTML] created', MANAGE_BY_BTS_MODAL_NAME);
 
@@ -2603,12 +2614,12 @@ const createConsentModal = (api, createMainContainer) => {
             setAttribute(dom._cmMangeByBTS, DATA_ROLE, 'optional');
             
             addEvent(dom._cmMangeByBTS, 'mouseenter', () => {
-                console.log('mouseEnter');
+                console.log('mouseEnter: ', state._manageByBTSModalExists);
                 if (!state._manageByBTSModalExists) {
                     createManageByBTSModal(api, createMainContainer);
                 }
             });
-            addEvent(dom._cmMangeByBTS, CLICK_EVENT, showManageByBTSModal);
+            addEvent(dom._cmMangeByBTS, CLICK_EVENT, console.log('Modal'));
         }
         dom._cmMangeByBTS.firstElementChild.innerHTML = consentModalCustomThirdButton;
     }
