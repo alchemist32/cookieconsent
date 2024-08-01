@@ -113,6 +113,7 @@
      * @property {HTMLElement} _btsmContent
      * @property {HTMLElement} _btsmContainer
      * @property {HTMLElement} _btsmOverlay
+     * @property {HTMLElement} _btsmCloseBtn
      *
      * @property {Object.<string, HTMLInputElement>} _categoryCheckboxInputs
      * @property {Object.<string, ServiceToggle>} _serviceCheckboxInputs
@@ -2410,7 +2411,17 @@
 
             dom._btsmDivTabindex = createNode(DIV_TAG);
             setAttribute(dom._btsmDivTabindex, 'tabIndex', -1);
+
+            dom._btsmCloseBtn = createNode(BUTTON_TAG);
+            addClassPm(dom._btsmCloseBtn, 'close-btn');
+            setAttribute(dom._btsmCloseBtn, 'aria-label', 'Close modal');
+            addEvent(dom._btsmCloseBtn, CLICK_EVENT, hideManageByBTSModal);
+
             appendChild(dom._btsm, dom._btsmDivTabindex);
+            appendChild(dom._btsm, dom._btsmCloseBtn);
+            appendChild(dom._btsm, dom._btsmContent);
+
+            appendChild(dom._btsmContainer, dom._btsm);
         }
         guiManager(2);
 
