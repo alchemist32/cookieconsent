@@ -228,7 +228,8 @@ export const createConsentModal = (api, createMainContainer) => {
         if (!dom._cmMangeByBTS) {
             dom._cmMangeByBTS = createNode(BUTTON_TAG);
             appendChild(dom._cmMangeByBTS, createFocusSpan());
-            addClassCm(dom._cmMangeByBTS, 'btn');
+            addClass(dom._cmMangeByBTS, 'btn');
+            addClass(dom._cmMangeByBTS, 'bts-btn');
             setAttribute(dom._cmMangeByBTS, DATA_ROLE, 'optional');
             
             addEvent(dom._cmMangeByBTS, 'mouseenter', () => {
