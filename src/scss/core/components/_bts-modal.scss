@@ -65,6 +65,7 @@ $service-toggle-knob-icon-width: 1.7px;
     .btsm-content {
         flex: 1;
         overflow-y: overlay;
+        padding: $padding-y $padding-x;
     }
 
     .btsm-overlay {

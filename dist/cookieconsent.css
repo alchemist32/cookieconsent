@@ -1524,3 +1524,84 @@ html.disable--interaction.show--consent, html.disable--interaction.show--consent
     transform: translateY(0) !important;
   }
 }
+#cc-main .btsm-wrapper {
+  position: relative;
+  z-index: 2;
+}
+#cc-main .btsm {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  width: unset;
+  background: var(--cc-bg);
+  flex-direction: column;
+  border-radius: var(--cc-modal-border-radius);
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 0.625em 1.875em rgba(0, 0, 2, 0.3);
+}
+#cc-main .btsm__close-btn {
+  width: calc(42px - 2px);
+  height: calc(42px - 2px);
+  position: relative;
+  background: var(--cc-btn-secondary-bg);
+  border-radius: var(--cc-btn-border-radius);
+  border: 1px solid var(--cc-btn-secondary-border-color);
+  transition: all 0.15s ease;
+}
+#cc-main .btsm__close-btn span {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+#cc-main .btsm__close-btn svg {
+  stroke: var(--cc-btn-secondary-color);
+  transform: scale(0.5);
+  transition: stroke 0.15s ease;
+}
+#cc-main .btsm__close-btn:hover {
+  border-color: var(--cc-btn-secondary-hover-border-color);
+  background: var(--cc-btn-secondary-hover-bg);
+}
+#cc-main .btsm__close-btn:hover svg {
+  stroke: var(--cc-btn-secondary-hover-color);
+}
+#cc-main .btsm-content {
+  flex: 1;
+  overflow-y: overlay;
+  padding: 1em 1.4em;
+}
+#cc-main .btsm-overlay {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  background: var(--cc-overlay-bg);
+  opacity: 0;
+  visibility: hidden;
+}
+#cc-main .cc--anim .btsm,
+#cc-main .cc--anim .btsm-overlay {
+  transition: opacity var(--cc-modal-transition-duration) ease, visibility var(--cc-modal-transition-duration) ease, transform var(--cc-modal-transition-duration) ease;
+}
+
+#cc-main .btsm--box {
+  transform: translateY(calc(-50% + 1.6em));
+}
+
+.show--bts-modal #cc-main .cc--anim .btsm {
+  opacity: 1;
+  visibility: visible !important;
+}
+.show--bts-modal #cc-main .cc--anim .btsm--box {
+  transform: translateY(-50%);
+}
+.show--bts-modal #cc-main .cc--anim .btsm-overlay {
+  opacity: 1;
+  visibility: visible;
+}
