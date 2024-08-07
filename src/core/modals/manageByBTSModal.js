@@ -102,7 +102,7 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         appendChild(dom._ccMain, dom._btsmContainer);
         handleFocusTrap(dom._btsm);
 
-        setTimeout(() => addClass(dom._pmContainer, 'cc--anim'), 100);
+        setTimeout(() => addClass(dom._btsmContainer, 'cc--anim'), 100);
     }
     getModalFocusableData(2);
 };
