@@ -30,6 +30,22 @@ $service-toggle-knob-icon-width: 1.7px;
         box-shadow: $modal-box-shadow;
     }
 
+    .btsm__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid;
+        padding: 1em 1.4em;
+    }
+
+    .btsm__title {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        font-weight: 600;
+        margin-right: 2em;
+    }
+
     .btsm__close-btn {
         width: calc(#{$btn-height} - 2px);
         height: calc(#{$btn-height} - 2px);
@@ -61,11 +77,31 @@ $service-toggle-knob-icon-width: 1.7px;
         }
     }
 
-    .btsm-content {
+    .btsm__body {
         flex: 1;
         overflow-y: overlay;
         padding: $padding-y $padding-x;
+        padding: 1em 1.4em;
+        stroke-width: thin;
+        overscroll-behavior: auto contain;
     }
+
+    .btsm__qr-container {
+        width: auto;
+        max-width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btsm__fake-qr {
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        border: 2px solid black;
+        margin: 8px;
+    }
+
 
     .btsm-overlay {
         content: '';
