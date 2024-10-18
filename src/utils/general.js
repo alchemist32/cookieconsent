@@ -828,12 +828,12 @@ export const handleFocusTrap = (modal) => {
         //         ? dom._ccMain
         //         : dom._htmlDom;
         if (state._userConfig.disablePageInteraction) {
-            dom._htmlDom;
+            scope = dom._htmlDom;
         }
         if (modal === dom._cm || modal === dom._pm || modal === dom._btsm) {
-            dom._ccMain;
+            scope = dom._ccMain;
         } else {
-            dom._htmlDom;
+            scope = dom._htmlDom;
         }
 
         const getFocusableElements = () => {
