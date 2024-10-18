@@ -81,7 +81,8 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         setAttribute(dom._btsmDivTabindex, 'tabIndex', -1);
 
         dom._btsmCloseBtn = createNode(BUTTON_TAG);
-        addClassPm(dom._btsmCloseBtn, 'close-btn');
+        dom._btsmCloseBtn.textContent = 'X';
+        addClass(dom._btsmCloseBtn, 'btsm__close-btn');
         setAttribute(dom._btsmCloseBtn, 'aria-label', 'Close modal');
         addEvent(dom._btsmCloseBtn, CLICK_EVENT, hideManageByBTSModal);
 
@@ -104,5 +105,5 @@ export const createManageByBTSModal = (api, createMainContainer) => {
 
         setTimeout(() => addClass(dom._btsmContainer, 'cc--anim'), 100);
     }
-    getModalFocusableData(2);
+    getModalFocusableData(3);
 };

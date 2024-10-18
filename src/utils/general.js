@@ -819,21 +819,52 @@ export const handleFocusTrap = (modal) => {
      * @param {HTMLElement[]} focusableElements
      */
     const trapFocus = (modal) => {
+        let scope;
         const isConsentModal = modal === dom._cm;
 
-        const scope = state._userConfig.disablePageInteraction
-            ? dom._htmlDom
-            : isConsentModal
-                ? dom._ccMain
-                : dom._htmlDom;
+        // const scope = state._userConfig.disablePageInteraction
+        //     ? dom._htmlDom
+        //     : isConsentModal
+        //         ? dom._ccMain
+        //         : dom._htmlDom;
+        if (state._userConfig.disablePageInteraction) {
+            dom._htmlDom;
+        }
+        if (modal === dom._cm || modal === dom._pm || modal === dom._btsm) {
+            dom._ccMain;
+        } else {
+            dom._htmlDom;
+        }
 
-        const getFocusableElements = () => isConsentModal
-            ? state._cmFocusableElements
-            : state._pmFocusableElements;
+        const getFocusableElements = () => {
+            if (modal === dom._cm) {
+                return state._cmFocusableElements;
+            }
+            if (modal === dom._pm) {
+                return state._pmFocusableElements;
+            }
+            if (modal === dom._btsm) {
+                return state._btsmFocusableElements;
+            }
+        };
 
-        const isModalVisible = () => isConsentModal
-            ? state._consentModalVisible && !state._preferencesModalVisible
-            : state._preferencesModalVisible;
+        // const isModalVisible = () => isConsentModal
+        //     ? state._consentModalVisible && !state._preferencesModalVisible
+        //     : state._preferencesModalVisible;
+
+        const isModalVisible = () => {
+            if (isConsentModal) {
+                return state._consentModalVisible
+                    && !state._preferencesModalVisible
+                    && !state._manageByBTSModalVisible;
+            }
+
+            if (modal === dom._pm) {
+                return state._preferencesModalVisible;
+            }
+
+            return state._manageByBTSModalVisible;
+        };
 
         addEvent(scope, 'keydown', (e) => {
             if (e.key !== 'Tab' || !isModalVisible())
@@ -878,7 +909,7 @@ export const getFocusableElements = (root) => querySelectorAll(root, focusableTy
 /**
  * Save reference to first and last focusable elements inside each modal
  * to prevent losing focus while navigating with TAB
- * @param {1 | 2} [modalId]
+ * @param {1 | 2 | 3} [modalId]
  */
 export const getModalFocusableData = (modalId) => {
     const { _state, _dom } = globalObj;
@@ -903,6 +934,10 @@ export const getModalFocusableData = (modalId) => {
 
     if (modalId === 2 && _state._preferencesModalExists)
         saveAllFocusableElements(_dom._pm, _state._pmFocusableElements);
+
+    if (modalId === 3 && _state._manageByBTSModalExists) {
+        saveAllFocusableElements(_dom._btsm, _state._btsmFocusableElements);
+    }
 };
 
 /**

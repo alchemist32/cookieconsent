@@ -20,7 +20,6 @@ $service-toggle-knob-icon-width: 1.7px;
         position: fixed;
         display: flex;
         width: 100%;
-        width: unset;
         background: var(--cc-bg);
         flex-direction: column;
         border-radius: var(--cc-modal-border-radius);
@@ -93,6 +92,13 @@ $service-toggle-knob-icon-width: 1.7px;
 
 #cc-main {
     .btsm--box {
+        left: 1rem;
+        right: 1rem;
+        margin: 0 auto;
+        top: 50%;
+        max-width: 43em;
+        max-height: 37.5em;
+        height: calc(100% - 2em);
         transform: translateY(calc(-50% + $translate-y));
     }
 }

@@ -411,8 +411,8 @@ export const hideManageByBTSModal = () => {
     */
     focus(globalObj._dom._pmFocusSpan, true);
 
-    removeClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
-    setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'true');
+    removeClass(globalObj._dom._htmlDom, TOGGLE_BTS_MODAL_CLASS);
+    setAttribute(globalObj._dom._btsm, ARIA_HIDDEN, 'true');
 
     /**
      * If consent modal is visible, focus him (instead of page document)

@@ -86,6 +86,7 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * // Used to properly restore focus when modal is closed
  * @property {HTMLSpanElement} _focusSpan
  * @property {HTMLSpanElement} _pmFocusSpan
+ * @property {HTMLSpanElement} _btsmFocusSpan
  */
 
 /**
@@ -278,6 +279,7 @@ export class GlobalState {
 
             /** @type {HTMLElement[]} **/ _cmFocusableElements : [],
             /** @type {HTMLElement[]} **/ _pmFocusableElements : [],
+            /** @type {HTMLElement[]} **/ _btsmFocusableElements : [],
 
             /**
             * Keep track of enabled/disabled categories
