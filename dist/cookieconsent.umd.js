@@ -121,6 +121,7 @@
      * // Used to properly restore focus when modal is closed
      * @property {HTMLSpanElement} _focusSpan
      * @property {HTMLSpanElement} _pmFocusSpan
+     * @property {HTMLSpanElement} _btsmFocusSpan
      */
 
     /**
@@ -313,6 +314,7 @@
 
                 /** @type {HTMLElement[]} **/ _cmFocusableElements : [],
                 /** @type {HTMLElement[]} **/ _pmFocusableElements : [],
+                /** @type {HTMLElement[]} **/ _btsmFocusableElements : [],
 
                 /**
                 * Keep track of enabled/disabled categories
@@ -1204,21 +1206,52 @@
          * @param {HTMLElement[]} focusableElements
          */
         const trapFocus = (modal) => {
+            let scope;
             const isConsentModal = modal === dom._cm;
 
-            const scope = state._userConfig.disablePageInteraction
-                ? dom._htmlDom
-                : isConsentModal
-                    ? dom._ccMain
-                    : dom._htmlDom;
+            // const scope = state._userConfig.disablePageInteraction
+            //     ? dom._htmlDom
+            //     : isConsentModal
+            //         ? dom._ccMain
+            //         : dom._htmlDom;
+            if (state._userConfig.disablePageInteraction) {
+                dom._htmlDom;
+            }
+            if (modal === dom._cm || modal === dom._pm || modal === dom._btsm) {
+                dom._ccMain;
+            } else {
+                dom._htmlDom;
+            }
 
-            const getFocusableElements = () => isConsentModal
-                ? state._cmFocusableElements
-                : state._pmFocusableElements;
+            const getFocusableElements = () => {
+                if (modal === dom._cm) {
+                    return state._cmFocusableElements;
+                }
+                if (modal === dom._pm) {
+                    return state._pmFocusableElements;
+                }
+                if (modal === dom._btsm) {
+                    return state._btsmFocusableElements;
+                }
+            };
 
-            const isModalVisible = () => isConsentModal
-                ? state._consentModalVisible && !state._preferencesModalVisible
-                : state._preferencesModalVisible;
+            // const isModalVisible = () => isConsentModal
+            //     ? state._consentModalVisible && !state._preferencesModalVisible
+            //     : state._preferencesModalVisible;
+
+            const isModalVisible = () => {
+                if (isConsentModal) {
+                    return state._consentModalVisible
+                        && !state._preferencesModalVisible
+                        && !state._manageByBTSModalVisible;
+                }
+
+                if (modal === dom._pm) {
+                    return state._preferencesModalVisible;
+                }
+
+                return state._manageByBTSModalVisible;
+            };
 
             addEvent(scope, 'keydown', (e) => {
                 if (e.key !== 'Tab' || !isModalVisible())
@@ -1263,7 +1296,7 @@
     /**
      * Save reference to first and last focusable elements inside each modal
      * to prevent losing focus while navigating with TAB
-     * @param {1 | 2} [modalId]
+     * @param {1 | 2 | 3} [modalId]
      */
     const getModalFocusableData = (modalId) => {
         const { _state, _dom } = globalObj;
@@ -1288,6 +1321,10 @@
 
         if (modalId === 2 && _state._preferencesModalExists)
             saveAllFocusableElements(_dom._pm, _state._pmFocusableElements);
+
+        if (modalId === 3 && _state._manageByBTSModalExists) {
+            saveAllFocusableElements(_dom._btsm, _state._btsmFocusableElements);
+        }
     };
 
     /**
@@ -2413,7 +2450,8 @@
             setAttribute(dom._btsmDivTabindex, 'tabIndex', -1);
 
             dom._btsmCloseBtn = createNode(BUTTON_TAG);
-            addClassPm(dom._btsmCloseBtn, 'close-btn');
+            dom._btsmCloseBtn.textContent = 'X';
+            addClass(dom._btsmCloseBtn, 'btsm__close-btn');
             setAttribute(dom._btsmCloseBtn, 'aria-label', 'Close modal');
             addEvent(dom._btsmCloseBtn, CLICK_EVENT, hideManageByBTSModal);
 
@@ -2436,7 +2474,7 @@
 
             setTimeout(() => addClass(dom._btsmContainer, 'cc--anim'), 100);
         }
-        getModalFocusableData(2);
+        getModalFocusableData(3);
     };
 
     /**
@@ -3757,8 +3795,8 @@
         */
         focus(globalObj._dom._pmFocusSpan, true);
 
-        removeClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
-        setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'true');
+        removeClass(globalObj._dom._htmlDom, TOGGLE_BTS_MODAL_CLASS);
+        setAttribute(globalObj._dom._btsm, ARIA_HIDDEN, 'true');
 
         /**
          * If consent modal is visible, focus him (instead of page document)
