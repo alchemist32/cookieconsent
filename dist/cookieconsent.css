@@ -1541,6 +1541,20 @@ html.disable--interaction.show--consent, html.disable--interaction.show--consent
   z-index: 1;
   box-shadow: 0 0.625em 1.875em rgba(0, 0, 2, 0.3);
 }
+#cc-main .btsm__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid;
+  padding: 1em 1.4em;
+}
+#cc-main .btsm__title {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  font-weight: 600;
+  margin-right: 2em;
+}
 #cc-main .btsm__close-btn {
   width: calc(42px - 2px);
   height: calc(42px - 2px);
@@ -1567,10 +1581,27 @@ html.disable--interaction.show--consent, html.disable--interaction.show--consent
 #cc-main .btsm__close-btn:hover svg {
   stroke: var(--cc-btn-secondary-hover-color);
 }
-#cc-main .btsm-content {
+#cc-main .btsm__body {
   flex: 1;
   overflow-y: overlay;
   padding: 1em 1.4em;
+  padding: 1em 1.4em;
+  stroke-width: thin;
+  overscroll-behavior: auto contain;
+}
+#cc-main .btsm__qr-container {
+  width: auto;
+  max-width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#cc-main .btsm__fake-qr {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border: 2px solid black;
+  margin: 8px;
 }
 #cc-main .btsm-overlay {
   content: "";

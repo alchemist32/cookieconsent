@@ -2442,21 +2442,56 @@
             }, true);
 
             dom._btsmContent = createNode(DIV_TAG);
-            const pTag = createNode('p');
-            pTag.textContent = 'This is managed by BTS';
-            appendChild(dom._btsmContent, pTag);
+            addClass(dom._btsmContent, 'btsm__body');
+
+            const qrContainer = createNode(DIV_TAG);
+            addClass(qrContainer, 'btsm__qr-container');
+
+            const qrInstructions = createNode('h3');
+            qrInstructions.textContent = 'Scan the QR code to get the data';
+
+            const qrCode = createNode(DIV_TAG);
+            addClass(qrCode, 'btsm__fake-qr');
+
+            appendChild(qrContainer, qrInstructions);
+            appendChild(qrContainer, qrCode);
+            appendChild(dom._btsmContent, qrContainer);
 
             dom._btsmDivTabindex = createNode(DIV_TAG);
             setAttribute(dom._btsmDivTabindex, 'tabIndex', -1);
 
+            const btsmHeader = createNode(DIV_TAG);
+            addClass(btsmHeader, 'btsm__header');
+
+            const title = createNode('h2');
+            title.textContent = 'Manage with BTS';
+            addClass(title, 'btsm__title');
+
             dom._btsmCloseBtn = createNode(BUTTON_TAG);
-            dom._btsmCloseBtn.textContent = 'X';
+            const crossIcon = createNode('span');
+            crossIcon.innerHTML = getSvgIcon();
+
             addClass(dom._btsmCloseBtn, 'btsm__close-btn');
             setAttribute(dom._btsmCloseBtn, 'aria-label', 'Close modal');
             addEvent(dom._btsmCloseBtn, CLICK_EVENT, hideManageByBTSModal);
 
+            appendChild(dom._btsmCloseBtn, crossIcon);
+
+            appendChild(btsmHeader, title);
+            appendChild(btsmHeader, dom._btsmCloseBtn);
+
+            const btsmFooter = createNode('footer');
+            addClass(btsmFooter, 'btsm__footer');
+
+            const closeBtn = createNode(BUTTON_TAG);
+            closeBtn.textContent = 'Close';
+            addClass(closeBtn, 'pm__btn pm__btn--secondary');
+            addEvent(closeBtn, CLICK_EVENT, hideManageByBTSModal);
+
+            appendChild(btsmFooter, closeBtn);
+
             appendChild(dom._btsm, dom._btsmDivTabindex);
-            appendChild(dom._btsm, dom._btsmCloseBtn);
+            appendChild(dom._btsm, btsmHeader);
             appendChild(dom._btsm, dom._btsmContent);
 
             appendChild(dom._btsmContainer, dom._btsm);
