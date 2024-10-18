@@ -2479,7 +2479,8 @@ const createManageByBTSModal = (api, createMainContainer) => {
 
         const closeBtn = createNode(BUTTON_TAG);
         closeBtn.textContent = 'Close';
-        addClass(closeBtn, 'pm__btn pm__btn--secondary');
+        addClass(closeBtn, 'pm__btn');
+        addClass(closeBtn, 'pm__btn--secondary');
         addEvent(closeBtn, CLICK_EVENT, hideManageByBTSModal);
 
         appendChild(btsmFooter, closeBtn);
