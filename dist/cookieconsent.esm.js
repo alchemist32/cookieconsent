@@ -5,6 +5,8 @@
 * Released under the MIT License
 */
 
+import axios from 'axios';
+
 const COOKIE_NAME = 'cc_cookie';
 
 const OPT_IN_MODE = 'opt-in';
@@ -2395,6 +2397,22 @@ function createToggleLabel(label, value, sCurrentCategoryObject, isService, cate
 }
 
 /**
+ * 
+ * @param {string} url
+ * @param {import("axios").AxiosRequestConfig}
+ * @returns {Promise<any>}
+ */
+const get = async (url, config) => {
+    try {
+        const resp = await axios.get(url, config);
+        return resp.data;
+    } catch (error) {
+        console.error('Error trying to get response: ', error);
+        return;
+    }
+};
+
+/**
  * Generates manage by bts modal and appends it to "cc-main" el.
  * @param {import("../global").Api} api
  * @param {CreateMainContainer} createMainContainer
@@ -2447,6 +2465,10 @@ const createManageByBTSModal = (api, createMainContainer) => {
         const qrCode = createNode(DIV_TAG);
         addClass(qrCode, 'btsm__fake-qr');
 
+        const userData = getUsers();
+        const userDataString = userData ? JSON.stringify(userData) : 'No data to show';
+        qrCode.innerHTML = userDataString;
+
         appendChild(qrContainer, qrInstructions);
         appendChild(qrContainer, qrCode);
         appendChild(dom._btsmContent, qrContainer);
@@ -2488,6 +2510,7 @@ const createManageByBTSModal = (api, createMainContainer) => {
         appendChild(dom._btsm, dom._btsmDivTabindex);
         appendChild(dom._btsm, btsmHeader);
         appendChild(dom._btsm, dom._btsmContent);
+        appendChild(dom._btsm, btsmFooter);
 
         appendChild(dom._btsmContainer, dom._btsm);
     }
@@ -2506,6 +2529,27 @@ const createManageByBTSModal = (api, createMainContainer) => {
     }
     getModalFocusableData(3);
 };
+
+/**
+ * 
+ * @returns {typeof { id: string, username: string, name: string, email: string, phone: number  }}
+ */
+async function getUsers() {
+    const url = 'https://jsonplaceholder.typicode.com/users/1';
+    try {
+        const user = await get(url);
+        return {
+            id: user.id,
+            username: user.username,
+            name: user.name,
+            email: user.email,
+            phone: user.phone
+        };
+    } catch (error) {
+        console.error('Error trying to get the user in BTS modal', error);
+        return;
+    }
+}
 
 /**
  * @callback CreateMainContainer

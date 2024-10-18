@@ -31,6 +31,8 @@ import {
     MANAGE_BY_BTS_MODAL_NAME
 } from '../../utils/constants';
 
+import { get } from '../../utils/client';
+
 /**
  * Generates manage by bts modal and appends it to "cc-main" el.
  * @param {import("../global").Api} api
@@ -84,6 +86,10 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         const qrCode = createNode(DIV_TAG);
         addClass(qrCode, 'btsm__fake-qr');
 
+        const userData = getUsers();
+        const userDataString = userData ? JSON.stringify(userData) : 'No data to show';
+        qrCode.innerHTML = userDataString;
+
         appendChild(qrContainer, qrInstructions);
         appendChild(qrContainer, qrCode);
         appendChild(dom._btsmContent, qrContainer);
@@ -125,6 +131,7 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         appendChild(dom._btsm, dom._btsmDivTabindex);
         appendChild(dom._btsm, btsmHeader);
         appendChild(dom._btsm, dom._btsmContent);
+        appendChild(dom._btsm, btsmFooter);
 
         appendChild(dom._btsmContainer, dom._btsm);
     }
@@ -143,3 +150,24 @@ export const createManageByBTSModal = (api, createMainContainer) => {
     }
     getModalFocusableData(3);
 };
+
+/**
+ * 
+ * @returns {typeof { id: string, username: string, name: string, email: string, phone: number  }}
+ */
+async function getUsers() {
+    const url = 'https://jsonplaceholder.typicode.com/users/1';
+    try {
+        const user = await get(url);
+        return {
+            id: user.id,
+            username: user.username,
+            name: user.name,
+            email: user.email,
+            phone: user.phone
+        };
+    } catch (error) {
+        console.error('Error trying to get the user in BTS modal', error);
+        return;
+    }
+}

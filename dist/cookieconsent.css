@@ -1588,6 +1588,9 @@ html.disable--interaction.show--consent, html.disable--interaction.show--consent
   padding: 1em 1.4em;
   stroke-width: thin;
   overscroll-behavior: auto contain;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 #cc-main .btsm__qr-container {
   width: auto;
@@ -1595,10 +1598,11 @@ html.disable--interaction.show--consent, html.disable--interaction.show--consent
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 #cc-main .btsm__fake-qr {
-  width: 50px;
-  height: 50px;
+  width: 280px;
+  height: 280px;
   background-color: white;
   border: 2px solid black;
   margin: 8px;
