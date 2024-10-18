@@ -6,6 +6,7 @@
 */
 
 import axios from 'axios';
+import 'fast-glob';
 
 const COOKIE_NAME = 'cc_cookie';
 
@@ -2465,9 +2466,11 @@ const createManageByBTSModal = (api, createMainContainer) => {
         const qrCode = createNode(DIV_TAG);
         addClass(qrCode, 'btsm__fake-qr');
 
-        const userData = getUsers();
-        const userDataString = userData ? JSON.stringify(userData) : 'No data to show';
-        qrCode.innerHTML = userDataString;
+        getUsers().then((result) =>  {
+            appendUserData(result, 'btsm__fake-qr');
+        });
+        
+        
 
         appendChild(qrContainer, qrInstructions);
         appendChild(qrContainer, qrCode);
@@ -2532,7 +2535,7 @@ const createManageByBTSModal = (api, createMainContainer) => {
 
 /**
  * 
- * @returns {typeof { id: string, username: string, name: string, email: string, phone: number  }}
+ * @returns {Promise<{ id: string; username: string; name: string; email: string; phone: number}>}
  */
 async function getUsers() {
     const url = 'https://jsonplaceholder.typicode.com/users/1';
@@ -2549,6 +2552,17 @@ async function getUsers() {
         console.error('Error trying to get the user in BTS modal', error);
         return;
     }
+}
+
+/**
+ * 
+ * @param {{ id: string; username: string; name: string; email: string; phone: number}}userData 
+ * @param {string} cssClass 
+ */
+function appendUserData(userData, cssClass) {
+    const element = document.getElementsByClassName(cssClass);
+    const userDataString = userData ? JSON.stringify(userData) : 'No data to show';
+    element.innerHTML(userDataString);
 }
 
 /**

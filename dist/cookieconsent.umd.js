@@ -6,8 +6,8 @@
 */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('axios')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'axios'], factory) :
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('axios'), require('fast-glob')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'axios', 'fast-glob'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CookieConsent = {}, global.axios));
 })(this, (function (exports, axios) { 'use strict';
 
@@ -2469,9 +2469,11 @@
             const qrCode = createNode(DIV_TAG);
             addClass(qrCode, 'btsm__fake-qr');
 
-            const userData = getUsers();
-            const userDataString = userData ? JSON.stringify(userData) : 'No data to show';
-            qrCode.innerHTML = userDataString;
+            getUsers().then((result) =>  {
+                appendUserData(result, 'btsm__fake-qr');
+            });
+            
+            
 
             appendChild(qrContainer, qrInstructions);
             appendChild(qrContainer, qrCode);
@@ -2536,7 +2538,7 @@
 
     /**
      * 
-     * @returns {typeof { id: string, username: string, name: string, email: string, phone: number  }}
+     * @returns {Promise<{ id: string; username: string; name: string; email: string; phone: number}>}
      */
     async function getUsers() {
         const url = 'https://jsonplaceholder.typicode.com/users/1';
@@ -2553,6 +2555,17 @@
             console.error('Error trying to get the user in BTS modal', error);
             return;
         }
+    }
+
+    /**
+     * 
+     * @param {{ id: string; username: string; name: string; email: string; phone: number}}userData 
+     * @param {string} cssClass 
+     */
+    function appendUserData(userData, cssClass) {
+        const element = document.getElementsByClassName(cssClass);
+        const userDataString = userData ? JSON.stringify(userData) : 'No data to show';
+        element.innerHTML(userDataString);
     }
 
     /**
