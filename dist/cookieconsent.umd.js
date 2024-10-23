@@ -2567,7 +2567,8 @@
         const userDataString = userData ? JSON.stringify(userData) : 'No data to show';
         const htmlArr = [...collection];
         const element = htmlArr[0];
-        element.innerHTML(userDataString);
+
+        element.innerHTML = userDataString;
     }
 
     /**
