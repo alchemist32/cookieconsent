@@ -2563,8 +2563,10 @@
      * @param {string} cssClass 
      */
     function appendUserData(userData, cssClass) {
-        const element = document.getElementsByClassName(cssClass);
+        const collection = document.getElementsByClassName(cssClass);
         const userDataString = userData ? JSON.stringify(userData) : 'No data to show';
+        const htmlArr = [...collection];
+        const element = htmlArr[0];
         element.innerHTML(userDataString);
     }
 
