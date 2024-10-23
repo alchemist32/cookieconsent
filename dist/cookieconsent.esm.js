@@ -6,7 +6,6 @@
 */
 
 import axios from 'axios';
-import 'fast-glob';
 
 const COOKIE_NAME = 'cc_cookie';
 

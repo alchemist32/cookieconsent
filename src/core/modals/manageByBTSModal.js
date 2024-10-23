@@ -32,7 +32,6 @@ import {
 } from '../../utils/constants';
 
 import { get } from '../../utils/client';
-import { async } from 'fast-glob';
 
 /**
  * Generates manage by bts modal and appends it to "cc-main" el.

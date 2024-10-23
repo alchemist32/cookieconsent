@@ -6,8 +6,8 @@
 */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('axios'), require('fast-glob')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'axios', 'fast-glob'], factory) :
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('axios')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'axios'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CookieConsent = {}, global.axios));
 })(this, (function (exports, axios) { 'use strict';
 
