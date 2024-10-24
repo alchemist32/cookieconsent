@@ -75,7 +75,7 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         setAttribute(dom._btsmQr, 'id', 'qrCodeContainer');
 
         getUsers().then((result) =>  {
-            appendUserData(result, 'btsm__fake-qr');
+            appendUserData(result, 'qrCodeContainer');
         });
         
         
