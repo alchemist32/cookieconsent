@@ -11,9 +11,6 @@ importers:
       axios:
         specifier: ^1.7.7
         version: 1.7.7
-      qrcodejs:
-        specifier: ^1.0.0
-        version: 1.0.0
     devDependencies:
       '@babel/core':
         specifier: ^7.24.3
@@ -2933,9 +2930,6 @@ packages:
 
   pure-rand@6.1.0:
     resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
-
-  qrcodejs@1.0.0:
-    resolution: {integrity: sha512-67rj3mMBhSBepaD57qENnltO+r8rSYlqM7HGThks/BiyDAkc86sLvkKqjkqPS5v13f7tvnt6dbEf3qt7zq+BCg==}
 
   querystringify@2.2.0:
     resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
@@ -6749,8 +6743,6 @@ snapshots:
   punycode@2.3.1: {}
 
   pure-rand@6.1.0: {}
-
-  qrcodejs@1.0.0: {}
 
   querystringify@2.2.0: {}
 

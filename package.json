@@ -62,8 +62,5 @@
     },
     "peerDependencies": {
         "axios": "^1.7.7"
-    },
-    "dependencies": {
-        "qrcodejs": "^1.0.0"
     }
 }
