@@ -1,7 +1,4 @@
-import QRCode from 'qrcodejs';
-
-
-
+import * as qrCode from 'qrcodejs';
 
 /**
  * generate
@@ -11,7 +8,7 @@ import QRCode from 'qrcodejs';
  * @returns {QRCode} the qrCode object
  */
 export function generate(elementId, text) {
-    const qr = new QRCode(elementId, {
+    const qr = new qrCode(elementId, {
         text,
         width: 280,
         height: 280,

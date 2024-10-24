@@ -8,8 +8,27 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('axios'), require('qrcodejs')) :
     typeof define === 'function' && define.amd ? define(['exports', 'axios', 'qrcodejs'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CookieConsent = {}, global.axios, global.QRCode));
-})(this, (function (exports, axios, QRCode) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CookieConsent = {}, global.axios, global.qrCode));
+})(this, (function (exports, axios, qrCode) { 'use strict';
+
+    function _interopNamespaceDefault(e) {
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () { return e[k]; }
+                    });
+                }
+            });
+        }
+        n.default = e;
+        return Object.freeze(n);
+    }
+
+    var qrCode__namespace = /*#__PURE__*/_interopNamespaceDefault(qrCode);
 
     const COOKIE_NAME = 'cc_cookie';
 
@@ -2426,7 +2445,7 @@
      * @returns {QRCode} the qrCode object
      */
     function generate(elementId, text) {
-        const qr = new QRCode(elementId, {
+        const qr = new qrCode__namespace(elementId, {
             text,
             width: 280,
             height: 280,
