@@ -8,8 +8,8 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('axios'), require('qrcodejs')) :
     typeof define === 'function' && define.amd ? define(['exports', 'axios', 'qrcodejs'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CookieConsent = {}, global.axios, global.qrcode));
-})(this, (function (exports, axios, qrcode) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CookieConsent = {}, global.axios, global.QRCode));
+})(this, (function (exports, axios, QRCode) { 'use strict';
 
     const COOKIE_NAME = 'cc_cookie';
 
@@ -2423,10 +2423,10 @@
      * creates a new QR code
      * @param {string} elementId 
      * @param {string} text
-     * @returns {qrcode} the qrCode object
+     * @returns {QRCode} the qrCode object
      */
     function generate(elementId, text) {
-        return new qrcode(elementId, {
+        return new QRCode(elementId, {
             text,
             width: 280,
             height: 280,

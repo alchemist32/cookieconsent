@@ -6,7 +6,7 @@
 */
 
 import axios from 'axios';
-import qrcode from 'qrcodejs';
+import QRCode from 'qrcodejs';
 
 const COOKIE_NAME = 'cc_cookie';
 
@@ -2420,10 +2420,10 @@ const get = async (url, config) => {
  * creates a new QR code
  * @param {string} elementId 
  * @param {string} text
- * @returns {qrcode} the qrCode object
+ * @returns {QRCode} the qrCode object
  */
 function generate(elementId, text) {
-    return new qrcode(elementId, {
+    return new QRCode(elementId, {
         text,
         width: 280,
         height: 280,
