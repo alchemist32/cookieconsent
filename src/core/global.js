@@ -79,6 +79,8 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * @property {HTMLElement} _btsmContainer
  * @property {HTMLElement} _btsmOverlay
  * @property {HTMLElement} _btsmCloseBtn
+ * @property {HTMLElement} _btsmQrContainer
+ * @property {HTMLElement} _btsmQr
  *
  * @property {Object.<string, HTMLInputElement>} _categoryCheckboxInputs
  * @property {Object.<string, ServiceToggle>} _serviceCheckboxInputs

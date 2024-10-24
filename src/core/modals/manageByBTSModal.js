@@ -2,17 +2,10 @@ import { globalObj } from '../global';
 import {
     createNode,
     addClass,
-    addClassPm,
     setAttribute,
-    removeClass,
     addEvent,
     appendChild,
-    getKeys,
-    hasClass,
-    elContains,
     getModalFocusableData,
-    isString,
-    isObject,
     fireEvent,
     getSvgIcon,
     handleFocusTrap,
@@ -21,17 +14,15 @@ import {
 
 import { guiManager } from '../../utils/gui-manager';
 import {
-    SCRIPT_TAG_SELECTOR,
     DIV_TAG,
     ARIA_HIDDEN,
     BUTTON_TAG,
-    BTN_GROUP_CLASS,
     CLICK_EVENT,
-    DATA_ROLE,
     MANAGE_BY_BTS_MODAL_NAME
 } from '../../utils/constants';
 
 import { get } from '../../utils/client';
+import { generate } from '../../utils/qrCode';
 
 /**
  * Generates manage by bts modal and appends it to "cc-main" el.
@@ -47,8 +38,6 @@ export const createManageByBTSModal = (api, createMainContainer) => {
     if (!modalData) {
         return;
     }
-
-    console.log('btsM: ', dom._btsm);
     if (!dom._btsm) {
         dom._btsmContainer = createNode(DIV_TAG);
         addClass(dom._btsmContainer, 'btsm-wrapper');
@@ -60,7 +49,6 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         addEvent(btsmOverlay, CLICK_EVENT, hideManageByBTSModal);
 
         dom._btsm =  createNode(DIV_TAG);
-        console.log('btsM: ', dom._btsm);
 
         addClass(dom._btsm, 'btsm');
         setAttribute(dom._btsm, 'role', 'dialog');
@@ -77,14 +65,14 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         dom._btsmContent = createNode(DIV_TAG);
         addClass(dom._btsmContent, 'btsm__body');
 
-        const qrContainer = createNode(DIV_TAG);
-        addClass(qrContainer, 'btsm__qr-container');
+        dom._btsmQrContainer = createNode(DIV_TAG);
+        addClass(dom._btsmQrContainer, 'btsm__qr-container');
 
         const qrInstructions = createNode('h3');
         qrInstructions.textContent = 'Scan the QR code to get the data';
 
-        const qrCode = createNode(DIV_TAG);
-        addClass(qrCode, 'btsm__fake-qr');
+        dom._btsmQr = createNode(DIV_TAG);
+        setAttribute(dom._btsmQr, 'id', 'qrCodeContainer');
 
         getUsers().then((result) =>  {
             appendUserData(result, 'btsm__fake-qr');
@@ -92,9 +80,9 @@ export const createManageByBTSModal = (api, createMainContainer) => {
         
         
 
-        appendChild(qrContainer, qrInstructions);
-        appendChild(qrContainer, qrCode);
-        appendChild(dom._btsmContent, qrContainer);
+        appendChild(dom._btsmQrContainer, qrInstructions);
+        appendChild(dom._btsmQrContainer, dom._btsmQr);
+        appendChild(dom._btsmContent, dom._btsmQrContainer);
 
         dom._btsmDivTabindex = createNode(DIV_TAG);
         setAttribute(dom._btsmDivTabindex, 'tabIndex', -1);
@@ -175,15 +163,24 @@ async function getUsers() {
 }
 
 /**
- * 
+ * appendUserData
+ * generates a QR a appends the data to the dom
  * @param {{ id: string; username: string; name: string; email: string; phone: number}}userData 
- * @param {string} cssClass 
+ * @param {string} elementId
  */
-function appendUserData(userData, cssClass) {
-    const collection = document.getElementsByClassName(cssClass);
-    const userDataString = userData ? JSON.stringify(userData) : 'No data to show';
-    const htmlArr = [...collection];
-    const element = htmlArr[0];
+function appendUserData(userData, elementId) {
+    let data = '';
+    const noDataMsg = 'No data to show';
+    const dom = globalObj._dom;
+    if (!userData) {
+        dom._btsmQr.innerHTML = noDataMsg;
+        return;
+    }
 
-    element.innerHTML = userDataString;
+    if (!dom._btsmQr) {
+        dom._btsmQrContainer.innerHTML = noDataMsg;
+        return;
+    }
+    data = JSON.stringify(userData);
+    generate(elementId, data);
 }

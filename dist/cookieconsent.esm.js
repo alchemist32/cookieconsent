@@ -6,6 +6,7 @@
 */
 
 import axios from 'axios';
+import qrcode from 'qrcodejs';
 
 const COOKIE_NAME = 'cc_cookie';
 
@@ -110,6 +111,8 @@ const TOGGLE_BTS_MODAL_CLASS = 'show--bts-modal';
  * @property {HTMLElement} _btsmContainer
  * @property {HTMLElement} _btsmOverlay
  * @property {HTMLElement} _btsmCloseBtn
+ * @property {HTMLElement} _btsmQrContainer
+ * @property {HTMLElement} _btsmQr
  *
  * @property {Object.<string, HTMLInputElement>} _categoryCheckboxInputs
  * @property {Object.<string, ServiceToggle>} _serviceCheckboxInputs
@@ -2413,6 +2416,21 @@ const get = async (url, config) => {
 };
 
 /**
+ * generate
+ * creates a new QR code
+ * @param {string} elementId 
+ * @param {string} text
+ * @returns {qrcode} the qrCode object
+ */
+function generate(elementId, text) {
+    return new qrcode(elementId, {
+        text,
+        width: 280,
+        height: 280,
+    });
+}
+
+/**
  * Generates manage by bts modal and appends it to "cc-main" el.
  * @param {import("../global").Api} api
  * @param {CreateMainContainer} createMainContainer
@@ -2426,8 +2444,6 @@ const createManageByBTSModal = (api, createMainContainer) => {
     if (!modalData) {
         return;
     }
-
-    console.log('btsM: ', dom._btsm);
     if (!dom._btsm) {
         dom._btsmContainer = createNode(DIV_TAG);
         addClass(dom._btsmContainer, 'btsm-wrapper');
@@ -2439,7 +2455,6 @@ const createManageByBTSModal = (api, createMainContainer) => {
         addEvent(btsmOverlay, CLICK_EVENT, hideManageByBTSModal);
 
         dom._btsm =  createNode(DIV_TAG);
-        console.log('btsM: ', dom._btsm);
 
         addClass(dom._btsm, 'btsm');
         setAttribute(dom._btsm, 'role', 'dialog');
@@ -2456,14 +2471,14 @@ const createManageByBTSModal = (api, createMainContainer) => {
         dom._btsmContent = createNode(DIV_TAG);
         addClass(dom._btsmContent, 'btsm__body');
 
-        const qrContainer = createNode(DIV_TAG);
-        addClass(qrContainer, 'btsm__qr-container');
+        dom._btsmQrContainer = createNode(DIV_TAG);
+        addClass(dom._btsmQrContainer, 'btsm__qr-container');
 
         const qrInstructions = createNode('h3');
         qrInstructions.textContent = 'Scan the QR code to get the data';
 
-        const qrCode = createNode(DIV_TAG);
-        addClass(qrCode, 'btsm__fake-qr');
+        dom._btsmQr = createNode(DIV_TAG);
+        setAttribute(dom._btsmQr, 'id', 'qrCodeContainer');
 
         getUsers().then((result) =>  {
             appendUserData(result, 'btsm__fake-qr');
@@ -2471,9 +2486,9 @@ const createManageByBTSModal = (api, createMainContainer) => {
         
         
 
-        appendChild(qrContainer, qrInstructions);
-        appendChild(qrContainer, qrCode);
-        appendChild(dom._btsmContent, qrContainer);
+        appendChild(dom._btsmQrContainer, qrInstructions);
+        appendChild(dom._btsmQrContainer, dom._btsmQr);
+        appendChild(dom._btsmContent, dom._btsmQrContainer);
 
         dom._btsmDivTabindex = createNode(DIV_TAG);
         setAttribute(dom._btsmDivTabindex, 'tabIndex', -1);
@@ -2554,17 +2569,26 @@ async function getUsers() {
 }
 
 /**
- * 
+ * appendUserData
+ * generates a QR a appends the data to the dom
  * @param {{ id: string; username: string; name: string; email: string; phone: number}}userData 
- * @param {string} cssClass 
+ * @param {string} elementId
  */
-function appendUserData(userData, cssClass) {
-    const collection = document.getElementsByClassName(cssClass);
-    const userDataString = userData ? JSON.stringify(userData) : 'No data to show';
-    const htmlArr = [...collection];
-    const element = htmlArr[0];
+function appendUserData(userData, elementId) {
+    let data = '';
+    const noDataMsg = 'No data to show';
+    const dom = globalObj._dom;
+    if (!userData) {
+        dom._btsmQr.innerHTML = noDataMsg;
+        return;
+    }
 
-    element.innerHTML = userDataString;
+    if (!dom._btsmQr) {
+        dom._btsmQrContainer.innerHTML = noDataMsg;
+        return;
+    }
+    data = JSON.stringify(userData);
+    generate(elementId, data);
 }
 
 /**
